@@ -177,7 +177,7 @@ $productos = [
     ],
     'accesorios' => [
         [
-            'id' => 16,
+            'id' => 15,
             'nombre' => 'Mochila Off Road* Black/Purple',
             'marca' => 'Rusty',
             'tipo' => 'Mochila',
@@ -189,19 +189,7 @@ $productos = [
             'precio' => 74890
         ],
         [
-            'id' => 17,
-            'nombre' => 'Pilusos Marathon Nylon Bucket',
-            'marca' => 'Rusty',
-            'tipo' => 'Piluso',
-            'color' => 'Negro',
-            'talles' => 'U',
-            'img' => 'accesorios/piluso-rusty-marathon.jpg',
-            'descripcion' => 'El Piluso Marathon está confeccionado en nylon resistente, combinando estilo y funcionalidad en un clásico bucket hat. Ideal para protegerte del sol durante actividades al aire libre, este piluso ofrece un diseño ligero y cómodo.',
-            'temporada' => 'Invierno, 2024',
-            'precio' => 52490
-        ],
-        [
-            'id' => 18,
+            'id' => 16,
             'nombre' => 'Medias All Day Invisible 5- Pack',
             'marca' => 'Rusty',
             'tipo' => 'Medias Cortas',
@@ -213,7 +201,7 @@ $productos = [
             'precio' => 27490
         ],
         [
-            'id' => 19,
+            'id' => 17,
             'nombre' => 'Gorra Chronic 4 Flexfit',
             'marca' => 'Rusty',
             'tipo' => 'Gorra',
@@ -225,7 +213,7 @@ $productos = [
             'precio' => 34890
         ],
         [
-            'id' => 20,
+            'id' => 18,
             'nombre' => 'Morral Sicarius Negro',
             'marca' => 'Rusty',
             'tipo' => 'Morral',
