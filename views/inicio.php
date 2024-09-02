@@ -5,10 +5,11 @@
         <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
         <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
     </div>
+    
     <div class="carousel-inner">
         <!-- Zapatillas Slide -->
         <div class="carousel-item active">
-            <svg class="bd-placeholder-img" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false"><rect width="100%" height="100%" fill="var(--bs-secondary-color)"/></svg>
+            <img src="img/banner/banner-zapas-dc.jpg" alt="Banner Dc Zapatillas" class="bd-placeholder-img" height="100%">
             <div class="container">
                 <div class="carousel-caption text-start">
                     <h1>Zapatillas</h1>
@@ -19,7 +20,7 @@
         </div>
         <!-- Hombre Slide -->
         <div class="carousel-item">
-            <svg class="bd-placeholder-img" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false"><rect width="100%" height="100%" fill="var(--bs-secondary-color)"/></svg>
+            <img src="img/banner/banner-hombre-dc.jpg" alt="Banner Dc Zapatillas" class="bd-placeholder-img" height="100%">
             <div class="container">
                 <div class="carousel-caption">
                     <h1>Hombre</h1>
@@ -30,7 +31,7 @@
         </div>
         <!-- Mujer Slide -->
         <div class="carousel-item">
-            <svg class="bd-placeholder-img" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false"><rect width="100%" height="100%" fill="var(--bs-secondary-color)"/></svg>
+            <img src="img/banner/banner-rusty-mujer.jpg" alt="Banner Dc Zapatillas" class="bd-placeholder-img" height="100%">
             <div class="container">
                 <div class="carousel-caption text-end">
                     <h1>Mujer</h1>

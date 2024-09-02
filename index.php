@@ -53,10 +53,10 @@ if ($categoriaSeleccionada) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mundo Urbano | <?= $links_validos[$vista]['title'] ?></title>
-    <link href="css/styles.css" rel="stylesheet">
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link href="css/styles.css" rel="stylesheet">
 </head>
 <body>
 
@@ -75,16 +75,14 @@ if ($categoriaSeleccionada) {
                 <li class="nav-item">
                     <a class="nav-link active" href="index.php?link=inicio">Inicio</a>
                 </li>
-                <li class="nav-item dropdown custom-dropdown">
-                    <a class="nav-link dropdown-toggle" href="index.php?link=todos_productos" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        Productos
-                    </a>
-                    <ul class="dropdown-menu w-100" aria-labelledby="navbarDropdownMenuLink">
-                        <li><a class="dropdown-item" href="index.php?link=todos_productos&categoria=zapatillas">Zapatillas</a></li>
-                        <li><a class="dropdown-item" href="index.php?link=todos_productos&categoria=hombre">Hombre</a></li>
-                        <li><a class="dropdown-item" href="index.php?link=todos_productos&categoria=mujer">Mujer</a></li>
-                        <li><a class="dropdown-item" href="index.php?link=todos_productos&categoria=accesorios">Accesorios</a></li>
-                    </ul>
+                <li class="nav-item custom-dropdown">
+                    <a class="nav-link" href="index.php?link=todos_productos">Productos</a>
+                    <div class="custom-dropdown-content">
+                        <a href="index.php?link=todos_productos&categoria=zapatillas">Zapatillas</a>
+                        <a href="index.php?link=todos_productos&categoria=hombre">Hombre</a>
+                        <a href="index.php?link=todos_productos&categoria=mujer">Mujer</a>
+                        <a href="index.php?link=todos_productos&categoria=accesorios">Accesorios</a>
+                    </div>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="index.php?link=nosotros">Nosotros</a>
