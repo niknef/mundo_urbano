@@ -1,9 +1,5 @@
 <?PHP 
-$idProducto = $_GET['id'] ?? null;
-
-if ($idProducto && isset($catalogo[$idProducto])) {
     $producto = $catalogo[$idProducto];
-}
 ?>
 
 <div class="container mt-5">

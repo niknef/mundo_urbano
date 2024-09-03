@@ -1,6 +1,6 @@
 <?php
 //Traemos el array de productos
-require_once 'includes/productos.php';
+require_once 'includes/inventario.php';
 
 //Obtenemos la categoría seleccionada por url
 $categoriaSeleccionada = isset($_GET['categoria']) ? $_GET['categoria'] : FALSE;
@@ -43,9 +43,9 @@ if (!array_key_exists($link, $links_validos)) {
 //Si se selecciona una categoría
 if ($categoriaSeleccionada) {
     //Verificamos si la categoría seleccionada existe en el array de productos
-    if (array_key_exists($categoriaSeleccionada, $productos)) {
+    if (array_key_exists($categoriaSeleccionada, $inventario)) {
         //Si existe, asignamos el array de productos de esa categoría a la variable catalogo
-        $catalogo = $productos[$categoriaSeleccionada];
+        $catalogo = $inventario[$categoriaSeleccionada];
         // Cambiamos la vista a 'productos' si se selecciona una categoría
         $vista = 'productos'; 
     } else {
@@ -56,22 +56,25 @@ if ($categoriaSeleccionada) {
     //Si no se selecciona una categoría, mostramos todos los productos
     $catalogo = [];
     // Unimos todos los productos en un solo array
-    foreach ($productos as $subCatalogo) {
+    foreach ($inventario as $subCatalogo) {
         $catalogo = array_merge($catalogo, $subCatalogo);
     }
 };
 
 // Obtén el ID del producto si está presente en la URL
-$idProducto = isset($_GET['id']) ? $_GET['id'] : FALSE;
+    //Uso el null ya que me habia generado un error con el false con el item id 0
+$idProducto = isset($_GET['id']) ? $_GET['id'] : null;
 
 // Verifica si el ID está presente y si es un producto válido
-if ($idProducto && array_key_exists($idProducto, $catalogo)) {
+if ($idProducto !== null && array_key_exists($idProducto, $catalogo)) {
     // Si el ID es válido, cambiamos la vista a 'detalle_producto'
     $vista = 'detalle_producto';
-} else if ($idProducto) {
+} else if ($idProducto !== null) {
     // Si el ID no es válido, cambiamos la vista a '404'
     $vista = '404';
 };
+
+
 ?>
 
 <!DOCTYPE html>

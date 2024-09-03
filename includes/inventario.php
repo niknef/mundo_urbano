@@ -1,8 +1,8 @@
 <?PHP
-$productos = [
+$inventario = [
     'zapatillas' => [
         [
-            'id' => 1,
+            'id' => 0,
             'nombre' => 'Trip Premium',
             'marca' => 'Spiral',
             'tipo' => 'Zapatillas Urbanas',
@@ -14,7 +14,7 @@ $productos = [
             'precio' => 92819
         ],
         [
-            'id' => 2,
+            'id' => 1,
             'nombre' => 'G.O.A.T High',
             'marca' => 'Spiral',
             'tipo' => 'Botas',
@@ -26,7 +26,7 @@ $productos = [
             'precio' => 109199
         ],
         [
-            'id' => 3,
+            'id' => 2,
             'nombre' => 'Court Graffik Ss (wlk)',
             'marca' => 'Dc Shoes',
             'tipo' => 'Zapatillas Urbana',
@@ -38,7 +38,7 @@ $productos = [
             'precio' => 144990
         ],
         [
-            'id' => 4,
+            'id' => 3,
             'nombre' => 'Court Graffik Ss (Xw)',
             'marca' => 'Dc Shoes',
             'tipo' => 'Zapatillas urbana',
@@ -50,7 +50,7 @@ $productos = [
             'precio' => 144990
         ],
         [
-            'id' => 5,
+            'id' => 4,
             'nombre' => 'Lynx Zero (Wdb)',
             'marca' => 'Dc Shoes',
             'tipo' => 'Zapatillas Urbana',
@@ -65,7 +65,7 @@ $productos = [
 
     'hombre' => [
         [
-            'id' => 6,
+            'id' => 5,
             'nombre' => 'Static 94 (Neg)',
             'marca' => 'Dc Shoes',
             'tipo' => 'Campera',
@@ -77,7 +77,7 @@ $productos = [
             'precio' => 169990
         ],
         [
-            'id' => 7,
+            'id' => 6,
             'nombre' => 'Chaleco Static 94',
             'marca' => 'Dc Shoes',
             'tipo' => 'Chaleco',
@@ -89,7 +89,7 @@ $productos = [
             'precio' => 116990
         ],
         [
-            'id' => 8,
+            'id' => 7,
             'nombre' => 'Canguro Biceps Orange',
             'marca' => 'Rusty',
             'tipo' => 'Buzo',
@@ -101,7 +101,7 @@ $productos = [
             'precio' => 51990
         ],
         [
-            'id' => 9,
+            'id' => 8,
             'nombre' => 'Campera Canguro Pure O2 Black',
             'marca' => 'Rusty',
             'tipo' => 'Campera',
@@ -113,7 +113,7 @@ $productos = [
             'precio' => 59990
         ],
         [
-            'id' => 10,
+            'id' => 9,
             'nombre' => 'Jean Dungaree Denim Ash Blue',
             'marca' => 'Rusty',
             'tipo' => 'Pantalon',
@@ -127,7 +127,7 @@ $productos = [
     ],
     'mujer' => [
         [
-            'id' => 11,
+            'id' => 10,
             'nombre' => 'Shift Oversized',
             'marca' => 'Dc Shoes',
             'tipo' => 'Remera Mc',
@@ -139,7 +139,7 @@ $productos = [
             'precio' => 32990
         ],
         [
-            'id' => 12,
+            'id' => 11,
             'nombre' => 'The Weekend New Fit (Vee)',
             'marca' => 'Dc Shoes',
             'tipo' => 'Remera Mc',
@@ -151,7 +151,7 @@ $productos = [
             'precio' => 28990
         ],
         [
-            'id' => 13,
+            'id' => 12,
             'nombre' => 'Billie Low Wide Canvas Carpenter Black',
             'marca' => 'Rusty',
             'tipo' => 'Pantalon',
@@ -163,7 +163,7 @@ $productos = [
             'precio' => 74990
         ],
         [
-            'id' => 14,
+            'id' => 13,
             'nombre' => 'Jean Penny Black Slim Black',
             'marca' => 'Rusty',
             'tipo' => 'Pantalon',
@@ -177,7 +177,7 @@ $productos = [
     ],
     'accesorios' => [
         [
-            'id' => 15,
+            'id' => 14,
             'nombre' => 'Mochila Off Road* Black/Purple',
             'marca' => 'Rusty',
             'tipo' => 'Mochila',
@@ -189,7 +189,7 @@ $productos = [
             'precio' => 74890
         ],
         [
-            'id' => 16,
+            'id' => 15,
             'nombre' => 'Medias All Day Invisible 5- Pack',
             'marca' => 'Rusty',
             'tipo' => 'Medias Cortas',
@@ -201,7 +201,7 @@ $productos = [
             'precio' => 27490
         ],
         [
-            'id' => 17,
+            'id' => 16,
             'nombre' => 'Gorra Chronic 4 Flexfit',
             'marca' => 'Rusty',
             'tipo' => 'Gorra',
@@ -213,7 +213,7 @@ $productos = [
             'precio' => 34890
         ],
         [
-            'id' => 18,
+            'id' => 17,
             'nombre' => 'Morral Sicarius Negro',
             'marca' => 'Rusty',
             'tipo' => 'Morral',
