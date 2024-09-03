@@ -1,8 +1,11 @@
 <?php
-// Asumiendo que tienes un archivo `includes/productos.php` para productos
+//Traemos el array de productos
 require_once 'includes/productos.php';
+
+//Obtenemos la categoría seleccionada por url
 $categoriaSeleccionada = isset($_GET['categoria']) ? $_GET['categoria'] : FALSE;
 
+//Array con los links válidos
 $links_validos = [
     '404' => [
         'title' => '404 - Página no encontrada',
@@ -18,33 +21,57 @@ $links_validos = [
     ],
     'productos' => [
         'title' => $categoriaSeleccionada,
+    ],
+    'detalle_producto' => [
+        'title' => 'Detalle del Producto',
     ]
 ];
 
+//Obtenemos el link solicitado por url
 $link = isset($_GET['link']) ? $_GET['link'] : 'inicio';
 
-// Verifica si la sección solicitada es válida
+
+// Verificamos si la sección solicitada es válida
 if (!array_key_exists($link, $links_validos)) {
+    //si no es valida lo mandamos al 404
     $vista = '404';
 } else {
+    //si es valida la asignamos a la variable vista
     $vista = $link;
 }
 
+//Si se selecciona una categoría
 if ($categoriaSeleccionada) {
+    //Verificamos si la categoría seleccionada existe en el array de productos
     if (array_key_exists($categoriaSeleccionada, $productos)) {
+        //Si existe, asignamos el array de productos de esa categoría a la variable catalogo
         $catalogo = $productos[$categoriaSeleccionada];
-        $vista = 'productos'; // Cambiamos la vista a 'producto' si se selecciona una categoría
+        // Cambiamos la vista a 'productos' si se selecciona una categoría
+        $vista = 'productos'; 
     } else {
-        $catalogo = []; // Si la categoría no existe, asigna un array vacío
+        // Si la categoría no existe, asigna un array vacío
+        $catalogo = []; 
     }
 } else {
+    //Si no se selecciona una categoría, mostramos todos los productos
     $catalogo = [];
-
+    // Unimos todos los productos en un solo array
     foreach ($productos as $subCatalogo) {
         $catalogo = array_merge($catalogo, $subCatalogo);
     }
 };
 
+// Obtén el ID del producto si está presente en la URL
+$idProducto = isset($_GET['id']) ? $_GET['id'] : FALSE;
+
+// Verifica si el ID está presente y si es un producto válido
+if ($idProducto && array_key_exists($idProducto, $catalogo)) {
+    // Si el ID es válido, cambiamos la vista a 'detalle_producto'
+    $vista = 'detalle_producto';
+} else if ($idProducto) {
+    // Si el ID no es válido, cambiamos la vista a '404'
+    $vista = '404';
+};
 ?>
 
 <!DOCTYPE html>
@@ -52,15 +79,17 @@ if ($categoriaSeleccionada) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mundo Urbano | <?= $links_validos[$vista]['title'] ?></title>
+    <link rel="icon" href="./img/favicon.ico" type="image/x-icon">
+    <title>Mundo Urbano | <?= ucfirst($links_validos[$vista]['title']) ?></title>
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <!-- Estilos CSS -->
     <link href="css/styles.css" rel="stylesheet">
 </head>
 <body>
 
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark px-3">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark px-3 sticky-top">
     <div class="container-fluid">
         <a class="navbar-brand" href="#">
             <img src="./img/logo.svg" alt="logo Mundo Urbano">
@@ -73,11 +102,11 @@ if ($categoriaSeleccionada) {
         <div class="collapse navbar-collapse" id="navbarNavDropdown">
             <ul class="navbar-nav ms-auto gap-3">
                 <li class="nav-item">
-                    <a class="nav-link active" href="index.php?link=inicio">Inicio</a>
+                    <a class="nav-link" href="index.php?link=inicio">Inicio</a>
                 </li>
                 <li class="nav-item custom-dropdown">
                     <a class="nav-link" href="index.php?link=todos_productos">Productos</a>
-                    <div class="custom-dropdown-content">
+                    <div class="custom-dropdown-content px-2">
                         <a href="index.php?link=todos_productos&categoria=zapatillas">Zapatillas</a>
                         <a href="index.php?link=todos_productos&categoria=hombre">Hombre</a>
                         <a href="index.php?link=todos_productos&categoria=mujer">Mujer</a>
@@ -94,7 +123,7 @@ if ($categoriaSeleccionada) {
 
 <main class="container">
     <?php
-    // Incluir la vista correspondiente según la sección actual
+    //Incluimos la vista correspondiente
     require_once "views/$vista.php";
     ?>
 </main>

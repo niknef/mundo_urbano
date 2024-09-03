@@ -1,22 +1,86 @@
+/* NAV-BAR*/
 .navbar-brand img {
-    height: 40px;
+    height: 50px;
 }
 
-.custom-dropdown .dropdown-menu {
-    border-radius: 0.2rem; 
-    padding: 0.5rem; 
-    
+.navbar-nav .nav-link {
+    color: #fff; 
+    transition: color 0.3s ease; 
 }
 
-.custom-dropdown .dropdown-item {
-    color: #000000bb; 
+.navbar-nav .nav-link:hover {
+    color: #0dcaf0; 
+}   
+
+.custom-dropdown-content {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background-color: #343a40;
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+    justify-content: flex-end;
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    visibility: hidden; 
+    transition: max-height 0.4s ease, opacity 0.4s ease, visibility 0.4s;
 }
 
-.custom-dropdown .dropdown-item:hover {
-    background-color: #e9ecef; 
-    color: #41BFB3; 
+.custom-dropdown:hover .custom-dropdown-content,
+.custom-dropdown-content:hover {
+    display: flex;
+    max-height: 300px;
+    opacity: 1;
+    visibility: visible; 
 }
 
+.custom-dropdown-content a {
+    color: white;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.custom-dropdown-content a:hover {
+    background-color: #41BFB3;
+}
+
+
+@media (max-width: 991px) {
+    .custom-dropdown-content {
+        position: static;
+        display: flex;
+        box-shadow: none;
+        flex-direction: column;
+        justify-content: flex-start;
+        max-height: 0;
+        opacity: 0;
+        visibility: hidden; 
+        transition: max-height 0.4s ease, opacity 0.4s ease, visibility 0.4s;
+    }
+
+    .navbar-toggler[aria-expanded="true"] + .navbar-collapse .custom-dropdown-content {
+        max-height: 300px;
+        opacity: 1;
+        visibility: visible; 
+        display: flex;
+    }
+
+    .custom-dropdown-content{
+        margin-top: 10px;
+        padding: 0;
+        background-color: #212529;
+    }
+    .custom-dropdown-content a {
+        padding: 8px 16px;
+        border-top: 1px solid #41BFB3;
+        display: block;
+    }
+}
+
+/* FOOTER */
 footer .nav-link {
     color: #6c757d; 
 }
@@ -26,93 +90,46 @@ footer .nav-link:hover {
     text-decoration: none; 
 }
 
+/* CARD PRODUCTOS*/
 .custom-card .card {
     border: none;
-    transition: transform 0.3s ease;
+    transition: transform 0.1s ease;
 }
 
 .custom-card .card:hover {
     box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
-    transform: scale(1.005);
+    transform: scale(1.003);
 }
 
+/* CAROUSEL */
 .carousel {
     margin-top: 1rem;
     margin-bottom: 4rem;
 }
-  /* Since positioning the image, we need to help out the caption */
+
 .carousel-caption {
     bottom: 3rem;
     z-index: 10;
 }
 
-  /* Declare heights because of positioning of img element */
 .carousel-item {
     height: 32rem;
+    position: relative;
 }
 
-/* Contenedor oculto por defecto */
-.custom-dropdown-content {
+.carousel-overlay {
     position: absolute;
-    top: 100%;
+    top: 0;
     left: 0;
     width: 100%;
-    background-color: #343a40;
-    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
-    z-index: 1000;
-    padding: 10px 0;
-    justify-content: flex-end;
-    
-    /* Inicialmente oculto */
-    max-height: 0;
-    overflow: hidden;
-    opacity: 0;
-    transition: max-height 0.4s ease, opacity 0.4s ease;
-}
-
-.custom-dropdown:hover .custom-dropdown-content,
-.custom-dropdown-content:hover {
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5); 
     display: flex;
-    max-height: 300px; /* Ajusta este valor dependiendo del contenido */
-    opacity: 1;
+    align-items: center;
+    justify-content: center;
 }
 
-/* Alinear los elementos del menú horizontalmente en pantallas grandes */
-.custom-dropdown-content a {
-    color: white;
-    padding: 12px 16px;
-    text-decoration: none;
-    display: inline-block;
-}
 
-.custom-dropdown-content a:hover {
-    background-color: #495057;
-}
-
-/* Estilos para móviles */
-@media (max-width: 991px) {
-    .custom-dropdown-content {
-        position: static;
-        display: flex; /* Mostrar siempre el contenido en móviles */
-        box-shadow: none;
-        flex-direction: column; /* Asegura que los elementos estén en columnas en móviles */
-        justify-content: flex-start;
-        max-height: 0; /* Inicialmente oculto en móviles */
-        opacity: 0;
-        transition: max-height 0.4s ease, opacity 0.4s ease;
-    }
-
-    .navbar-toggler[aria-expanded="true"] + .navbar-collapse .custom-dropdown-content {
-        max-height: 300px; /* Ajusta este valor dependiendo del contenido */
-        opacity: 1;
-        display: flex; /* Mostrar el contenido al hacer clic en el menú hamburguesa */
-    }
-
-    .custom-dropdown-content a {
-        padding: 8px 16px;
-        background-color: #343a40;
-        border-top: 1px solid #495057;
-        display: block; /* Asegura que los enlaces ocupen todo el ancho */
-        text-align: left; /* Opcional, para alinear el texto a la izquierda */
-    }
+.boton-comprar:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); 
 }
