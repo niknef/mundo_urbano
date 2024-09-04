@@ -109,7 +109,7 @@ if ($idProducto !== null && array_key_exists($idProducto, $catalogo)) {
                 </li>
                 <li class="nav-item custom-dropdown">
                     <a class="nav-link" href="index.php?link=todos_productos">Productos</a>
-                    <div class="custom-dropdown-content px-2">
+                    <div class="custom-dropdown-content px-2 d-flex justify-content-end">
                         <a href="index.php?link=todos_productos&categoria=zapatillas">Zapatillas</a>
                         <a href="index.php?link=todos_productos&categoria=hombre">Hombre</a>
                         <a href="index.php?link=todos_productos&categoria=mujer">Mujer</a>

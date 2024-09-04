@@ -9,7 +9,7 @@
         <div class="carousel-inner">
             <!-- Zapatillas Slide -->
             <div class="carousel-item active">
-                <img src="img/banner/banner-zapas-dc.jpg" alt="Banner Dc Zapatillas" class="bd-placeholder-img" height="100%">
+                <img src="img/banner/banner-zapas-dc.jpg" alt="Banner Dc Zapatillas" class="bd-placeholder-img" height="100%" width="100%" >
                 <div class="carousel-overlay">
                     <div class="container">
                         <div class="carousel-caption text-start">
@@ -22,7 +22,7 @@
             </div>
             <!-- Hombre Slide -->
             <div class="carousel-item">
-                <img src="img/banner/banner-hombre-dc.jpg" alt="Banner Dc Zapatillas" class="bd-placeholder-img" height="100%">
+                <img src="img/banner/banner-hombre-dc.jpg" alt="Banner Dc Zapatillas" class="bd-placeholder-img" height="100%" width="100%">
                 <div class="carousel-overlay">
                     <div class="container">
                         <div class="carousel-caption">
@@ -35,7 +35,7 @@
             </div>
             <!-- Mujer Slide -->
             <div class="carousel-item">
-                <img src="img/banner/banner-rusty-mujer.jpg" alt="Banner Dc Zapatillas" class="bd-placeholder-img" height="100%">
+                <img src="img/banner/banner-rusty-mujer.jpg" alt="Banner Dc Zapatillas" class="bd-placeholder-img" height="100%" width="100%">
                 <div class="carousel-overlay">
                     <div class="container">
                         <div class="carousel-caption text-end">
