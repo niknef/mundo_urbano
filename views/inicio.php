@@ -112,3 +112,9 @@
         </div>
     </div>
 </section>
+
+<section>
+    <?PHP
+    require_once "views/oferta_corto.php";
+    ?>
+</section>

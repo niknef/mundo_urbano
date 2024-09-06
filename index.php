@@ -1,6 +1,8 @@
 <?php
 //Traemos el array de productos
 require_once 'includes/inventario.php';
+//Traemos las funciones
+require_once 'includes/functions.php';
 
 //Obtenemos la categoría seleccionada por url
 $categoriaSeleccionada = isset($_GET['categoria']) ? $_GET['categoria'] : FALSE;
@@ -24,7 +26,10 @@ $links_validos = [
     ],
     'detalle_producto' => [
         'title' => 'Detalle del Producto',
-    ]
+    ],
+    'oferta' =>[
+        'title' => 'Ofertas',
+    ],
 ];
 
 //Obtenemos el link solicitado por url
@@ -74,6 +79,7 @@ if ($idProducto !== null && array_key_exists($idProducto, $catalogo)) {
     $vista = '404';
 };
 
+$productosEnOferta = filtrarProductosTemporada($inventario, 'invierno');
 
 ?>
 
@@ -115,6 +121,9 @@ if ($idProducto !== null && array_key_exists($idProducto, $catalogo)) {
                         <a href="index.php?link=todos_productos&categoria=mujer">Mujer</a>
                         <a href="index.php?link=todos_productos&categoria=accesorios">Accesorios</a>
                     </div>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="index.php?link=oferta">Ofertas</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="index.php?link=nosotros">Nosotros</a>
