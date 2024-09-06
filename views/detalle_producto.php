@@ -27,7 +27,7 @@
             </p>
             
             <h2>
-                <?php $precio = aplicarDescuento($producto, 15);
+                <?php $precio = aplicarDescuento($producto, $temporada, $descuento);
                     if ($precio < $producto['precio']) { ?>
                         <span class='fw-lighter text-decoration-line-through text-secondary text-danger me-1'><?= "$" . number_format($producto['precio'], 0, ',', '.') ?> </span>
                         <?= "$" . number_format($precio, 0, ',', '.');?>

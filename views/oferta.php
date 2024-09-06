@@ -20,7 +20,7 @@
                                         <p class="fs-5 fw-light text-dark mt-2">
                                             <?php 
                                                 // Aplicar descuento y mostrar precio
-                                                $precio = aplicarDescuento($producto, 15);
+                                                $precio = aplicarDescuento($producto, $temporada, $descuento);
                                                 if ($precio < $producto['precio']) { ?>
                                                     <span class='fw-lighter text-decoration-line-through text-secondary text-danger me-1'>
                                                         <?= "$" . number_format($producto['precio'], 0, ',', '.') ?>

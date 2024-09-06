@@ -79,7 +79,11 @@ if ($idProducto !== null && array_key_exists($idProducto, $catalogo)) {
     $vista = '404';
 };
 
-$productosEnOferta = filtrarProductosTemporada($inventario, 'invierno');
+//pasamos la temporada que queremos hacer ofertas
+$temporada = 'verano';
+//pasamos el descuento que queremos hacer
+$descuento = 20;
+$productosEnOferta = filtrarProductosTemporada($inventario, $temporada);
 
 ?>
 
