@@ -1,11 +1,13 @@
 <?php
 //Traemos el array de productos
-require_once 'includes/inventario.php';
+//require_once 'includes/inventario.php';
 //Traemos las funciones
 require_once 'includes/functions.php';
 
 //Obtenemos la categoría seleccionada por url
 $categoriaSeleccionada = isset($_GET['categoria']) ? $_GET['categoria'] : FALSE;
+//Obtenemos el link solicitado por url
+$link = isset($_GET['link']) ? $_GET['link'] : 'inicio';
 
 //Array con los links válidos
 $links_validos = [
@@ -32,9 +34,15 @@ $links_validos = [
     ],
 ];
 
-//Obtenemos el link solicitado por url
-$link = isset($_GET['link']) ? $_GET['link'] : 'inicio';
 
+
+// Si se selecciona una categoría
+if ($categoriaSeleccionada) {
+    $catalogo = catalogo_por_categoria($categoriaSeleccionada);
+} else {
+    // Si no se selecciona una categoría, mostramos todos los productos
+    $catalogo = inventario_completo();
+}
 
 // Verificamos si la sección solicitada es válida
 if (!array_key_exists($link, $links_validos)) {
@@ -45,45 +53,12 @@ if (!array_key_exists($link, $links_validos)) {
     $vista = $link;
 }
 
-//Si se selecciona una categoría
-if ($categoriaSeleccionada) {
-    //Verificamos si la categoría seleccionada existe en el array de productos
-    if (array_key_exists($categoriaSeleccionada, $inventario)) {
-        //Si existe, asignamos el array de productos de esa categoría a la variable catalogo
-        $catalogo = $inventario[$categoriaSeleccionada];
-        // Cambiamos la vista a 'productos' si se selecciona una categoría
-        $vista = 'productos'; 
-    } else {
-        // Si la categoría no existe, asigna un array vacío
-        $catalogo = []; 
-    }
-} else {
-    //Si no se selecciona una categoría, mostramos todos los productos
-    $catalogo = [];
-    // Unimos todos los productos en un solo array
-    foreach ($inventario as $subCatalogo) {
-        $catalogo = array_merge($catalogo, $subCatalogo);
-    }
-};
-
-// Obtén el ID del producto si está presente en la URL
-    //Uso el null ya que me habia generado un error con el false con el item id 0
-$idProducto = isset($_GET['id']) ? $_GET['id'] : null;
-
-// Verifica si el ID está presente y si es un producto válido
-if ($idProducto !== null && array_key_exists($idProducto, $catalogo)) {
-    // Si el ID es válido, cambiamos la vista a 'detalle_producto'
-    $vista = 'detalle_producto';
-} else if ($idProducto !== null) {
-    // Si el ID no es válido, cambiamos la vista a '404'
-    $vista = '404';
-};
-
 //pasamos la temporada que queremos hacer ofertas
 $temporada = 'verano';
+$anio = null;
 //pasamos el descuento que queremos hacer
-$descuento = 20;
-$productosEnOferta = filtrarProductosTemporada($inventario, $temporada);
+$descuento = 10;
+$productosEnOferta = filtrarProductosTemporada($temporada);
 
 ?>
 
@@ -120,10 +95,10 @@ $productosEnOferta = filtrarProductosTemporada($inventario, $temporada);
                 <li class="nav-item custom-dropdown">
                     <a class="nav-link" href="index.php?link=todos_productos">Productos</a>
                     <div class="custom-dropdown-content px-2 d-flex justify-content-end">
-                        <a href="index.php?link=todos_productos&categoria=zapatillas">Zapatillas</a>
-                        <a href="index.php?link=todos_productos&categoria=hombre">Hombre</a>
-                        <a href="index.php?link=todos_productos&categoria=mujer">Mujer</a>
-                        <a href="index.php?link=todos_productos&categoria=accesorios">Accesorios</a>
+                        <a href="index.php?link=productos&categoria=zapatillas">Zapatillas</a>
+                        <a href="index.php?link=productos&categoria=hombre">Hombre</a>
+                        <a href="index.php?link=productos&categoria=mujer">Mujer</a>
+                        <a href="index.php?link=productos&categoria=accesorios">Accesorios</a>
                     </div>
                 </li>
                 <li class="nav-item">
@@ -159,10 +134,10 @@ $productosEnOferta = filtrarProductosTemporada($inventario, $temporada);
                     Productos
                 </a>
                 <ul class="dropdown-menu w-100" aria-labelledby="navbarDropdownMenuLink">
-                    <li><a class="dropdown-item" href="index.php?link=todos_productos&categoria=zapatillas">Zapatillas</a></li>
-                    <li><a class="dropdown-item" href="index.php?link=todos_productos&categoria=hombre">Hombre</a></li>
-                    <li><a class="dropdown-item" href="index.php?link=todos_productos&categoria=mujer">Mujer</a></li>
-                    <li><a class="dropdown-item" href="index.php?link=todos_productos&categoria=accesorios">Accesorios</a></li>
+                    <li><a class="dropdown-item" href="index.php?link=productos&categoria=zapatillas">Zapatillas</a></li>
+                    <li><a class="dropdown-item" href="index.php?link=productos&categoria=hombre">Hombre</a></li>
+                    <li><a class="dropdown-item" href="index.php?link=productos&categoria=mujer">Mujer</a></li>
+                    <li><a class="dropdown-item" href="index.php?link=productos&categoria=accesorios">Accesorios</a></li>
                 </ul>
             </li>
             <li class="nav-item">

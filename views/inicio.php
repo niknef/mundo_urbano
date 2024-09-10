@@ -15,7 +15,7 @@
                         <div class="carousel-caption text-start">
                             <h1>Zapatillas</h1>
                             <p class="fs-5 fw-light">Encuentra las mejores zapatillas para todas tus necesidades.</p>
-                            <p ><a class="btn btn-outline-info" href="index.php?link=todos_productos&categoria=zapatillas">Ver productos</a></p>
+                            <p ><a class="btn btn-outline-info" href="index.php?link=productos&categoria=zapatillas">Ver productos</a></p>
                         </div>
                     </div>
                 </div>
@@ -28,7 +28,7 @@
                         <div class="carousel-caption">
                             <h1>Hombre</h1>
                             <p class="fs-5 fw-light">Descubre nuestra colección para hombre, desde ropa hasta accesorios.</p>
-                            <p><a class="btn btn-outline-info" href="index.php?link=todos_productos&categoria=hombre">Ver productos</a></p>
+                            <p><a class="btn btn-outline-info" href="index.php?link=productos&categoria=hombre">Ver productos</a></p>
                         </div>
                     </div>
                 </div>
@@ -41,7 +41,7 @@
                         <div class="carousel-caption text-end">
                             <h1>Mujer</h1>
                             <p class="fs-5 fw-light">Explora nuestra selección de productos para mujer, con estilos para todas.</p>
-                            <p><a class="btn btn-outline-info" href="index.php?link=todos_productos&categoria=mujer">Ver productos</a></p>
+                            <p><a class="btn btn-outline-info" href="index.php?link=productos&categoria=mujer">Ver productos</a></p>
                         </div>
                     </div>
                 </div>
@@ -63,7 +63,7 @@
         <div class="row g-2">
             
             <div class="col-12 col-md-3">
-                <a href="index.php?link=todos_productos&categoria=zapatillas" class="text-decoration-none">
+                <a href="index.php?link=productos&categoria=zapatillas" class="text-decoration-none">
                     <div class="card text-bg-dark position-relative">
                         <img src="./img/banner/zapatillas-banner-cat.jpg" class="card-img" alt="Banner Categoria Zapatillas" style="object-fit: cover;">
                         <div class="overlay position-absolute w-100 h-100 rounded-1" style="background-color: rgba(0, 0, 0, 0.2);"></div>
@@ -75,7 +75,7 @@
             </div>
 
             <div class="col-12 col-md-3">
-                <a href="index.php?link=todos_productos&categoria=hombre" class="text-decoration-none">
+                <a href="index.php?link=productos&categoria=hombre" class="text-decoration-none">
                     <div class="card text-bg-dark position-relative">
                         <img src="./img/banner/hombre-banner-cat.jpg" class="card-img" alt="Baner Categoria Hombre" style="object-fit: cover;">
                         <div class="overlay position-absolute w-100 h-100 rounded-1" style="background-color: rgba(0, 0, 0, 0.2);"></div>
@@ -87,7 +87,7 @@
             </div>
 
             <div class="col-12 col-md-3">
-                <a href="index.php?link=todos_productos&categoria=mujer" class="text-decoration-none">
+                <a href="index.php?link=productos&categoria=mujer" class="text-decoration-none">
                     <div class="card text-bg-dark position-relative">
                         <img src="./img/banner/mujer-banner-cat.jpg" class="card-img" alt="Baner Categoria Mujer" style="object-fit: cover;">
                         <div class="overlay position-absolute w-100 h-100 rounded-1" style="background-color: rgba(0, 0, 0, 0.2);"></div>
@@ -99,7 +99,7 @@
             </div>
 
             <div class="col-12 col-md-3">
-                <a href="index.php?link=todos_productos&categoria=accesorios" class="text-decoration-none">
+                <a href="index.php?link=productos&categoria=accesorios" class="text-decoration-none">
                     <div class="card text-bg-dark position-relative">
                         <img src="./img/banner/accesorios-banner-cat.jpg" class="card-img" alt="Baner Categoria Accesorios" style="object-fit: cover;">
                         <div class="overlay position-absolute w-100 h-100 rounded-1" style="background-color: rgba(0, 0, 0, 0.2);"></div>
