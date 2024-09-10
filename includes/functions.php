@@ -109,6 +109,9 @@ function aplicarDescuento(array $producto, ?string $temporada = null, ?string $a
 
     // Retornar el precio original si no aplica el descuento
     return $producto['precio'];
-}
+};
+
+
+
 
 ?>

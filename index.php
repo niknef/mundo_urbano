@@ -1,11 +1,10 @@
 <?php
-//Traemos el array de productos
-//require_once 'includes/inventario.php';
 //Traemos las funciones
 require_once 'includes/functions.php';
 
 //Obtenemos la categoría seleccionada por url
 $categoriaSeleccionada = isset($_GET['categoria']) ? $_GET['categoria'] : FALSE;
+
 //Obtenemos el link solicitado por url
 $link = isset($_GET['link']) ? $_GET['link'] : 'inicio';
 
@@ -52,11 +51,8 @@ if (!array_key_exists($link, $links_validos)) {
     //si es valida la asignamos a la variable vista
     $vista = $link;
 }
-
-//pasamos la temporada que queremos hacer ofertas
 $temporada = 'verano';
 $anio = null;
-//pasamos el descuento que queremos hacer
 $descuento = 10;
 $productosEnOferta = filtrarProductosTemporada($temporada);
 
