@@ -26,12 +26,11 @@ function catalogo_por_categoria(string $categoria): array {
     // Traemos el inventario completo desde el archivo JSON
     $catalogo = inventario_completo();
 
-    // Verificamos si la categoría existe en el inventario
-    if (array_key_exists($categoria, $catalogo)) {
-        // Si la categoría existe, devolvemos los productos de esa categoría
-        $result = $catalogo[$categoria];
+    foreach ($catalogo as $productos) {
+        if (strtolower($productos['categoria']) === strtolower($categoria)) {
+            $result[] = $productos;
+        }
     }
-
     return $result;
 };
 
@@ -47,13 +46,10 @@ function buscarProductoPorId(int $id):mixed {
     $inventario = inventario_completo();
 
     // Recorremos cada categoría dentro del inventario
-    foreach ($inventario as $productos) {
-        foreach ($productos as $producto) {
-            // Verificamos si el ID del producto coincide con el ID proporcionado
-            if ($producto['id'] == $id) {
+    foreach ($inventario as $producto) {
+        if ($producto['id'] == $id) {
                 return $producto;
             };
-        };
     };
 
     return null;
@@ -67,26 +63,25 @@ function buscarProductoPorId(int $id):mixed {
  * @return array Retorna un array de productos que pertenecen a la temporada y/o año especificado.
  */
 function filtrarProductosTemporada(?string $temporada = null, ?string $anio = null): array {
-    
+    // Si ambos son null, no hay productos en oferta
+    if (is_null($temporada) && is_null($anio)) {
+        return [];
+    }
+
     $inventario = inventario_completo();
     $productosOferta = [];
 
-    // Recorremos cada categoría dentro del inventario
-    foreach ($inventario as $productos) {
-        foreach ($productos as $producto) {
-            // Verificamos si el año y la temporada coinciden con los parámetros
-            $coincideTemporada = $temporada ? strtolower($producto['temporada']) === strtolower($temporada) : true;
+    foreach ($inventario as $producto) {
+        $coincideTemporada = $temporada ? strtolower($producto['temporada']) === strtolower($temporada) : true;
+        $coincideAnio = $anio ? $producto['anio'] == $anio : true;
 
-            $coincideAnio = $anio ? $producto['anio'] == $anio : true;
-            
-            if ($coincideTemporada && $coincideAnio) {
-                $productosOferta[] = $producto;
-            }
+        if ($coincideTemporada && $coincideAnio) {
+            $productosOferta[] = $producto;
         }
     }
 
     return $productosOferta;
-};
+}
 
 /**
  * Aplica un descuento a un producto si pertenece a la temporada y/o año indicado.
@@ -99,6 +94,12 @@ function filtrarProductosTemporada(?string $temporada = null, ?string $anio = nu
  * @return float Retorna el precio con descuento si el producto pertenece a la temporada y/o año especificado.
  */
 function aplicarDescuento(array $producto, ?string $temporada = null, ?string $anio = null, float $descuento = 15): float {
+    // Si ambos son null
+    if (is_null($temporada) && is_null($anio)) {
+        return $producto['precio'];
+    }
+
+    
     $coincideTemporada = $temporada ? strtolower($producto['temporada']) === strtolower($temporada) : true;
     $coincideAnio = $anio ? $producto['anio'] == $anio : true;
 
@@ -107,9 +108,8 @@ function aplicarDescuento(array $producto, ?string $temporada = null, ?string $a
         return round($precioConDescuento, 2);
     }
 
-    // Retornar el precio original si no aplica el descuento
     return $producto['precio'];
-};
+}
 
 
 

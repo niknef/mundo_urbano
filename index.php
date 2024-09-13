@@ -1,38 +1,7 @@
 <?php
 //Traemos las funciones
 require_once 'includes/functions.php';
-
-//Obtenemos la categoría seleccionada por url
-$categoriaSeleccionada = isset($_GET['categoria']) ? $_GET['categoria'] : FALSE;
-
-//Obtenemos el link solicitado por url
-$link = isset($_GET['link']) ? $_GET['link'] : 'inicio';
-
-//Array con los links válidos
-$links_validos = [
-    '404' => [
-        'title' => '404 - Página no encontrada',
-    ],
-    'inicio' => [
-        'title' => 'Tienda Online de Indumentaria y Calzado',
-    ],
-    'todos_productos' => [
-        'title' => 'Todos los Productos',
-    ],
-    'nosotros' => [
-        'title' => 'Nosotros',
-    ],
-    'productos' => [
-        'title' => $categoriaSeleccionada,
-    ],
-    'detalle_producto' => [
-        'title' => 'Detalle del Producto',
-    ],
-    'oferta' =>[
-        'title' => 'Ofertas',
-    ],
-];
-
+require_once 'includes/validacion_links.php';
 
 
 // Si se selecciona una categoría
@@ -43,18 +12,11 @@ if ($categoriaSeleccionada) {
     $catalogo = inventario_completo();
 }
 
-// Verificamos si la sección solicitada es válida
-if (!array_key_exists($link, $links_validos)) {
-    //si no es valida lo mandamos al 404
-    $vista = '404';
-} else {
-    //si es valida la asignamos a la variable vista
-    $vista = $link;
-}
+
 $temporada = 'verano';
 $anio = null;
-$descuento = 10;
-$productosEnOferta = filtrarProductosTemporada($temporada);
+$descuento = 20; 
+$productosEnOferta = filtrarProductosTemporada($temporada, $anio);
 
 ?>
 
@@ -89,7 +51,7 @@ $productosEnOferta = filtrarProductosTemporada($temporada);
                     <a class="nav-link" href="index.php?link=inicio">Inicio</a>
                 </li>
                 <li class="nav-item custom-dropdown">
-                    <a class="nav-link" href="index.php?link=todos_productos">Productos</a>
+                    <a class="nav-link" href="index.php?link=productos">Productos</a>
                     <div class="custom-dropdown-content px-2 d-flex justify-content-end">
                         <a href="index.php?link=productos&categoria=zapatillas">Zapatillas</a>
                         <a href="index.php?link=productos&categoria=hombre">Hombre</a>
@@ -130,10 +92,12 @@ $productosEnOferta = filtrarProductosTemporada($temporada);
                     Productos
                 </a>
                 <ul class="dropdown-menu w-100" aria-labelledby="navbarDropdownMenuLink">
+                    <li><a class="dropdown-item" href="index.php?link=productos">Todos los productos</a></li>
                     <li><a class="dropdown-item" href="index.php?link=productos&categoria=zapatillas">Zapatillas</a></li>
                     <li><a class="dropdown-item" href="index.php?link=productos&categoria=hombre">Hombre</a></li>
                     <li><a class="dropdown-item" href="index.php?link=productos&categoria=mujer">Mujer</a></li>
                     <li><a class="dropdown-item" href="index.php?link=productos&categoria=accesorios">Accesorios</a></li>
+                    <li><a class="dropdown-item" href="index.php?link=oferta">Oferta</a></li>
                 </ul>
             </li>
             <li class="nav-item">

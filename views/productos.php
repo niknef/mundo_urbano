@@ -1,6 +1,8 @@
 <div class="d-flex justify-content-center py-4 custom-card">
     <div>
-        <h1 class="text-start mb-5 fw-light fs-2"> <?= ucfirst($categoriaSeleccionada) ?></h1>
+        <h1 class="text-start mb-5 fw-light fs-2"> 
+            <?= isset($categoriaSeleccionada) && !empty($categoriaSeleccionada) ? ucfirst($categoriaSeleccionada) : "Todos los productos" ?>
+        </h1>
         <div class="container">
             <div class="row">       
                 <?php foreach ($catalogo as $producto) { ?>
