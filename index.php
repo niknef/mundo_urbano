@@ -1,22 +1,13 @@
 <?php
 //Traemos las funciones
-require_once 'includes/functions.php';
+//require_once 'includes/functions.php';
+require_once 'classes/Producto.php';
 require_once 'includes/validacion_links.php';
-
-
-// Si se selecciona una categoría
-if ($categoriaSeleccionada) {
-    $catalogo = catalogo_por_categoria($categoriaSeleccionada);
-} else {
-    // Si no se selecciona una categoría, mostramos todos los productos
-    $catalogo = inventario_completo();
-}
-
 
 $temporada = 'verano';
 $anio = null;
 $descuento = 20; 
-$productosEnOferta = filtrarProductosTemporada($temporada, $anio);
+$productosEnOferta = Producto::filtrarProductosTemporada($temporada, $anio);
 
 ?>
 
@@ -37,7 +28,7 @@ $productosEnOferta = filtrarProductosTemporada($temporada, $anio);
 
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark px-3 sticky-top">
     <div class="container-fluid">
-        <a class="navbar-brand" href="#">
+        <a class="navbar-brand" href="index.php?link=inicio">
             <img src="./img/logo.svg" alt="logo Mundo Urbano">
         </a>
         

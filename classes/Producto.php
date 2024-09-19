@@ -55,7 +55,7 @@
          * @param string $categoria La categoria de la cual se desea obtener el catalogo.
          * @return Producto[] Un array con los productos de la categoria especificada.
          */
-        public static function catalogo_por_categoria(string $categoria): array
+        public static function inventario_por_categoria(string $categoria): array
         {
             $result = [];
 
@@ -99,22 +99,30 @@
          * 
          * @return Producto[] Retorna un array de productos que pertenecen a la temporada y/o año especificado. Si no hay coincidencias retorna un array vacío.
          */
-        public static function filtrarProductosTemporada(string $temporada = null, string $anio = null): array{
-            // Si ambos son null, no hay productos en oferta
-            if (is_null($temporada) && is_null($anio)) {
+        public static function filtrarProductosTemporada(?string $temporada = null, ?string $anio = null): array
+        {
+                // Si ambos son null, no hay productos en oferta
+                if (is_null($temporada) && is_null($anio)) {
                 return []; // Devolvemos un array vacío
-            }
+        }
 
-            $inventario = self::inventario_completo();
-            $result = [];
+        $inventario = self::inventario_completo();
+        $productosOferta = [];
 
-            foreach ($inventario as $producto) {
-                if ($producto->temporada == $temporada || $producto->anio == $anio) {
-                    $result[] = $producto;
+                foreach ($inventario as $producto) {
+                
+                        $coincideTemporada = $temporada ? strtolower($producto->temporada) === strtolower($temporada) : true;
+                        $coincideAnio = $anio ? $producto->anio == $anio : true;
+
+                        if ($coincideTemporada && $coincideAnio) {
+                                $productosOferta[] = $producto;
+                        }
                 }
-            }
+        
 
-            return $result;
+
+
+        return $productosOferta;
         }
 
         /**
@@ -123,7 +131,7 @@
          * @param Producto $producto El producto al que se le va a aplicar el descuento.
          * @param string|null $temporada La temporada para ofertar los productos (opcional).
          * @param string|null $anio El año para ofertar los productos (opcional).
-         * @param float|int $descuento El porcentaje de descuento a aplicar. Por defecto es 15%. (Opcional)
+         * @param float $descuento El porcentaje de descuento a aplicar. Por defecto es 15%. (Opcional)
          * 
          * @return float Retorna el precio con descuento si el producto pertenece a la temporada y/o año especificado.
          */
@@ -143,6 +151,30 @@
             }
 
             return $producto->precio;
+        }
+
+        /**
+         * obtiene precio con descuento si corresponde y le da stilo y si no devuelve el precio normal
+         * 
+         * @param string|null $temporada La temporada del producto que puede recibir un descuento (opcional).
+         * @param string|null $anio El año del producto que puede recibir un descuento (opcional).
+         * @param float $descuento El porcentaje de descuento a aplicar. Por defecto es 15%. (Opcional)
+         * 
+         * @return string Devuelve una cadena HTML con el precio original tachado (si hay descuento) y el precio con descuento. 
+         *                Si no se aplica descuento, devuelve solo el precio formateado.
+         */
+        public function obtenerPrecioConDescuento(string $temporada = null, string $anio = null, float $descuento = 15): string
+        {
+            // Aplicamos el descuento usando la función existente
+            $precioConDescuento = $this->aplicarDescuento($this, $temporada, $anio, $descuento);
+            
+            // Si el precio con descuento es menor al precio original, mostramos ambos precios (tachando el original)
+            if ($precioConDescuento < $this->precio) {
+                return "<span class='fw-lighter text-decoration-line-through text-secondary text-danger me-1'>" . $this->precio_formateado() . "</span> $" . number_format($precioConDescuento, 2, ',', '.');
+            }
+
+            // Si no se aplica descuento, simplemente devolvemos el precio formateado
+            return $this->precio_formateado();
         }
 
         /**

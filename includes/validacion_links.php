@@ -3,7 +3,7 @@
 $categorias_validas = ['zapatillas', 'hombre', 'mujer', 'accesorios'];
 
 // Obtener la categoría seleccionada por URL
-$categoriaSeleccionada = isset($_GET['categoria']) ? $_GET['categoria'] : false;
+$categoriaSeleccionada = isset($_GET['categoria']) ? $_GET['categoria'] : FALSE;
 
 // Obtener el link solicitado por URL
 $link = isset($_GET['link']) ? $_GET['link'] : 'inicio';
