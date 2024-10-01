@@ -1,3 +1,4 @@
+
 <header>
     <div id="myCarousel" class="carousel slide mb-4" data-bs-ride="carousel">
         <div class="carousel-indicators">
@@ -9,20 +10,31 @@
         <div class="carousel-inner">
             <!-- Zapatillas Slide -->
             <div class="carousel-item active">
-                <img src="img/banner/banner-zapas-dc.jpg" alt="Banner Dc Zapatillas" class="bd-placeholder-img" height="100%" width="100%" >
+                <picture>
+                    <source media="(min-width: 1200px)" srcset="img/banner/dektop/banner-zapas-dc.jpg">
+                    <source media="(min-width: 768px)" srcset="img/banner/tablet/banner-zapas-dc.jpg">
+                    <source media="(max-width: 767px)" srcset="img/banner/banner-zapas-dc.jpg" type="image/jpg">
+                    <img src="img/banner/banner-zapas-dc.jpg" alt="Banner Dc Zapatillas" class="d-block w-100 h-100" style="object-fit: cover;">
+                </picture>
                 <div class="carousel-overlay">
                     <div class="container">
                         <div class="carousel-caption text-start">
                             <h1>Zapatillas</h1>
                             <p class="fs-5 fw-light">Encuentra las mejores zapatillas para todas tus necesidades.</p>
-                            <p ><a class="btn btn-outline-info" href="index.php?link=productos&categoria=zapatillas">Ver productos</a></p>
+                            <p><a class="btn btn-outline-info" href="index.php?link=productos&categoria=zapatillas">Ver productos</a></p>
                         </div>
                     </div>
                 </div>
             </div>
+
             <!-- Hombre Slide -->
             <div class="carousel-item">
-                <img src="img/banner/banner-hombre-dc.jpg" alt="Banner Dc Zapatillas" class="bd-placeholder-img" height="100%" width="100%">
+                <picture>
+                    <source media="(min-width: 1200px)" srcset="img/banner/desktop/banner-hombre-dc.jpg">
+                    <source media="(min-width: 768px)" srcset="img/banner/tablet/banner-hombre-dc.jpg">
+                    <source media="(max-width: 767px)" srcset="img/banner/banner-hombre-dc.jpg" type="image/jpg">
+                    <img src="img/banner/banner-hombre-dc.jpg" alt="Banner Dc Hombre" class="d-block h-100 w-100" style="object-fit: cover;">
+                </picture>
                 <div class="carousel-overlay">
                     <div class="container">
                         <div class="carousel-caption">
@@ -33,9 +45,15 @@
                     </div>
                 </div>
             </div>
+
             <!-- Mujer Slide -->
             <div class="carousel-item">
-                <img src="img/banner/banner-rusty-mujer.jpg" alt="Banner Dc Zapatillas" class="bd-placeholder-img" height="100%" width="100%">
+                <picture>
+                    <source media="(min-width: 1200px)" srcset="img/banner/desktop/banner-rusty-mujer.jpg">
+                    <source media="(min-width: 768px)" srcset="img/banner/tablet/banner-rusty-mujer.jpg">
+                    <source media="(max-width: 767px)" srcset="img/banner/banner-rusty-mujer.jpg">
+                    <img src="img/banner/banner-mujer.jpg" alt="Banner Dc Mujer" class="d-block h-100 w-100" style="object-fit: cover;">
+                </picture>
                 <div class="carousel-overlay">
                     <div class="container">
                         <div class="carousel-caption text-end">
@@ -47,6 +65,7 @@
                 </div>
             </div>
         </div>
+
         <button class="carousel-control-prev" type="button" data-bs-target="#myCarousel" data-bs-slide="prev">
             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
             <span class="visually-hidden">Previous</span>
@@ -65,7 +84,13 @@
             <div class="col-12 col-md-3">
                 <a href="index.php?link=productos&categoria=zapatillas" class="text-decoration-none">
                     <div class="card text-bg-dark position-relative">
-                        <img src="./img/banner/zapatillas-banner-cat.jpg" class="card-img" alt="Banner Categoria Zapatillas" style="object-fit: cover;">
+
+                    <picture>
+                        <source media="(min-width: 768px)" srcset="./img/categorias/desktop/zapatillas-banner-cat.jpg">
+                        <source media="(max-width: 767px)" srcset="./img/categorias/zapatillas-banner-cat.jpg" type="image/jpg">
+                        <img src="./img/categorias/zapatillas-banner-cat.jpg" alt="Banner Categoria Zapatillas" class="card-img" style="object-fit: cover;">
+                    </picture>
+                            
                         <div class="overlay position-absolute w-100 h-100 rounded-1" style="background-color: rgba(0, 0, 0, 0.2);"></div>
                         <div class="card-img-overlay d-flex align-items-center justify-content-center">
                             <h2 class="card-title text-center">Zapatillas</h2>
@@ -77,7 +102,12 @@
             <div class="col-12 col-md-3">
                 <a href="index.php?link=productos&categoria=hombre" class="text-decoration-none">
                     <div class="card text-bg-dark position-relative">
-                        <img src="./img/banner/hombre-banner-cat.jpg" class="card-img" alt="Baner Categoria Hombre" style="object-fit: cover;">
+                    <picture>
+                        <source media="(min-width: 768px)" srcset="./img/categorias/desktop/hombre-banner-cat.jpg">
+                        <source media="(max-width: 767px)" srcset="./img/categorias/hombre-banner-cat.jpg" type="image/jpg">
+                        <img src="./img/categorias/hombre-banner-cat.jpg" alt="Baner Categoria Hombre" class="card-img" style="object-fit: cover;">
+                    </picture>
+                        
                         <div class="overlay position-absolute w-100 h-100 rounded-1" style="background-color: rgba(0, 0, 0, 0.2);"></div>
                         <div class="card-img-overlay d-flex align-items-center justify-content-center">
                             <h2 class="card-title text-center">Hombre</h2>
@@ -89,7 +119,12 @@
             <div class="col-12 col-md-3">
                 <a href="index.php?link=productos&categoria=mujer" class="text-decoration-none">
                     <div class="card text-bg-dark position-relative">
-                        <img src="./img/banner/mujer-banner-cat.jpg" class="card-img" alt="Baner Categoria Mujer" style="object-fit: cover;">
+                    <picture>
+                        <source media="(min-width: 768px)" srcset="./img/categorias/desktop/mujer-banner-cat.jpg">
+                        <source media="(max-width: 767px)" srcset="./img/categorias/mujer-banner-cat.jpg" type="image/jpg">
+                        <img src="./img/categorias/mujer-banner-cat.jpg" alt="Banner Categoria Mujer" class="card-img" style="object-fit: cover;">
+                    </picture>
+                        
                         <div class="overlay position-absolute w-100 h-100 rounded-1" style="background-color: rgba(0, 0, 0, 0.2);"></div>
                         <div class="card-img-overlay d-flex align-items-center justify-content-center">
                             <h2 class="card-title text-center">Mujer</h2>
@@ -101,7 +136,13 @@
             <div class="col-12 col-md-3">
                 <a href="index.php?link=productos&categoria=accesorios" class="text-decoration-none">
                     <div class="card text-bg-dark position-relative">
-                        <img src="./img/banner/accesorios-banner-cat.jpg" class="card-img" alt="Baner Categoria Accesorios" style="object-fit: cover;">
+
+                    <picture>
+                        <source media="(min-width: 768px)" srcset="./img/categorias/desktop/accesorios-banner-cat.jpg">
+                        <source media="(max-width: 767px)" srcset="./img/categorias/accesorios-banner-cat.jpg" type="image/jpg">
+                        <img src="./img/categorias/accesorios-banner-cat.jpg" alt="Banner Categoria accesorios" class="card-img" style="object-fit: cover;">
+                    </picture>
+                    
                         <div class="overlay position-absolute w-100 h-100 rounded-1" style="background-color: rgba(0, 0, 0, 0.2);"></div>
                         <div class="card-img-overlay d-flex align-items-center justify-content-center">
                             <h2 class="card-title text-center">Accesorios</h2>

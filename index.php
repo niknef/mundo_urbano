@@ -1,8 +1,10 @@
 <?php
-//Traemos las funciones
-//require_once 'includes/functions.php';
+
 require_once 'classes/Producto.php';
-require_once 'includes/validacion_links.php';
+require_once 'classes/Vista.php';
+
+$categoriaSeleccionada = $_GET['categoria'] ?? null;
+$vista = Vista::validar_vista($_GET['link'] ?? null, $categoriaSeleccionada);
 
 $temporada = 'verano';
 $anio = null;
@@ -17,7 +19,7 @@ $productosEnOferta = Producto::filtrarProductosTemporada($temporada, $anio);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="./img/favicon.ico" type="image/x-icon">
-    <title>Mundo Urbano | <?= ucfirst($links_validos[$vista]['title']) ?></title>
+    <title>Mundo Urbano | <?= ucfirst($vista['titulo']) ?></title>
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
@@ -64,7 +66,7 @@ $productosEnOferta = Producto::filtrarProductosTemporada($temporada, $anio);
 <main class="container">
     <?php
     //Incluimos la vista correspondiente
-    require_once "views/$vista.php";
+    require_once "views/{$vista['archivo']}.php"
     ?>
 </main>
 

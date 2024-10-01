@@ -1,6 +1,6 @@
 <?PHP
-    class Producto
-    {
+class Producto
+{
         private $id;
         private $categoria;
         private $nombre;
@@ -21,10 +21,10 @@
          */
         public static function inventario_completo(): array
         {
-            $inventario = [];
+                $inventario = [];
 
-            $JSON = file_get_contents('data/inventario.json');
-            $JSON_DATA = json_decode($JSON);
+                $JSON = file_get_contents('data/inventario.json');
+                $JSON_DATA = json_decode($JSON);
 
             foreach ($JSON_DATA as $value){
 
