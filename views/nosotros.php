@@ -2,10 +2,10 @@
 <section>
 <div class="row featurette mt-5 align-items-center">
   <div class="col-md-7 ">
-    <h1 class="featurette-heading fw-normal lh-1">Conoce Mundo Urbano</h1>
+    <h2 class="featurette-heading fw-normal lh-1">Conoce Mundo Urbano</h2>
     <p class="lead"><em>Desde 2015, redefiniendo el estilo con las mejores marcas y tendencias.</em></p>
     <p><strong>Mundo Urbano</strong> es más que una tienda, es un espacio donde la <em>moda urbana</em> cobra vida. Con sucursales en Del Viso y Maquinista Savio, ofrecemos una selección exclusiva de ropa, calzado y accesorios de las marcas más reconocidas y emergentes.</p>
-    <p>Desde nuestros inicios en 2015, nos hemos comprometido a brindar un servicio excepcional, combinando las últimas tendencias con la autenticidad que caracteriza a nuestro público.</p>
+    <p>Desde nuestros inicios en 2015, <strong class="fw-normal">nos hemos comprometido a brindar un servicio excepcional, combinando las últimas tendencias con la autenticidad que caracteriza a nuestro público.</strong></p>
     <p>En <strong>Mundo Urbano</strong>, creemos en la <em>autoexpresión</em> y en la libertad de estilo. Nuestro catálogo está cuidadosamente curado para ofrecerte lo mejor en moda urbana, adaptándonos a tus gustos y necesidades. Ya sea que busques lo último en tendencias o piezas clásicas que nunca pasan de moda, estamos aquí para ayudarte a encontrar tu estilo único.</p>
   </div>
   <div class="col-md-5">
@@ -13,13 +13,15 @@
     
   </div>
 </div>
+</section>
 
 <hr class="featurette-divider">
 
+<section>
 <div class="row mt-5">
 
 <div class="col-md-6">
-    <h2 class="fw-normal">Sucursal Del Viso</h2>
+    <h3 class="fw-normal">Sucursal Del Viso</h3>
     <p>Visítanos en nuestra sucursal de Del Viso, donde encontrarás una amplia variedad de productos de las mejores marcas.</p>
     
     <div class="ratio ratio-16x9">
@@ -28,7 +30,7 @@
 </div>
 
 <div class="col-md-6">
-    <h2 class="fw-normal">Sucursal Maquinista Savio</h2>
+    <h3 class="fw-normal">Sucursal Maquinista Savio</h3>
     <p>Ven a nuestra sucursal de Maquinista Savio para descubrir lo último en moda urbana y accesorios.</p>
     
     <div class="ratio ratio-16x9">

@@ -6,9 +6,9 @@ require_once 'classes/Vista.php';
 $categoriaSeleccionada = $_GET['categoria'] ?? null;
 $vista = Vista::validar_vista($_GET['link'] ?? null, $categoriaSeleccionada);
 
-$temporada = 'verano';
+$temporada = 'invierno';
 $anio = null;
-$descuento = 20; 
+$descuento = 10; 
 $productosEnOferta = Producto::filtrarProductosTemporada($temporada, $anio);
 
 ?>
@@ -28,57 +28,61 @@ $productosEnOferta = Producto::filtrarProductosTemporada($temporada, $anio);
 </head>
 <body>
 
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark px-3 sticky-top">
-    <div class="container-fluid">
-        <a class="navbar-brand" href="index.php?link=inicio">
-            <img src="./img/logo.svg" alt="logo Mundo Urbano">
-            <h1 class="visually-hidden">Mundo Urbano | <?= ucfirst($vista['titulo']) ?></h1>
-        </a>
-        
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        
-        <div class="collapse navbar-collapse" id="navbarNavDropdown">
-            <ul class="navbar-nav ms-auto gap-3">
-                <li class="nav-item">
-                    <a class="nav-link" href="index.php?link=inicio">Inicio</a>
-                </li>
-                <li class="nav-item custom-dropdown">
-                    <a class="nav-link" href="index.php?link=productos">Productos</a>
-                    <div class="custom-dropdown-content px-2 d-flex justify-content-end">
-                        <a href="index.php?link=productos&categoria=zapatillas">Zapatillas</a>
-                        <a href="index.php?link=productos&categoria=hombre">Hombre</a>
-                        <a href="index.php?link=productos&categoria=mujer">Mujer</a>
-                        <a href="index.php?link=productos&categoria=accesorios">Accesorios</a>
-                    </div>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="index.php?link=oferta">Ofertas</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="index.php?link=nosotros">Nosotros</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="index.php?link=alumno">Alumno</a>
-                </li>
-                <li class="nav-item">
-                    <a type="button" class="btn btn-info" href="index.php?link=contacto">Contacto</a>
-                </li>
-            </ul>
+<header>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark px-3 sticky-top">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="index.php?link=inicio">
+                <img src="./img/logo.svg" alt="logo Mundo Urbano">
+                <h1 class="visually-hidden">Mundo Urbano | <?= ucfirst($vista['titulo']) ?></h1>
+            </a>
+            
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            
+            <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                <ul class="navbar-nav ms-auto gap-3">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.php?link=inicio">Inicio</a>
+                    </li>
+                    <li class="nav-item custom-dropdown">
+                        <a class="nav-link" href="index.php?link=productos">Productos</a>
+                        <div class="custom-dropdown-content px-2 d-flex justify-content-end">
+                            <a href="index.php?link=productos&categoria=zapatillas">Zapatillas</a>
+                            <a href="index.php?link=productos&categoria=hombre">Hombre</a>
+                            <a href="index.php?link=productos&categoria=mujer">Mujer</a>
+                            <a href="index.php?link=productos&categoria=accesorios">Accesorios</a>
+                        </div>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.php?link=oferta">Ofertas</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.php?link=nosotros">Nosotros</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.php?link=alumno">Alumno</a>
+                    </li>
+                    <li class="nav-item">
+                        <a type="button" class="btn btn-info" href="index.php?link=contacto">Contacto</a>
+                    </li>
+                </ul>
+            </div>
         </div>
-    </div>
-</nav>
+    </nav>
+</header>
 
-<main class="container">
-    <?php
-    //Incluimos la vista correspondiente
-    require_once "views/{$vista['archivo']}.php"
-    ?>
+<main class="container my-4">
+    
+        <?php
+        // Incluimos la vista correspondiente
+        require_once "views/{$vista['archivo']}.php"
+        ?>
+    
 </main>
 
-<div class="container">
-    <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 px-3 my-4 border-top bg-dark rounded">
+<footer class="container">
+    <div class="d-flex flex-wrap justify-content-between align-items-center py-3 px-3 my-4 border-top bg-dark rounded">
         <p class="col-md-4 mb-0 text-white-50">&copy; 2024 Mundo Urbano</p>
         <a href="index.php?link=inicio" class="col-md-4 d-flex align-items-center justify-content-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none navbar-brand">
             <img src="./img/logo.svg" alt="Logo Mundo Urbano">
@@ -104,8 +108,8 @@ $productosEnOferta = Producto::filtrarProductosTemporada($temporada, $anio);
                 <a class="nav-link" href="index.php?link=nosotros">Contacto</a>
             </li>
         </ul>
-    </footer>
-</div>
+    </div>
+</footer>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/js/bootstrap.bundle.min.js" integrity="sha384-qKXV1j0HvMUeCBQ+QVp7JcfGl760yU08IQ+GpUo5hlbpg51QRiuqHAJz8+BrxE/N" crossorigin="anonymous"></script>
 </body>

@@ -1,11 +1,11 @@
 
 <div class="d-flex justify-content-center py-4 custom-card">
     <div>
-        <h1 class="text-start mb-5 fw-light fs-2">Liquidación</h1>
+        <h2 class="text-start mb-5 fw-light fs-2">Liquidación</h2>
         <div class="container">
             <?php if (empty($productosEnOferta)) { ?>
                 <div class="alert alert-info text-center">
-                    <h2> No hay productos en oferta para esta temporada. </h2>
+                    <h3> No hay productos en oferta para esta temporada. </h3>
                     <img src="./img/sad-svg.svg" alt="No hay productos en oferta" class="img-fluid" style="max-width: 400px;">
                 </div>
             <?php } else { ?>
@@ -16,7 +16,7 @@
                                 <div class="card border-0 h-100 rounded-1 d-flex flex-column">
                                     <img src="./img/productos/<?= $producto->getImg() ?>" class="card-img-top" alt="<?= $producto->getNombre() ?>">
                                     <div class="card-body text-start flex-grow-1 d-flex flex-column justify-content-between">
-                                        <h2 class="card-title fw-light fs-4"><?= $producto->getNombre() ?></h2>
+                                        <h3 class="card-title fw-light fs-4"><?= $producto->getNombre() ?></h3>
                                         <p class="fs-5 fw-light text-dark mt-2">
                                             <?= $producto->obtenerPrecioConDescuento($temporada, $anio, $descuento); ?>
                                         </p>

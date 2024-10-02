@@ -4,7 +4,7 @@
         <img src="./img/contact.svg" class="d-block mx-lg-auto img-fluid rounded" alt="Banner de contacto" width="700" height="500" loading="lazy">
     </div>
     <div class="col-lg-6 col-md-8 col-12 bg-light p-4 rounded shadow">
-        <h1 class="text-center mb-4">Contáctanos</h1>
+        <h2 class="fs-1 text-center mb-4">Contáctanos</h2>
         <form action="php/procesar_datos.php" method="POST">
             <div class="form-floating mb-3">
                 <input type="text" class="form-control" id="nombre" name="nombre" placeholder="Ingrese su nombre" required>

@@ -3,6 +3,7 @@
     $id = filter_var($id, FILTER_VALIDATE_INT) ? (int)$id : 0; // Validar si es un entero, sino asignar 0
     $producto = Producto::buscarProductoPorId($id);
 ?>
+<section>
  <div class="container mt-5">
     <div class="row">
         <?PHP if (!empty($producto)) { ?>
@@ -10,7 +11,7 @@
             <img src="img/productos/<?= $producto->getImg() ?>" alt="<?= $producto->getNombre() ?>" class="img-fluid">
         </div>
         <div class="col-md-6">
-            <h1><?= $producto->getNombre() ?></h1>
+            <h2><?= $producto->getNombre() ?></h2>
             <h2 class="fw-light mb-3"><?= $producto->getMarca() ?></h2>
             <p><strong>Tipo:</strong><?= $producto->getTipo() ?></p>
             <p><strong>Color:</strong><?= $producto->getColor() ?></p>
@@ -28,15 +29,15 @@
                 <?php endif; ?>
             </p>
             
-            <h2>
+            <h3>
                 <?= $producto->obtenerPrecioConDescuento($temporada, $anio, $descuento); ?>
-            </h2>
+            </h3>
             <button class="btn btn-info btn-lg mt-2 w-50 text-white fw-semibold boton-comprar">Comprar</button>
         </div>
 
         <?PHP } else {?>
             <div class="alert alert-danger text-center">
-                <h1> No se encontró el producto solicitado. </h1>
+                <h2> No se encontró el producto solicitado. </h2>
                 <img src="img/sad-svg.svg" alt="No se encontró el producto" class="img-fluid" style="max-width: 400px;">
             </div>
         <?PHP }; ?>
@@ -44,7 +45,7 @@
     </div>
 </div>
 
-
+</section>
 <section>
     <?PHP
     require_once "views/oferta_corto.php";

@@ -150,3 +150,11 @@ footer .nav-link:hover {
     opacity: 1; 
     color: #6c757d;
 }
+
+.fit-cover{
+    object-fit: cover;
+}
+
+.over-opacity{
+    background-color: rgba(0, 0, 0, 0.2)
+}

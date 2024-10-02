@@ -1,8 +1,8 @@
 <section class="alumno d-flex align-items-center justify-content-center">
     <div class="row featurette align-items-center text-center">
         <div class="col-md-7 order-md-first order-last">
-        <h1 class="featurette-heading fw-light lh-1">Nicolás Firpo</h1>
-        <p class="lead"><em>Nacimiento: 17-04-2000</em></p>
+            <h2 class="featurette-heading fw-light lh-1">Nicolás Firpo</h2>
+            <p class="lead"><em>Nacimiento: 17-04-2000</em></p>
         <div class="d-flex justify-content-center gap-3">
             <a href="mailto:nicolas.firpo@davinci.edu.ar" class="badge custom-badge bg-primary">
             <i class="bi bi-envelope-fill"></i> Mail
