@@ -133,3 +133,20 @@ footer .nav-link:hover {
 .boton-comprar:hover {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); 
 }
+
+.alumno{
+    min-height: calc(100vh - 250px);
+}
+
+.custom-badge {
+    font-size: 1.15rem; 
+    text-decoration: none; 
+    opacity: 0.8; 
+    padding: 10px 15px; 
+    transition: opacity 0.3s ease; 
+}
+
+.custom-badge:hover {
+    opacity: 1; 
+    color: #6c757d;
+}
