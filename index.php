@@ -32,6 +32,7 @@ $productosEnOferta = Producto::filtrarProductosTemporada($temporada, $anio);
     <div class="container-fluid">
         <a class="navbar-brand" href="index.php?link=inicio">
             <img src="./img/logo.svg" alt="logo Mundo Urbano">
+            <h1 class="visually-hidden">Mundo Urbano | <?= ucfirst($vista['titulo']) ?></h1>
         </a>
         
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
@@ -58,6 +59,12 @@ $productosEnOferta = Producto::filtrarProductosTemporada($temporada, $anio);
                 <li class="nav-item">
                     <a class="nav-link" href="index.php?link=nosotros">Nosotros</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="index.php?link=alumno">Alumno</a>
+                </li>
+                <li class="nav-item">
+                    <a type="button" class="btn btn-info" href="index.php?link=contacto">Contacto</a>
+                </li>
             </ul>
         </div>
     </div>
@@ -73,12 +80,12 @@ $productosEnOferta = Producto::filtrarProductosTemporada($temporada, $anio);
 <div class="container">
     <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 px-3 my-4 border-top bg-dark rounded">
         <p class="col-md-4 mb-0 text-white-50">&copy; 2024 Mundo Urbano</p>
-        <a href="/" class="col-md-4 d-flex align-items-center justify-content-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none navbar-brand">
+        <a href="index.php?link=inicio" class="col-md-4 d-flex align-items-center justify-content-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none navbar-brand">
             <img src="./img/logo.svg" alt="Logo Mundo Urbano">
         </a>
         <ul class="nav col-md-4 justify-content-end">
             <li class="nav-item">
-                <a class="nav-link active" href="index.php">Inicio</a>
+                <a class="nav-link active" href="index.php?link=inicio">Inicio</a>
             </li>
             <li class="nav-item dropdown custom-dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -94,7 +101,7 @@ $productosEnOferta = Producto::filtrarProductosTemporada($temporada, $anio);
                 </ul>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="index.php?link=nosotros">Nosotros</a>
+                <a class="nav-link" href="index.php?link=nosotros">Contacto</a>
             </li>
         </ul>
     </footer>

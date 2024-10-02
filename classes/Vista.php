@@ -46,6 +46,18 @@ class Vista {
                 $archivo = 'oferta';
                 $titulo = 'Ofertas';
                 break;
+            case 'alumno':
+                $archivo = 'alumno';
+                $titulo = 'Alumno';
+                break;
+            case 'contacto':
+                $archivo = 'contacto';
+                $titulo = 'Contacto';
+                break;
+            case 'gracias':
+                $archivo = 'gracias';
+                $titulo = 'Gracias';
+                break;
             default:
                 $archivo = '404';
                 $titulo = 'Página no encontrada';

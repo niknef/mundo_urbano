@@ -1,4 +1,5 @@
 
+<section>
 <div class="row featurette mt-5 align-items-center">
   <div class="col-md-7 ">
     <h1 class="featurette-heading fw-normal lh-1">Conoce Mundo Urbano</h1>
@@ -35,3 +36,4 @@
     </div>
 </div>
 </div>
+</section>
