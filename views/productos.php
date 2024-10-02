@@ -1,20 +1,32 @@
 <?PHP
-// Si se selecciona una categoría
+// Filtramos por categoría si hay una categoría seleccionada
 if ($categoriaSeleccionada) {
     $catalogo = Producto::inventario_por_categoria($categoriaSeleccionada);
 } else {
-    // Si no se selecciona una categoría, mostramos todos los productos
+    // Si no hay categoría seleccionada, traemos todo el inventario
     $catalogo = Producto::inventario_completo();
 }
 
-
+// Si se selecciona un filtro de orden, lo aplicamos sobre el catálogo filtrado
+if (isset($_GET['orden'])) {
+    $catalogo = Producto::ordenarPorPrecio($catalogo, $_GET['orden']);
+}
 ?>
 
-<div class="d-flex justify-content-center py-4 custom-card">
-    <div>
-        <h1 class="text-start mb-5 fw-light fs-2"> 
-            <?= isset($categoriaSeleccionada) && !empty($categoriaSeleccionada) ? ucfirst($categoriaSeleccionada) : "Todos los productos" ?>
-        </h1>
+
+<section>
+    <div class="d-flex justify-content-between align-items-center py-4 flex-column flex-md-row text-center text-md-start">
+        <div class="mb-3 mb-md-0">
+            <h2 class="fw-light fs-2"> 
+                <?= isset($categoriaSeleccionada) && !empty($categoriaSeleccionada) ? ucfirst($categoriaSeleccionada) : "Todos los productos" ?>
+            </h2>
+        </div>
+        <div class="d-flex gap-2">
+            <a href="index.php?link=productos&categoria=<?= $categoriaSeleccionada ?>&orden=asc" class="btn btn-sm btn-outline-primary">Precio: Menor a Mayor</a>
+            <a href="index.php?link=productos&categoria=<?= $categoriaSeleccionada ?>&orden=desc" class="btn btn-sm btn-outline-secondary">Precio: Mayor a Menor</a>
+        </div>
+    </div>
+    <div class="d-flex justify-content-center py-4 custom-card">
         <div class="container">
             <div class="row">       
                 <?php foreach ($catalogo as $producto) { ?>
@@ -35,4 +47,4 @@ if ($categoriaSeleccionada) {
             </div>
         </div>
     </div>
-</div>
+</section>

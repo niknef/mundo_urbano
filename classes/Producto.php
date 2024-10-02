@@ -185,6 +185,24 @@ class Producto
                 return "$" . number_format($this->precio, 2, ",", ".");
         }
 
+        /**
+        * Ordena un catálogo de productos por precio.
+        * 
+        * @param Producto[] $catalogo El catálogo de productos a ordenar.
+        * @param string $orden El orden de la ordenación: "asc" para ascendente (menor a mayor) y "desc" para descendente (mayor a menor).
+        * @return Producto[] El catálogo ordenado según el precio.
+        */
+        public static function ordenarPorPrecio(array $catalogo, string $orden = 'asc'): array
+        {
+                usort($catalogo, function($a, $b) use ($orden) {
+                if ($orden === 'asc') {
+                        return $a->precio > $b->precio ? 1 : -1;
+                } else {
+                        return $a->precio < $b->precio ? 1 : -1;
+                }
+                });
+                return $catalogo;
+        }
 
         /**
          * Get the value of id
