@@ -26,7 +26,7 @@ class Producto
                 $JSON = file_get_contents('data/inventario.json');
                 $JSON_DATA = json_decode($JSON);
 
-            foreach ($JSON_DATA as $value){
+                foreach ($JSON_DATA as $value){
 
                 $producto = new self();
 
@@ -44,9 +44,9 @@ class Producto
                 $producto->precio = $value->precio;
 
                 $inventario[] = $producto;
-            }
+                }
 
-            return $inventario;
+                return $inventario;
         }
 
         /**
@@ -57,17 +57,17 @@ class Producto
          */
         public static function inventario_por_categoria(string $categoria): array
         {
-            $result = [];
+                $result = [];
 
             // Traemos el inventario completo desde el archivo JSON
-            $catalogo = self::inventario_completo();
+                $catalogo = self::inventario_completo();
 
-            foreach ($catalogo as $producto) {
-                if (strtolower($producto->categoria) === strtolower($categoria)) {
-                    $result[] = $producto;
+                foreach ($catalogo as $producto) {
+                        if (strtolower($producto->categoria) === strtolower($categoria)) {
+                                $result[] = $producto;
+                        }
                 }
-            }
-            return $result;
+                return $result;
         }
 
         /**
@@ -79,16 +79,16 @@ class Producto
         public static function buscarProductoPorId(int $id): ?Producto
         {
             // Traemos el inventario completo desde el archivo JSON
-            $inventario = self::inventario_completo();
+                $inventario = self::inventario_completo();
 
             // Recorremos cada categoría dentro del inventario
-            foreach ($inventario as $producto) {
-                if ($producto->id == $id) {
-                    return $producto;
+                foreach ($inventario as $producto) {
+                        if ($producto->id == $id) {
+                        return $producto;
+                        }
                 }
-            }
 
-            return null;
+                return null;
         }
 
         /**
@@ -138,19 +138,19 @@ class Producto
         public static function aplicarDescuento(Producto $producto, string $temporada = null, string $anio = null, float $descuento = 15): float
         {
             // Si ambos son null
-            if (is_null($temporada) && is_null($anio)) {
+                if (is_null($temporada) && is_null($anio)) {
+                        return $producto->precio;
+                }
+
+                $coincideTemporada = $temporada ? strtolower($producto->temporada) === strtolower($temporada) : true;
+                $coincideAnio = $anio ? $producto->anio == $anio : true;
+
+                if ($coincideTemporada && $coincideAnio) {
+                        $precioConDescuento = $producto->precio - ($producto->precio * ($descuento / 100));
+                        return round($precioConDescuento, 2);
+                }
+
                 return $producto->precio;
-            }
-
-            $coincideTemporada = $temporada ? strtolower($producto->temporada) === strtolower($temporada) : true;
-            $coincideAnio = $anio ? $producto->anio == $anio : true;
-
-            if ($coincideTemporada && $coincideAnio) {
-                $precioConDescuento = $producto->precio - ($producto->precio * ($descuento / 100));
-                return round($precioConDescuento, 2);
-            }
-
-            return $producto->precio;
         }
 
         /**
@@ -166,15 +166,15 @@ class Producto
         public function obtenerPrecioConDescuento(string $temporada = null, string $anio = null, float $descuento = 15): string
         {
             // Aplicamos el descuento usando la función existente
-            $precioConDescuento = $this->aplicarDescuento($this, $temporada, $anio, $descuento);
-            
+                $precioConDescuento = $this->aplicarDescuento($this, $temporada, $anio, $descuento);
+        
             // Si el precio con descuento es menor al precio original, mostramos ambos precios (tachando el original)
-            if ($precioConDescuento < $this->precio) {
-                return "<span class='fw-lighter text-decoration-line-through text-secondary text-danger me-1'>" . $this->precio_formateado() . "</span> $" . number_format($precioConDescuento, 2, ',', '.');
-            }
+                if ($precioConDescuento < $this->precio) {
+                        return "<span class='fw-lighter text-decoration-line-through text-secondary text-danger me-1'>" . $this->precio_formateado() . "</span> $" . number_format($precioConDescuento, 2, ',', '.');
+                }
 
             // Si no se aplica descuento, simplemente devolvemos el precio formateado
-            return $this->precio_formateado();
+                return $this->precio_formateado();
         }
 
         /**
@@ -182,7 +182,7 @@ class Producto
          */
         public function precio_formateado(): string
         {
-            return "$" . number_format($this->precio, 2, ",", ".");
+                return "$" . number_format($this->precio, 2, ",", ".");
         }
 
 
