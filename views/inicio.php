@@ -11,9 +11,9 @@
             <!-- Zapatillas Slide -->
             <div class="carousel-item active">
                 <picture>
-                    <source media="(min-width: 1200px)" srcset="img/banner/dektop/banner-zapas-dc.jpg">
+                    <source media="(min-width: 1200px)" srcset="img/banner/desktop/banner-zapas-dc.jpg">
                     <source media="(min-width: 768px)" srcset="img/banner/tablet/banner-zapas-dc.jpg">
-                    <source media="(max-width: 767px)" srcset="img/banner/banner-zapas-dc.jpg" type="image/jpg">
+                    <source media="(max-width: 767px)" srcset="img/banner/banner-zapas-dc.jpg">
                     <img src="img/banner/banner-zapas-dc.jpg" alt="Banner Dc Zapatillas" class="d-block w-100 h-100" style="object-fit: cover;">
                 </picture>
                 <div class="carousel-overlay">

@@ -8,57 +8,52 @@ class Vista {
      * @return array devuelve un array con el nombre de archivo y el título a mostrar  
      */
     public static function validar_vista(?string $link, ?string $categoriaSeleccionada = null): array {
+        
         // Lista de categorías válidas
         $categorias_validas = ['zapatillas', 'hombre', 'mujer', 'accesorios'];
 
-        // Verificar si la categoría es válida
-        if ($categoriaSeleccionada && !in_array($categoriaSeleccionada, $categorias_validas)) {
+        // Verificar si la categoría seleccionada es válida
+        if ($link === 'productos' && !empty($categoriaSeleccionada) && !in_array($categoriaSeleccionada, $categorias_validas)) {
+         // Si la categoría no es válida, redirigir a una página de error
             return [
                 'archivo' => '404',
-                'titulo' => 'Página no encontrada'
+                'titulo' => 'Página no encontrada',
             ];
         }
-
-        // Array de links válidos
-        $links_validos = [
-            '404' => [
-                'archivo' => '404',
-                'titulo' => '404 - Página no encontrada',
-            ],
-            'inicio' => [
-                'archivo' => 'inicio',
-                'titulo' => 'Tienda Online de Indumentaria y Calzado',
-            ],
-            'todos_productos' => [
-                'archivo' => 'todos_productos',
-                'titulo' => 'Todos los Productos',
-            ],
-            'nosotros' => [
-                'archivo' => 'nosotros',
-                'titulo' => 'Nosotros',
-            ],
-            'productos' => [
-                'archivo' => 'productos',
-                'titulo' => !empty($categoriaSeleccionada) ? ucfirst($categoriaSeleccionada) : 'Todos los productos',
-            ],
-            'detalle_producto' => [
-                'archivo' => 'detalle_producto',
-                'titulo' => 'Detalle del Producto',
-            ],
-            'oferta' => [
-                'archivo' => 'oferta',
-                'titulo' => 'Ofertas',
-            ],
+        switch($link) {
+            case null:
+            case 'inicio':
+                $archivo = 'inicio';
+                $titulo = 'Tienda Online de Indumentaria y Calzado';
+                break;
+            case 'todos_productos':
+                $archivo = 'todos_productos';
+                $titulo = 'Todos los Productos';
+                break;
+            case 'nosotros':
+                $archivo = 'nosotros';
+                $titulo = 'Nosotros';
+                break;
+            case 'productos':
+                $archivo = 'productos';
+                $titulo = !empty($categoriaSeleccionada) ? ucfirst($categoriaSeleccionada) : 'Todos los productos';
+                break;
+            case 'detalle_producto':
+                $archivo = 'detalle_producto';
+                $titulo = 'Detalle del Producto';
+                break;
+            case 'oferta':
+                $archivo = 'oferta';
+                $titulo = 'Ofertas';
+                break;
+            default:
+                $archivo = '404';
+                $titulo = 'Página no encontrada';
+            
+        }
+        return [
+            'archivo' => $archivo,
+            'titulo' => $titulo
         ];
-
-        // Verificar si el link es válido
-        if (!array_key_exists($link, $links_validos)) {
-            return [
-                'archivo' => '404',
-                'titulo' => 'Página no encontrada'
-            ];
-        }
-
-        return $links_validos[$link];
     }
 }
