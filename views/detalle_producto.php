@@ -1,6 +1,5 @@
 <?PHP 
-    $id = $_GET['id'] ?? 0; // Asegurarse de que $id siempre sea un entero
-    $id = filter_var($id, FILTER_VALIDATE_INT) ? (int)$id : 0; // Validar si es un entero, sino asignar 0
+    $id = isset($_GET['id']) ? (int) $_GET['id'] : 0;
     $producto = Producto::buscarProductoPorId($id);
 ?>
 <section>

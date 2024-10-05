@@ -6,9 +6,9 @@ require_once 'classes/Vista.php';
 $categoriaSeleccionada = $_GET['categoria'] ?? null;
 $vista = Vista::validar_vista($_GET['link'] ?? null, $categoriaSeleccionada);
 
-$temporada = 'invierno';
-$anio = null;
-$descuento = 10; 
+$temporada = null;
+$anio = '2022';
+$descuento = 50; 
 $productosEnOferta = Producto::filtrarProductosTemporada($temporada, $anio);
 
 ?>
