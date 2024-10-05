@@ -54,10 +54,6 @@ class Vista {
                 $archivo = 'contacto';
                 $titulo = 'Contacto';
                 break;
-            case 'gracias':
-                $archivo = 'gracias';
-                $titulo = 'Gracias';
-                break;
             default:
                 $archivo = '404';
                 $titulo = 'Página no encontrada';

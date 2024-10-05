@@ -349,5 +349,159 @@
         "temporada": "Invierno",
         "anio": "2024",
         "precio": 25990
+    },
+    {
+        "id": 19,
+        "categoria": "Zapatillas",
+        "nombre": "Union LA (Gwr)",
+        "marca": "Dc Shoes",
+        "tipo": "Zapatillas Urbana",
+        "color": "Negro/Gris",
+        "talles": [
+            "8",
+            "9",
+            "10",
+            "11",
+            "12"
+        ],
+        "img": "union-dc-negra-gris.jpg",
+        "descripcion": "Capellada de descarne con triple costura en la puntera, forro de mesh respirable, espuma en cuello y lengüeta para mayor confort y soporte. Suela de caucho resistente a la abrasión para durabilidad y agarre superior.",
+        "temporada": "Verano",
+        "anio": "2022",
+        "precio": 139990
+    },
+    {
+        "id": 20,
+        "categoria": "Zapatillas",
+        "nombre": "Rusty Retro White / Black",
+        "marca": "Rusty",
+        "tipo": "Zapatillas Urbana",
+        "color": "Blanca/Negra",
+        "talles": [
+            "40",
+            "41",
+            "42",
+            "43",
+            "44"
+        ],
+        "img": "retro-white-black.jpg",
+        "descripcion": "Zapatillas blancas y negras con estilo retro, diseñadas para comodidad y durabilidad. Perfectas para un look casual y moderno, ideales para uso diario.",
+        "temporada": "Verano",
+        "anio": "2022",
+        "precio": 89000
+    },
+    {
+        "id": 21,
+        "categoria": "hombre",
+        "nombre": "Walkshort Worker Straight Classic DC",
+        "marca": "Dc Shoes",
+        "tipo": "Bermuda",
+        "color": "Negro",
+        "talles": [
+            "28",
+            "30",
+            "32",
+            "34",
+            "36",
+            "38"
+        ],
+        "img": "bermuda-dc-worker-negra.jpg",
+        "descripcion": "Bermuda chino de gabardina con 98% algodón y 2% elastano, 7 oz. Fit recto, largo 19, con avíos de alta calidad DC. Ideal para comodidad y estilo casual.",
+        "temporada": "Verano",
+        "anio": "2024",
+        "precio": 87900
+    },
+    {
+        "id": 22,
+        "categoria": "hombre",
+        "nombre": "Remera Mc Global Invasion",
+        "marca": "Rusty",
+        "tipo": "Remera",
+        "color": "Negra",
+        "talles": [
+            "xs",
+            "s",
+            "m",
+            "l",
+            "xl",
+            "xxl"
+        ],
+        "img": "remera-rusty-global.jpg",
+        "descripcion": "Remera negra de manga corta con diseño gráfico impactante. Cómoda y versátil, ideal para un look casual y urbano.",
+        "temporada": "Verano",
+        "anio": "2024",
+        "precio": 34490
+    },
+    {
+        "id": 23,
+        "categoria": "mujer",
+        "nombre": "Vestido Simmer Mini Black Rusty",
+        "marca": "Rusty",
+        "tipo": "Vestido",
+        "color": "Negro",
+        "talles": [
+            "xs",
+            "s",
+            "m",
+            "l",
+            "xl"
+        ],
+        "img": "vestido-rusty-simmer.jpg",
+        "descripcion": "Vestido slip blanco de estilo minimalista, suave y ligero. Perfecto para un look casual y elegante, ideal para cualquier ocasión.",
+        "temporada": "Verano",
+        "anio": "2024",
+        "precio": 41890
+    },
+    {
+        "id": 24,
+        "categoria": "mujer",
+        "nombre": "Vestido Heather Rusty",
+        "marca": "Rusty",
+        "tipo": "Vestido",
+        "color": "Blanco",
+        "talles": [
+            "xs",
+            "s",
+            "m",
+            "l",
+            "xl"
+        ],
+        "img": "vestido-rusty-heather.jpg",
+        "descripcion": "Vestido slip blanco de estilo minimalista, suave y ligero. Perfecto para un look casual y elegante, ideal para cualquier ocasión.",
+        "temporada": "Verano",
+        "anio": "2024",
+        "precio": 64990
+    },
+    {
+        "id": 25,
+        "categoria": "accesorios",
+        "nombre": "Medias DC White Ankle pack* DC",
+        "marca": "Dc Shoes",
+        "tipo": "Medias Cortas",
+        "color": "Blanca",
+        "talles": [
+            "U"
+        ],
+        "img": "medias-dc-ankle.jpg",
+        "descripcion": "Soquetes de tejido Jacquard, 80% algodón, 17% poliéster, 3% spandex. Perfectas para un ajuste cómodo y duradero, ideales para el uso diario.",
+        "temporada": "Invierno",
+        "anio": "2024",
+        "precio": 7900
+    },
+    {
+        "id": 26,
+        "categoria": "accesorios",
+        "nombre": "Sun Kisses Afternoon Body Splash",
+        "marca": "Rusty",
+        "tipo": "Perfume",
+        "color": "Sin color",
+        "talles": [
+            "U"
+        ],
+        "img": "perfume-rusty-sunkiss.jpg",
+        "descripcion": "Fragancia fresca y ligera, ideal para un toque de suavidad y vitalidad durante el día. Perfecto para refrescar la piel con un aroma sutil y duradero.",
+        "temporada": "Invierno",
+        "anio": "2023",
+        "precio": 25990
     }
 ]
