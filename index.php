@@ -64,7 +64,7 @@ $productosEnOferta = Producto::filtrarProductosTemporada($temporada, $anio);
                         <a class="nav-link" href="index.php?link=alumno">Alumno</a>
                     </li>
                     <li class="nav-item">
-                        <a type="button" class="btn btn-info" href="index.php?link=contacto">Contacto</a>
+                        <a type="button" class="boton-custom btn" href="index.php?link=contacto">Contacto</a>
                     </li>
                 </ul>
             </div>

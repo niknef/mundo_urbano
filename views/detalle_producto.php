@@ -31,7 +31,7 @@
             <h3>
                 <?= $producto->obtenerPrecioConDescuento($temporada, $anio, $descuento); ?>
             </h3>
-            <button class="btn btn-info btn-lg mt-2 w-50 text-white fw-semibold boton-comprar">Comprar</button>
+            <button class="btn boton-custom btn-lg mt-2 w-50 text-white fw-semibold boton-comprar">Comprar</button>
         </div>
 
         <?PHP } else {?>

@@ -11,7 +11,38 @@
 .navbar-nav .nav-link:hover {
     color: #0dcaf0; 
 }   
+.boton-custom {
+    background-color: #00E3CC;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 15px;
+    transition: background-color 0.3s ease;
+}
 
+.boton-custom:hover {
+    background-color: #009688; 
+    color: #fff;
+    box-shadow: 0 4px 8px rgba(50, 168, 156, 0.2);
+}
+
+.boton-outline-custom {
+    border: 1px solid #00E3CC; 
+    color: #00E3CC; 
+    background-color: transparent;
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 10px;
+    transition: background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.boton-outline-custom:hover {
+    background-color: #00E3CC; 
+    border-color: #00E3CC;
+    color: #fff; 
+    box-shadow: 0 4px 8px rgba(0, 227, 204, 0.2); 
+}
 .custom-dropdown-content {
     position: absolute;
     top: 100%;

@@ -6,7 +6,7 @@ if (!empty($productosEnOferta)) { ?>
     <div class="d-flex flex-column py-4 custom-card">
         <div class="d-flex justify-content-between me-4 my-4">
             <h2 class="fw-light fs-3 text-start">Ofertas Especiales</h2>
-            <a href="index.php?link=oferta" class="btn btn-outline-info">Ir a Ofertas</a>
+            <a href="index.php?link=oferta" class="btn boton-outline-custom">Ir a Ofertas</a>
         </div>
         
         <div class="container">

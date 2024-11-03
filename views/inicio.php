@@ -22,7 +22,7 @@
                         <div class="carousel-caption text-start">
                             <h3 class="fs-1 fw-bold">Zapatillas</h3> 
                             <p class="fs-5 fw-light">Encuentra <strong>las mejores zapatillas</strong> para todas tus necesidades.</p>
-                            <p><a class="btn btn-outline-info" href="index.php?link=productos&categoria=zapatillas">Ver productos</a></p>
+                            <p><a class="btn boton-outline-custom" href="index.php?link=productos&categoria=zapatillas">Ver productos</a></p>
                         </div>
                     </div>
                 </div>
@@ -41,7 +41,7 @@
                         <div class="carousel-caption">
                             <h3 class="fs-1 fw-bold">Hombre</h3> 
                             <p class="fs-5 fw-light">Descubre nuestra colección para hombre, desde <strong>ropa hasta accesorios</strong>.</p>
-                            <p><a class="btn btn-outline-info" href="index.php?link=productos&categoria=hombre">Ver productos</a></p>
+                            <p><a class="btn boton-outline-custom" href="index.php?link=productos&categoria=hombre">Ver productos</a></p>
                         </div>
                     </div>
                 </div>
@@ -60,7 +60,7 @@
                         <div class="carousel-caption text-end">
                             <h3 class="fs-1 fw-bold">Mujer</h3> 
                             <p class="fs-5 fw-light">Explora nuestra selección de productos para <strong>mujer</strong>, con estilos para todas.</p>
-                            <p><a class="btn btn-outline-info" href="index.php?link=productos&categoria=mujer">Ver productos</a></p>
+                            <p><a class="btn boton-outline-custom" href="index.php?link=productos&categoria=mujer">Ver productos</a></p>
                         </div>
                     </div>
                 </div>
