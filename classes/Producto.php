@@ -2,17 +2,16 @@
 class Producto
 {
         private $id;
-        private $categoria;
+        private $categoria_id;
+        private $marca_id;
+        private $color_id;
         private $nombre;
-        private $marca;
-        private $tipo;
-        private $color;
-        private $talles;
-        private $img;
         private $descripcion;
-        private $temporada;
-        private $anio;
+        private $tipo;
         private $precio;
+        private $img;
+        private $temporada;
+        private $fecha_ingreso;
 
         /**
          * Devuelve el inventario completo
@@ -21,108 +20,102 @@ class Producto
          */
         public static function inventario_completo(): array
         {
-                $inventario = [];
+                
 
-                $JSON = file_get_contents('data/inventario.json');
-                $JSON_DATA = json_decode($JSON);
+                $conexion = Conexion::getConexion();
+                $query = "SELECT * FROM productos";
 
-                foreach ($JSON_DATA as $value){
-
-                $producto = new self();
-
-                $producto->id = $value->id;
-                $producto->categoria = $value->categoria;
-                $producto->nombre = $value->nombre;
-                $producto->marca = $value->marca;
-                $producto->tipo = $value->tipo;
-                $producto->color = $value->color;
-                $producto->talles = $value->talles;
-                $producto->img = $value->img;
-                $producto->descripcion = $value->descripcion;
-                $producto->temporada = $value->temporada;
-                $producto->anio = $value->anio;
-                $producto->precio = $value->precio;
-
-                $inventario[] = $producto;
-                }
+                $PDOStatement = $conexion->prepare($query);
+                $PDOStatement->setFetchMode(PDO::FETCH_CLASS, self::class);
+                $PDOStatement->execute();
+                
+                $inventario = $PDOStatement->fetchAll();
+                
 
                 return $inventario;
         }
+        
+        /**
+         * Devuelve un producto por su ID
+         * 
+         * @param int $id El ID del producto a buscar
+         * @return Producto El producto con el ID especificado
+         */
+        public static function buscarProductoPorId($id): ?Producto
+        {
+                $conexion = Conexion::getConexion();
+                $query = "SELECT * FROM productos WHERE id = ?";
 
+                $PDOStatement = $conexion->prepare($query);
+                $PDOStatement->setFetchMode(PDO::FETCH_CLASS, self::class);
+                $PDOStatement->execute([$id]);
+
+                $producto = $PDOStatement->fetch();
+
+                return $producto ? $producto : null;
+        }
+        
         /**
          * Devuelve el catalogo de productos de una categoria especifica.
          * 
-         * @param string $categoria La categoria de la cual se desea obtener el catalogo.
+         * @param int $id el id de la categoria de la cual se desea obtener el catalogo.
          * @return Producto[] Un array con los productos de la categoria especificada.
          */
-        public static function inventario_por_categoria(string $categoria): array
+        public static function inventario_por_categoria($id): array
         {
-                $result = [];
+                $conexion = Conexion::getConexion();
+                $query = "SELECT * FROM productos WHERE categoria_id = ?";
 
-            // Traemos el inventario completo desde el archivo JSON
-                $catalogo = self::inventario_completo();
+                $PDOStatement = $conexion->prepare($query);
+                $PDOStatement->setFetchMode(PDO::FETCH_CLASS, self::class);
+                $PDOStatement->execute([$id]);
 
-                foreach ($catalogo as $producto) {
-                        if (strtolower($producto->categoria) === strtolower($categoria)) {
-                                $result[] = $producto;
-                        }
-                }
-                return $result;
+                $inventario = $PDOStatement->fetchAll();
+
+                return $inventario;
         }
-
-        /**
-         * Busca un producto por su ID en el inventario.
-         * 
-         * @param int $id El ID del producto a buscar.
-         * @return ?Producto Retorna un objeto Producto con los datos del producto si se encuentra, de lo contrario retorna NULL.
-         */
-        public static function buscarProductoPorId(int $id): ?Producto
-        {
-            // Traemos el inventario completo desde el archivo JSON
-                $inventario = self::inventario_completo();
-
-            // Recorremos cada categoría dentro del inventario
-                foreach ($inventario as $producto) {
-                        if ($producto->id == $id) {
-                        return $producto;
-                        }
-                }
-
-                return null;
-        }
+        
 
         /**
          * Filtra los productos de un inventario basándose en la temporada y/o año proporcionados.
          * 
          * @param string|null $temporada La temporada para filtrar los productos (opcional).
-         * @param string|null $anio El año para filtrar los productos (opcional).
+         * @param int|null $anio El año para filtrar los productos (opcional).
          * 
          * @return Producto[] Retorna un array de productos que pertenecen a la temporada y/o año especificado. Si no hay coincidencias retorna un array vacío.
          */
-        public static function filtrarProductosTemporada(?string $temporada = null, ?string $anio = null): array
+        public static function filtrarProductosTemporada(?string $temporada = null, ?int $anio = null): array
         {
-                // Si ambos son null, no hay productos en oferta
-                if (is_null($temporada) && is_null($anio)) {
+        // Si ambos son null, no hay productos en oferta
+        if (is_null($temporada) && is_null($anio)) {
                 return []; // Devolvemos un array vacío
         }
 
-        $inventario = self::inventario_completo();
-        $productosOferta = [];
+        // Construcción de la consulta
+        $conexion = Conexion::getConexion();
+        $query = "SELECT * FROM productos WHERE 1=1"; // Condición base
 
-                foreach ($inventario as $producto) {
-                
-                        $coincideTemporada = $temporada ? strtolower($producto->temporada) === strtolower($temporada) : true;
-                        $coincideAnio = $anio ? $producto->anio == $anio : true;
-
-                        if ($coincideTemporada && $coincideAnio) {
-                                $productosOferta[] = $producto;
-                        }
-                }
+        $params = [];
         
+        // Filtro por temporada (si aplica)
+        if (!is_null($temporada)) {
+                $query .= " AND LOWER(temporada) = LOWER(?)";
+                $params[] = $temporada;
+        }
 
+        // Filtro por año (si aplica)
+        if (!is_null($anio)) {
+                $query .= " AND YEAR(fecha_ingreso) = ?";
+                $params[] = $anio;
+        }
 
+        // Preparar y ejecutar consulta
+        $PDOStatement = $conexion->prepare($query);
+        $PDOStatement->setFetchMode(PDO::FETCH_CLASS, self::class);
+        $PDOStatement->execute($params);
 
-        return $productosOferta;
+        // Retornar resultados
+        return $PDOStatement->fetchAll();
         }
 
         /**
@@ -131,26 +124,31 @@ class Producto
          * @param Producto $producto El producto al que se le va a aplicar el descuento.
          * @param string|null $temporada La temporada para ofertar los productos (opcional).
          * @param string|null $anio El año para ofertar los productos (opcional).
-         * @param float $descuento El porcentaje de descuento a aplicar. Por defecto es 15%. (Opcional)
+         * @param float $descuento El porcentaje de descuento a aplicar. Por defecto es 15% (Opcional).
          * 
          * @return float Retorna el precio con descuento si el producto pertenece a la temporada y/o año especificado.
          */
-        public static function aplicarDescuento(Producto $producto, string $temporada = null, string $anio = null, float $descuento = 15): float
+        public static function aplicarDescuento(Producto $producto, ?string $temporada = null, ?string $anio = null, float $descuento = 15): float
         {
-            // Si ambos son null
-                if (is_null($temporada) && is_null($anio)) {
-                        return $producto->precio;
-                }
-
-                $coincideTemporada = $temporada ? strtolower($producto->temporada) === strtolower($temporada) : true;
-                $coincideAnio = $anio ? $producto->anio == $anio : true;
-
-                if ($coincideTemporada && $coincideAnio) {
-                        $precioConDescuento = $producto->precio - ($producto->precio * ($descuento / 100));
-                        return round($precioConDescuento, 2);
-                }
-
+        // Si no se especifica temporada ni año, no aplica descuento
+        if (is_null($temporada) && is_null($anio)) {
                 return $producto->precio;
+        }
+
+        // Extraer el año de la fecha_ingreso del producto
+        $anioProducto = date('Y', strtotime($producto->fecha_ingreso));
+
+        // Verificar coincidencia de temporada y año
+        $coincideTemporada = $temporada ? strtolower($producto->temporada) === strtolower($temporada) : true;
+        $coincideAnio = $anio ? $anioProducto == $anio : true;
+
+        // Si coincide, calcular el precio con descuento
+        if ($coincideTemporada && $coincideAnio) {
+                return round($producto->precio * (1 - $descuento / 100), 2);
+        }
+
+        // Si no coincide, devolver el precio original
+        return $producto->precio;
         }
 
         /**
@@ -183,6 +181,47 @@ class Producto
         public function precio_formateado(): string
         {
                 return "$" . number_format($this->precio, 2, ",", ".");
+        }
+
+        /**
+         * Devuelve el codigo de color de un producto
+         * 
+         */
+        public function getCodigoColor(): string{
+                $color = Color::get_x_id($this->color_id);
+                return $color->getCodigo();
+        }
+        /**
+         * Devuelve el nombre de la marca del producto
+         * 
+         * @return string El nombre de la marca del producto
+         */
+        public function getMarca(): string
+        {
+                $marca = Marca::get_x_id($this->marca_id);
+                return $marca->getNombre();
+        }
+
+        /**
+         * Devuelve el nombre de la categoria del producto
+         * 
+         * @return string El nombre de la categoria del producto
+         */
+        public function getCategoria(): string
+        {
+                $categoria = Categoria::get_x_id($this->categoria_id);
+                return $categoria->getNombre();
+        }
+
+        /**
+         * Devuelve el nombre del color del producto
+         * 
+         * @return string El nombre del color del producto
+         */
+        public function getColor(): string
+        {
+                $color = Color::get_x_id($this->color_id);
+                return $color->getColor();
         }
 
         /**
@@ -225,21 +264,61 @@ class Producto
         }
 
         /**
-         * Get the value of categoria
+         * Get the value of categoria_id
          */ 
-        public function getCategoria()
+        public function getCategoria_id()
         {
-                return $this->categoria;
+                return $this->categoria_id;
         }
 
         /**
-         * Set the value of categoria
+         * Set the value of categoria_id
          *
          * @return  self
          */ 
-        public function setCategoria($categoria)
+        public function setCategoria_id($categoria_id)
         {
-                $this->categoria = $categoria;
+                $this->categoria_id = $categoria_id;
+
+                return $this;
+        }
+
+        /**
+         * Get the value of marca_id
+         */ 
+        public function getMarca_id()
+        {
+                return $this->marca_id;
+        }
+
+        /**
+         * Set the value of marca_id
+         *
+         * @return  self
+         */ 
+        public function setMarca_id($marca_id)
+        {
+                $this->marca_id = $marca_id;
+
+                return $this;
+        }
+
+        /**
+         * Get the value of color_id
+         */ 
+        public function getColor_id()
+        {
+                return $this->color_id;
+        }
+
+        /**
+         * Set the value of color_id
+         *
+         * @return  self
+         */ 
+        public function setColor_id($color_id)
+        {
+                $this->color_id = $color_id;
 
                 return $this;
         }
@@ -265,21 +344,21 @@ class Producto
         }
 
         /**
-         * Get the value of marca
+         * Get the value of descripcion
          */ 
-        public function getMarca()
+        public function getDescripcion()
         {
-                return $this->marca;
+                return $this->descripcion;
         }
 
         /**
-         * Set the value of marca
+         * Set the value of descripcion
          *
          * @return  self
          */ 
-        public function setMarca($marca)
+        public function setDescripcion($descripcion)
         {
-                $this->marca = $marca;
+                $this->descripcion = $descripcion;
 
                 return $this;
         }
@@ -305,41 +384,21 @@ class Producto
         }
 
         /**
-         * Get the value of color
+         * Get the value of precio
          */ 
-        public function getColor()
+        public function getPrecio()
         {
-                return $this->color;
+                return $this->precio;
         }
 
         /**
-         * Set the value of color
+         * Set the value of precio
          *
          * @return  self
          */ 
-        public function setColor($color)
+        public function setPrecio($precio)
         {
-                $this->color = $color;
-
-                return $this;
-        }
-
-        /**
-         * Get the value of talles
-         */ 
-        public function getTalles()
-        {
-                return $this->talles;
-        }
-
-        /**
-         * Set the value of talles
-         *
-         * @return  self
-         */ 
-        public function setTalles($talles)
-        {
-                $this->talles = $talles;
+                $this->precio = $precio;
 
                 return $this;
         }
@@ -365,26 +424,6 @@ class Producto
         }
 
         /**
-         * Get the value of descripcion
-         */ 
-        public function getDescripcion()
-        {
-                return $this->descripcion;
-        }
-
-        /**
-         * Set the value of descripcion
-         *
-         * @return  self
-         */ 
-        public function setDescripcion($descripcion)
-        {
-                $this->descripcion = $descripcion;
-
-                return $this;
-        }
-
-        /**
          * Get the value of temporada
          */ 
         public function getTemporada()
@@ -405,41 +444,21 @@ class Producto
         }
 
         /**
-         * Get the value of anio
+         * Get the value of fecha_ingreso
          */ 
-        public function getAnio()
+        public function getFecha_ingreso()
         {
-                return $this->anio;
+                return $this->fecha_ingreso;
         }
 
         /**
-         * Set the value of anio
+         * Set the value of fecha_ingreso
          *
          * @return  self
          */ 
-        public function setAnio($anio)
+        public function setFecha_ingreso($fecha_ingreso)
         {
-                $this->anio = $anio;
-
-                return $this;
-        }
-
-        /**
-         * Get the value of precio
-         */ 
-        public function getPrecio()
-        {
-                return $this->precio;
-        }
-
-        /**
-         * Set the value of precio
-         *
-         * @return  self
-         */ 
-        public function setPrecio($precio)
-        {
-                $this->precio = $precio;
+                $this->fecha_ingreso = $fecha_ingreso;
 
                 return $this;
         }

@@ -1,13 +1,18 @@
 <?php
-
+require_once 'classes/Conexion.php';
 require_once 'classes/Producto.php';
 require_once 'classes/Vista.php';
+require_once 'classes/Marca.php';
+require_once 'classes/Categoria.php';
+require_once 'classes/Color.php';
+
+$categorias = Categoria::get_all();
 
 $categoriaSeleccionada = $_GET['categoria'] ?? null;
 $vista = Vista::validar_vista($_GET['link'] ?? null, $categoriaSeleccionada);
 
 $temporada = null;
-$anio = '2022';
+$anio = 2022;
 $descuento = 50; 
 $productosEnOferta = Producto::filtrarProductosTemporada($temporada, $anio);
 
@@ -32,7 +37,7 @@ $productosEnOferta = Producto::filtrarProductosTemporada($temporada, $anio);
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark px-3 sticky-top">
         <div class="container-fluid">
             <a class="navbar-brand" href="index.php?link=inicio">
-                <img src="./img/logo.svg" alt="logo Mundo Urbano">
+                <img src="img/logo.svg" alt="logo Mundo Urbano">
                 <h1 class="visually-hidden">Mundo Urbano | <?= ucfirst($vista['titulo']) ?></h1>
             </a>
             
@@ -48,10 +53,10 @@ $productosEnOferta = Producto::filtrarProductosTemporada($temporada, $anio);
                     <li class="nav-item custom-dropdown">
                         <a class="nav-link" href="index.php?link=productos">Productos</a>
                         <div class="custom-dropdown-content px-2 d-flex justify-content-end">
-                            <a href="index.php?link=productos&categoria=zapatillas">Zapatillas</a>
-                            <a href="index.php?link=productos&categoria=hombre">Hombre</a>
-                            <a href="index.php?link=productos&categoria=mujer">Mujer</a>
-                            <a href="index.php?link=productos&categoria=accesorios">Accesorios</a>
+                            <?php foreach ($categorias as $c) { ?>
+                                <a href="index.php?link=productos&categoria=<?= $c->getId() ?>"><?= ucfirst($c->getNombre()) ?></a>
+                    
+                            <?php } ?>
                         </div>
                     </li>
                     <li class="nav-item">

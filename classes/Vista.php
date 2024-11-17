@@ -10,7 +10,7 @@ class Vista {
     public static function validar_vista(?string $link, ?string $categoriaSeleccionada = null): array {
         
         // Lista de categorías válidas
-        $categorias_validas = ['zapatillas', 'hombre', 'mujer', 'accesorios'];
+        $categorias_validas = ['1', '2', '3', '4'];
 
         // Verificar si la categoría seleccionada es válida
         if ($link === 'productos' && !empty($categoriaSeleccionada) && !in_array($categoriaSeleccionada, $categorias_validas)) {
@@ -34,10 +34,22 @@ class Vista {
                 $archivo = 'nosotros';
                 $titulo = 'Nosotros';
                 break;
-            case 'productos':
-                $archivo = 'productos';
-                $titulo = !empty($categoriaSeleccionada) ? ucfirst($categoriaSeleccionada) : 'Todos los productos';
-                break;
+                case 'productos':
+                    $archivo = 'productos';
+    
+                    // Obtención del nombre de la categoría desde la base de datos
+                    if (!empty($categoriaSeleccionada)) {
+                        $categoria = Categoria::get_x_id($categoriaSeleccionada);
+                        if ($categoria) {
+                            $titulo = ucfirst($categoria->getNombre());
+                        } else {
+                            $titulo = 'Categoría no encontrada';
+                        }
+                    } else {
+                        $titulo = 'Todos los productos';
+                    }
+                    break;
+
             case 'detalle_producto':
                 $archivo = 'detalle_producto';
                 $titulo = 'Detalle del Producto';

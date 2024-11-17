@@ -7,9 +7,28 @@ if ($categoriaSeleccionada) {
     $catalogo = Producto::inventario_completo();
 }
 
-// Si se selecciona un filtro de orden, lo aplicamos sobre el catálogo filtrado
+ // Si se selecciona un filtro de orden, lo aplicamos sobre el catálogo filtrado
 if (isset($_GET['orden'])) {
-    $catalogo = Producto::ordenarPorPrecio($catalogo, $_GET['orden']);
+     $catalogo = Producto::ordenarPorPrecio($catalogo, $_GET['orden']);
+ }
+
+
+// echo "<pre>";
+// print_r($catalogo);
+// echo "</pre>";
+
+// Inicializamos el nombre de la categoría
+$tituloCategoria = "Todos los productos";
+
+// Verificamos si se seleccionó una categoría por ID
+if (isset($categoriaSeleccionada) && !empty($categoriaSeleccionada)) {
+    $categoria = Categoria::get_x_id($categoriaSeleccionada);
+    if ($categoria) {
+        $tituloCategoria = $categoria->getNombre();
+    } else {
+        
+        $tituloCategoria = "Categoría no encontrada";
+    }
 }
 ?>
 
@@ -18,7 +37,7 @@ if (isset($_GET['orden'])) {
     <div class="d-flex justify-content-between align-items-center py-4 flex-column flex-md-row text-center text-md-start">
         <div class="mb-3 mb-md-0">
             <h2 class="fw-light fs-2"> 
-                <?= isset($categoriaSeleccionada) && !empty($categoriaSeleccionada) ? ucfirst($categoriaSeleccionada) : "Todos los productos" ?>
+                <?= ucfirst($tituloCategoria) ?>
             </h2>
         </div>
         <div class="d-flex gap-2">
@@ -37,7 +56,9 @@ if (isset($_GET['orden'])) {
                                 <div class="card-body text-start flex-grow-1 d-flex flex-column justify-content-between">
                                     <h3 class="card-title fw-light fs-4"><?= $producto->getNombre() ?></h3>
                                     <p class="fs-5 fw-light text-dark mt-2">
+                                    <p class="fs-5 fw-light text-dark mt-2">
                                         <?= $producto->obtenerPrecioConDescuento($temporada, $anio, $descuento); ?>
+                                    </p>
                                     </p>
                                 </div>
                             </div>

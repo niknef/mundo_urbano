@@ -78,6 +78,25 @@
     background-color: #41BFB3;
 }
 
+.badge-personalizado{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #6c757d6b;
+    width: fit-content;
+    padding: 5px 10px 5px 10px;
+    border-radius: 20px;
+    border: #6c757d6b solid 1px;
+    gap: 5px;
+}
+
+.bola{
+    display: inline-block; 
+    width: 25px; 
+    height: 25px; 
+    border-radius: 100%;  
+    vertical-align: middle;
+}
 
 @media (max-width: 991px) {
     .custom-dropdown-content {

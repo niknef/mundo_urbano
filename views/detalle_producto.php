@@ -12,21 +12,29 @@
         <div class="col-md-6">
             <h2><?= $producto->getNombre() ?></h2>
             <h2 class="fw-light mb-3"><?= $producto->getMarca() ?></h2>
-            <p><strong>Tipo:</strong><?= $producto->getTipo() ?></p>
-            <p><strong>Color:</strong><?= $producto->getColor() ?></p>
-            <p><?= $producto->getDescripcion() ?></p>
+            <p><strong>Tipo: </strong><?= $producto->getTipo() ?></p>
+            <div class="d-flex align-items-center gap-3">
+                <p class="mb-0"><strong>Color: </strong></p>
+                <span class="badge-personalizado d-flex align-items-center">
+                    <span class="bola" style="background-color: <?= $producto->getCodigoColor() ?>;"></span>
+                    <?= $producto->getColor() ?>
+                </span>
+            </div>
+            <p class="mt-2"><?= $producto->getDescripcion() ?></p>
             
+            <!-- Temporada  
             <p><strong>Talles disponibles:</strong>
-                <?php if (count($producto->getTalles()) > 1): ?>
+                ?php if (count($producto->getTalles()) > 1): ?>
                     <select class="form-select w-25 mt-1">
-                        <?php foreach ($producto->getTalles() as $talle): ?>
-                            <option value="<?= $talle ?>"><?= $talle; ?></option>
-                        <?php endforeach; ?>
+                        ?php foreach ($producto->getTalles() as $talle): ?>
+                            <option value="?= $talle ?>">?= $talle; ?></option>
+                        ?php endforeach; ?>
                     </select>
-                <?php else: ?>
-                    <?= $producto->getTalles()[0]; ?>
-                <?php endif; ?>
+                ?php else: ?>
+                    ?= $producto->getTalles()[0]; ?>
+                ?php endif; ?>
             </p>
+            -->
             
             <h3>
                 <?= $producto->obtenerPrecioConDescuento($temporada, $anio, $descuento); ?>
