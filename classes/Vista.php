@@ -14,7 +14,7 @@ class Vista
      *
      * @return Vista devuelve objeto Vista
      */
-    public static function validar_vista(?string $vista, $categoriaSeleccionada): Vista
+    public static function validar_vista(?string $vista, $categoriaSeleccionada = null): Vista
     {
 
         $conexion = Conexion::getConexion();

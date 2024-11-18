@@ -10,7 +10,7 @@ class Marca
     /**
      * Devuelve todas las marcas
      * 
-     * @return Color[] Un array con todas las marcas
+     * @return Marca[] Un array con todas las marcas
      */
     public static function get_all(): array
     {
