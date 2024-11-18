@@ -40,6 +40,27 @@ class Color {
     return $colores;
     }
 
+    /**
+     * Guarda un color en la base de datos
+     * 
+     * @param string $color El nombre del color
+     * @param string $codigo El código hexadecimal del color
+     * 
+     * 
+     */
+    public static function save(string $color, string $codigo){
+        $conexion = Conexion::getConexion();
+        $query = "INSERT INTO colores (`color`, `codigo`) VALUES (:color, :codigo)";
+
+        $PDOStatement = $conexion->prepare($query);
+        $result = $PDOStatement->execute([
+            'color' => $color,
+            'codigo' => $codigo
+        ]);
+
+
+        return $result;
+    }
 
     /**
      * Get the value of codigo

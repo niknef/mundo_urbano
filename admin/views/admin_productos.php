@@ -7,7 +7,7 @@ $inventario = Producto::inventario_completo();
         <h2 class="fw-bold m-0">Administrador de Productos</h2>
 
        
-        <a href="index.php?sec=add_producto" class="btn btn-primary">Cargar nuevo Producto</a>
+        <a href="index.php?link=add_producto" class="btn btn-primary">Cargar nuevo Producto</a>
     </div>
 <div class="table-responsive">
     <table class="table table-striped table-hover align-middle table-custom">
@@ -49,8 +49,8 @@ $inventario = Producto::inventario_completo();
                     <td><?= date("d/m/Y", strtotime($P->getFecha_ingreso())) ?></td>
                     <td>
                         <div class="d-flex flex-column gap-1">
-                            <a href="index.php?sec=edit_producto&id=<?= $P->getId() ?>" class="btn btn-sm btn-info">Editar</a>
-                            <a href="index.php?sec=delete_producto&id=<?= $P->getId() ?>" class="btn btn-sm btn-danger">Eliminar</a>
+                            <a href="index.php?link=edit_producto&id=<?= $P->getId() ?>" class="btn btn-sm btn-info">Editar</a>
+                            <a href="index.php?link=delete_producto&id=<?= $P->getId() ?>" class="btn btn-sm btn-danger">Eliminar</a>
                         </div>
                     </td>
                 </tr>

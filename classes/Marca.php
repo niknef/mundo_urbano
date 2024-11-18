@@ -44,6 +44,27 @@ class Marca
         return $marca;
     }
 
+    /**
+     * Guarda una nueva marca en la base de datos
+     * 
+     * @param string $nombre El nombre de la marca
+     * @param string $descripcion La descripción de la marca
+     * @param string $img La imagen de la marca
+     */
+    public static function save(string $nombre, string $img, string $descripcion,){
+        $conexion = Conexion::getConexion();
+        $query = "INSERT INTO marcas (`nombre`, `img`, `descripcion`) VALUES (:nombre, :img, :descripcion)";
+
+        $PDOStatement = $conexion->prepare($query);
+        $result = $PDOStatement->execute([
+            'nombre' => $nombre,
+            'img' => $img,
+            'descripcion' => $descripcion
+        ]);
+
+        return $result;
+    }
+
     public function getId()
     {
         return $this->id;

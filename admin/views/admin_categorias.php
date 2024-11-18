@@ -7,7 +7,7 @@ $categorias = Categoria::get_all();
         <h2 class="fw-bold m-0">Administrador de Categorias</h2>
 
        
-        <a href="index.php?sec=add_categoria" class="btn btn-primary">Cargar nueva Categoria</a>
+        <a href="index.php?link=add_categorias" class="btn btn-primary">Cargar nueva Categoria</a>
     </div>
 <div class="table-responsive">
     <table class="table table-striped table-hover align-middle table-custom">
@@ -33,8 +33,8 @@ $categorias = Categoria::get_all();
                     <td><?= $C->getDescripcion() ?></td>
                     <td>
                         <div class="d-flex flex-column gap-1">
-                            <a href="index.php?sec=edit_categoria&id=<?= $C->getId() ?>" class="btn btn-sm btn-info">Editar</a>
-                            <a href="index.php?sec=delete_categoria&id=<?= $C->getId() ?>" class="btn btn-sm btn-danger">Eliminar</a>
+                            <a href="index.php?link=edit_categoria&id=<?= $C->getId() ?>" class="btn btn-sm btn-info">Editar</a>
+                            <a href="index.php?link=delete_categoria&id=<?= $C->getId() ?>" class="btn btn-sm btn-danger">Eliminar</a>
                         </div>
                     </td>
                 </tr>

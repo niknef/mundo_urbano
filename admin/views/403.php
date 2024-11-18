@@ -6,7 +6,7 @@
       <div class="col-lg-6">
         <h2 class="display-5 fw-bold text-body-emphasis lh-1 mb-3">Página No Disponible</h2>
         <p class="lead">Lo sentimos, la página que estás buscando no existe o ha sido movida. Por favor, verifica la URL o vuelve a la página de inicio para continuar navegando en nuestro sitio.</p>
-        <a href="index.php?link=inicio" class="btn btn-primary btn-lg px-4 me-md-2">Volver al Inicio</a>
+        <a href="index.php?link=dashboard" class="btn btn-primary btn-lg px-4 me-md-2">Volver al Inicio</a>
       </div>
     </div>
 </div>

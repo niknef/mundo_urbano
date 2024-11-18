@@ -59,6 +59,29 @@ class categoria
         $categorias = $PDOStatement->fetchAll(PDO::FETCH_COLUMN);
         return $categorias;
     }
+
+    /**
+     * Guarda una nueva categoría en la base de datos
+     * 
+     * @param string $nombre El nombre de la categoría
+     * @param string $img El nombre de la imagen de la categoría
+     * @param string $banner_img El nombre del banner de la categoría
+     * @param string $descripcion La descripción de la categoría
+     */
+    public static function save(string $nombre, string $img, string $banner_img, string $descripcion){
+        $conexion = Conexion::getConexion();
+        $query = "INSERT INTO categorias (`nombre`, `img`, `banner_img`, `descripcion`) VALUES (:nombre, :img, :banner_img, :descripcion)";
+
+        $PDOStatement = $conexion->prepare($query);
+        $result = $PDOStatement->execute([
+            'nombre' => $nombre,
+            'img' => $img,
+            'banner_img' => $banner_img,
+            'descripcion' => $descripcion
+        ]);
+
+        return $result;
+    }
     /**
      * Get the value of id
      */ 
