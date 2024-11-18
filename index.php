@@ -9,7 +9,7 @@ require_once 'classes/Color.php';
 $categorias = Categoria::get_all();
 
 $categoriaSeleccionada = $_GET['categoria'] ?? null;
-$vista = Vista::validar_vista($_GET['link'] ?? null, $categoriaSeleccionada);
+$vista = Vista::validar_vista($_GET['link'] ?? 'inicio', $categoriaSeleccionada);
 
 $temporada = null;
 $anio = 2022;
@@ -24,7 +24,7 @@ $productosEnOferta = Producto::filtrarProductosTemporada($temporada, $anio);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="./img/favicon.ico" type="image/x-icon">
-    <title>Mundo Urbano | <?= ucfirst($vista['titulo']) ?></title>
+    <title>Mundo Urbano | <?= ucfirst($vista->getTitulo()) ?></title>
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
@@ -38,7 +38,7 @@ $productosEnOferta = Producto::filtrarProductosTemporada($temporada, $anio);
         <div class="container-fluid">
             <a class="navbar-brand" href="index.php?link=inicio">
                 <img src="img/logo.svg" alt="logo Mundo Urbano">
-                <h1 class="visually-hidden">Mundo Urbano | <?= ucfirst($vista['titulo']) ?></h1>
+                <h1 class="visually-hidden">Mundo Urbano | <?= ucfirst($vista->getTitulo()) ?></h1>
             </a>
             
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
@@ -81,7 +81,7 @@ $productosEnOferta = Producto::filtrarProductosTemporada($temporada, $anio);
     
         <?php
         // Incluimos la vista correspondiente
-        require_once "views/{$vista['archivo']}.php"
+        require_once "views/{$vista->getNombre()}.php"
         ?>
     
 </main>

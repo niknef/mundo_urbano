@@ -47,6 +47,19 @@ class categoria
     }
 
     /**
+     * funcion para traer todos los id de las categorias
+     */
+    public static function get_all_id(): array{
+        $conexion = Conexion::getConexion();
+        $query = "SELECT id FROM categorias";
+
+        $PDOStatement = $conexion->prepare($query);
+        $PDOStatement->execute();
+
+        $categorias = $PDOStatement->fetchAll(PDO::FETCH_COLUMN);
+        return $categorias;
+    }
+    /**
      * Get the value of id
      */ 
     public function getId()

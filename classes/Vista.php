@@ -1,79 +1,167 @@
-<?php
-class Vista {
+<?PHP
+class Vista
+{
+
+    private $id;
+    private $nombre;
+    private $titulo;
+    private $activa;
+    private $restringida;
+
     /**
      * Valida el identificador de una vista y devuelve un array con los datos de la misma
-     * @param ?string $link El identificador de la vista, o null
-     * @param ?string $categoriaSeleccionada La categoría seleccionada, o null
-     *  
-     * @return array devuelve un array con el nombre de archivo y el título a mostrar  
+     * @param ?string $vista El identificador de la vista, o null
+     *
+     * @return Vista devuelve objeto Vista
      */
-    public static function validar_vista(?string $link, ?string $categoriaSeleccionada = null): array {
+    public static function validar_vista(?string $vista, $categoriaSeleccionada): Vista
+    {
+
+        $conexion = Conexion::getConexion();
+        $query = "SELECT * FROM vistas WHERE nombre = ?";
+
+        $PDOStatement = $conexion->prepare($query);
+        $PDOStatement->setFetchMode(PDO::FETCH_CLASS, self::class);
+        $PDOStatement->execute([$vista]);
+
+        $viewData = $PDOStatement->fetch();
+
         
-        // Lista de categorías válidas
-        $categorias_validas = ['1', '2', '3', '4'];
 
-        // Verificar si la categoría seleccionada es válida
-        if ($link === 'productos' && !empty($categoriaSeleccionada) && !in_array($categoriaSeleccionada, $categorias_validas)) {
-         // Si la categoría no es válida, redirigir a una página de error
-            return [
-                'archivo' => '404',
-                'titulo' => 'Página no encontrada',
-            ];
-        }
-        switch($link) {
-            case null:
-            case 'inicio':
-                $archivo = 'inicio';
-                $titulo = 'Tienda Online de Indumentaria y Calzado';
-                break;
-            case 'todos_productos':
-                $archivo = 'todos_productos';
-                $titulo = 'Todos los Productos';
-                break;
-            case 'nosotros':
-                $archivo = 'nosotros';
-                $titulo = 'Nosotros';
-                break;
-                case 'productos':
-                    $archivo = 'productos';
-    
-                    // Obtención del nombre de la categoría desde la base de datos
-                    if (!empty($categoriaSeleccionada)) {
-                        $categoria = Categoria::get_x_id($categoriaSeleccionada);
-                        if ($categoria) {
-                            $titulo = ucfirst($categoria->getNombre());
-                        } else {
-                            $titulo = 'Categoría no encontrada';
-                        }
-                    } else {
-                        $titulo = 'Todos los productos';
-                    }
-                    break;
+        if ($viewData) {
+            if ($vista === 'productos' && !empty($categoriaSeleccionada)) {
+                $categorias = Categoria::get_all_id();
+                if (!in_array($categoriaSeleccionada, $categorias)) {
+                    $viewData->setNombre('404');
+                    $viewData->setTitulo('Página no encontrada');
+                }
+            }
 
-            case 'detalle_producto':
-                $archivo = 'detalle_producto';
-                $titulo = 'Detalle del Producto';
-                break;
-            case 'oferta':
-                $archivo = 'oferta';
-                $titulo = 'Ofertas';
-                break;
-            case 'alumno':
-                $archivo = 'alumno';
-                $titulo = 'Alumno';
-                break;
-            case 'contacto':
-                $archivo = 'contacto';
-                $titulo = 'Contacto';
-                break;
-            default:
-                $archivo = '404';
-                $titulo = 'Página no encontrada';
-            
+            if ($viewData->getActiva()) {
+                $resultado = $viewData;
+            } else {
+                $view403 = new self();
+
+                $view403->nombre = '403';
+                $view403->titulo = 'Página no disponible';
+                $view403->activa = 1;
+                $view403->restringida = 0;
+
+                $resultado = $view403;
+            }
+
+        }else {
+            $view404 = new self();
+
+            $view404->nombre = '404';
+            $view404->titulo = 'Página no Econtrada';
+            $view404->activa = 1;
+            $view404->restringida = 0;
+
+            $resultado = $view404;
         }
-        return [
-            'archivo' => $archivo,
-            'titulo' => $titulo
-        ];
+
+        return $resultado;
+
+    }
+
+    /**
+     * Get the value of id
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set the value of id
+     *
+     * @return  self
+     */
+    public function setId($id)
+    {
+        $this->id = $id;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of nombre
+     */
+    public function getNombre()
+    {
+        return $this->nombre;
+    }
+
+    /**
+     * Set the value of nombre
+     *
+     * @return  self
+     */
+    public function setNombre($nombre)
+    {
+        $this->nombre = $nombre;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of titulo
+     */
+    public function getTitulo()
+    {
+        return $this->titulo;
+    }
+
+    /**
+     * Set the value of titulo
+     *
+     * @return  self
+     */
+    public function setTitulo($titulo)
+    {
+        $this->titulo = $titulo;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of activa
+     */
+    public function getActiva()
+    {
+        return $this->activa;
+    }
+
+    /**
+     * Set the value of activa
+     *
+     * @return  self
+     */
+    public function setActiva($activa)
+    {
+        $this->activa = $activa;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of restringida
+     */
+    public function getRestringida()
+    {
+        return $this->restringida;
+    }
+
+    /**
+     * Set the value of restringida
+     *
+     * @return  self
+     */
+    public function setRestringida($restringida)
+    {
+        $this->restringida = $restringida;
+
+        return $this;
     }
 }
