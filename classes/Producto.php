@@ -191,6 +191,7 @@ class Producto
                 $color = Color::get_x_id($this->color_id);
                 return $color->getCodigo();
         }
+
         /**
          * Devuelve el nombre de la marca del producto
          * 
@@ -225,23 +226,98 @@ class Producto
         }
 
         /**
-        * Ordena un catálogo de productos por precio.
-        * 
-        * @param Producto[] $catalogo El catálogo de productos a ordenar.
-        * @param string $orden El orden de la ordenación: "asc" para ascendente (menor a mayor) y "desc" para descendente (mayor a menor).
-        * @return Producto[] El catálogo ordenado según el precio.
-        */
-        public static function ordenarPorPrecio(array $catalogo, string $orden = 'asc'): array
+         * Ordena los productos por precio y opcionalmente filtra por categoría.
+         * 
+         * @param string $orden El orden de la ordenación: "asc" para ascendente (menor a mayor) y "desc" para descendente (mayor a menor).
+         * @param int|null $categoriaId El ID de la categoría para filtrar (opcional).
+         * @return Producto[] El catálogo ordenado según el precio.
+         */
+        public static function ordenarPorPrecio(string $orden = 'asc', ?int $categoriaId = null): array
         {
-                usort($catalogo, function($a, $b) use ($orden) {
-                if ($orden === 'asc') {
-                        return $a->precio > $b->precio ? 1 : -1;
-                } else {
-                        return $a->precio < $b->precio ? 1 : -1;
-                }
-                });
-                return $catalogo;
+        $conexion = Conexion::getConexion();
+
+        // Construir la consulta
+        $query = "SELECT * FROM productos WHERE 1=1";
+        $valores = [];
+
+        if (!is_null($categoriaId)) {
+                $query .= " AND categoria_id = :categoria_id";
+                $valores[':categoria_id'] = $categoriaId;
         }
+
+        $query .= " ORDER BY precio " . ($orden === 'asc' ? "ASC" : "DESC");
+
+        // Preparar y ejecutar
+        $PDOStatement = $conexion->prepare($query);
+        $PDOStatement->setFetchMode(PDO::FETCH_CLASS, self::class);
+        $PDOStatement->execute($valores);
+
+        return $PDOStatement->fetchAll();
+        }
+
+        /**
+         * Devuelve los productos en un determinado rango de precios y opcionalmente filtra por categoría.
+         * 
+         * @param int $minimo El precio mínimo, por defecto 0.
+         * @param int $maximo El precio máximo, por defecto infinito.
+         * @param int|null $categoriaId El ID de la categoría para filtrar (opcional).
+         * @return Producto[] Un array con los productos que se encuentran en el rango de precios especificado.
+         */
+        public static function productos_x_rango(int $minimo = 0, int $maximo = 0, ?int $categoriaId = null): array
+        {
+        $conexion = Conexion::getConexion();
+
+        if($maximo){
+                $query = "SELECT * FROM productos WHERE precio BETWEEN :minimo AND :maximo";
+                $valores = [
+                        ':minimo' => $minimo,
+                        ':maximo' => $maximo,
+                ];
+        }else{
+                $query = "SELECT * FROM productos WHERE precio >= :minimo";
+                $valores = [
+                        ':minimo' => $minimo,
+                ];
+        }
+
+        if (!is_null($categoriaId)) {
+                $query .= " AND categoria_id = :categoria_id";
+                $valores[':categoria_id'] = $categoriaId;
+        }
+
+        $PDOStatement = $conexion->prepare($query);
+        $PDOStatement->setFetchMode(PDO::FETCH_CLASS, self::class);
+        $PDOStatement->execute($valores);
+
+        return $PDOStatement->fetchAll();
+        }
+
+        /**
+         * Devuelve los productos que contienen una palabra en su nombre, descripción o tipo y opcionalmente filtra por categoría.
+         * 
+         * @param string $busqueda La palabra a buscar.
+         * @param int|null $categoriaId El ID de la categoría para filtrar (opcional).
+         * @return Producto[] Un array con los productos que contienen la palabra buscada.
+         */
+        public static function buscarProducto(string $busqueda, ?int $categoriaId = null): array
+        {
+        $conexion = Conexion::getConexion();
+
+        $query = "SELECT * FROM productos WHERE (nombre LIKE :busqueda OR descripcion LIKE :busqueda OR tipo LIKE :busqueda)";
+        $valores = [':busqueda' => "%$busqueda%"];
+
+        if (!is_null($categoriaId)) {
+                $query .= " AND categoria_id = :categoria_id";
+                $valores[':categoria_id'] = $categoriaId;
+        }
+
+        $PDOStatement = $conexion->prepare($query);
+        $PDOStatement->setFetchMode(PDO::FETCH_CLASS, self::class);
+        $PDOStatement->execute($valores);
+
+        return $PDOStatement->fetchAll();
+}
+
 
         /**
          * Get the value of id
