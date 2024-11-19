@@ -1,18 +1,21 @@
 <?PHP
 require_once '../../classes/Conexion.php';
 require_once '../../classes/Marca.php';
+require_once '../../classes/Imagen.php';
 
 $postData = $_POST;
-$fileData = $_FILES;
+$datosArchivo = $_FILES['img'];
 
 try{
+
+    $img = Imagen::subirImagen("../../img/logos/", $datosArchivo);
     Marca::save(
         $postData['nombre'],
-        $fileData['img']['name'],
+        $img,
         $postData['descripcion']
     );
 } catch (Exception $e){
-    die("No se puedo cargar la marca en la base de datos");
+    die("No se pudo cargar la marca en la base de datos");
 }
 
 header('Location: ../index.php?link=admin_marcas');

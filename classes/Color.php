@@ -63,6 +63,40 @@ class Color {
     }
 
     /**
+     * Edita los datos de un color en la base de datos
+     * 
+     * @param string $color El nombre del color
+     * @param string $codigo El código hexadecimal del color
+     * 
+     */
+    public function edit(string $color, string $codigo){
+        $conexion = Conexion::getConexion();
+        $query = "UPDATE colores SET color = :color, codigo = :codigo WHERE id = :id";
+
+        $PDOStatement = $conexion->prepare($query);
+        $result = $PDOStatement->execute([
+            'color' => $color,
+            'codigo' => $codigo,
+            'id' => $this->id
+        ]);
+
+        return $result;
+    }
+
+    /**
+     * Elimina un color de la base de datos
+     * 
+     */
+    public function delete(){
+        $conexion = Conexion::getConexion();
+        $query = "DELETE FROM colores WHERE id = ?";
+
+        $PDOStatement = $conexion->prepare($query);
+        $PDOStatement->execute([$this->id]);
+
+    }
+
+    /**
      * Get the value of codigo
      */ 
     public function getCodigo()
