@@ -1,11 +1,5 @@
 <?php
-require_once 'classes/Conexion.php';
-require_once 'classes/Producto.php';
-require_once 'classes/Vista.php';
-require_once 'classes/Marca.php';
-require_once 'classes/Categoria.php';
-require_once 'classes/Color.php';
-require_once 'classes/Imagen.php';
+require_once "functions/autoload.php";
 
 $categorias = Categoria::get_all();
 

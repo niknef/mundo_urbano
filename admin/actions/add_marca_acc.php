@@ -1,7 +1,6 @@
 <?PHP
-require_once '../../classes/Conexion.php';
-require_once '../../classes/Marca.php';
-require_once '../../classes/Imagen.php';
+require_once "../../functions/autoload.php";
+
 
 $postData = $_POST;
 $datosArchivo = $_FILES['img'];

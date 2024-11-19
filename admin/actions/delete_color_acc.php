@@ -1,6 +1,6 @@
 <?PHP 
-require_once '../../classes/Conexion.php';
-require_once '../../classes/Color.php';
+require_once "../../functions/autoload.php";
+
 
 $id = $_GET['id'] ?? FALSE;
 

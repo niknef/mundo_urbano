@@ -1,7 +1,6 @@
 <?PHP
+require_once "../../functions/autoload.php";
 
-require_once '../../classes/Conexion.php';
-require_once '../../classes/Color.php';
 
 $id = $_GET['id'] ?? FALSE;
 
