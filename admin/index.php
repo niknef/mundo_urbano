@@ -30,7 +30,7 @@ $vista = Vista::validar_vista($_GET['link'] ?? 'dashboard');
 <header>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark px-3 sticky-top">
         <div class="container-fluid">
-            <a class="navbar-brand" href="index.php?link=inicio">
+            <a class="navbar-brand" href="index.php?link=dashboard">
                 <img src="../img/logo.svg" alt="logo Mundo Urbano">
                 <h1 class="visually-hidden">Mundo Urbano | <?= ucfirst($vista->getTitulo()) ?></h1>
             </a>
