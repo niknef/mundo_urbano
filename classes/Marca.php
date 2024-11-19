@@ -65,6 +65,41 @@ class Marca
         return $result;
     }
 
+    /**
+     * Edita los datos de una marca en la base de datos
+     * 
+     * @param string $nombre El nombre de la marca
+     * @param string $img el logo de la marca
+     * @param string $descripcion La descripción de la marca
+     */
+    public function edit(string $nombre, string $img, string $descripcion){
+        $conexion = Conexion::getConexion();
+        $query = "UPDATE marcas SET nombre = :nombre, img = :img, descripcion = :descripcion WHERE id = :id";
+
+        $PDOStatement = $conexion->prepare($query);
+        $result = $PDOStatement->execute([
+            'nombre' => $nombre,
+            'img' => $img,
+            'descripcion' => $descripcion,
+            'id' => $this->id
+        ]);
+
+        return $result;
+    }
+
+    /**
+     * Elimina una marca de la base de datos
+     * 
+     */
+    public function delete(){
+        $conexion = Conexion::getConexion();
+        $query = "DELETE FROM marcas WHERE id = ?";
+
+        $PDOStatement = $conexion->prepare($query);
+        $PDOStatement->execute([$this->id]);
+
+    }
+
     public function getId()
     {
         return $this->id;

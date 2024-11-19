@@ -11,7 +11,11 @@ $datosArchivoBanner = $_FILES['banner_img'];
 
 try{
     $img = Imagen::subirImagen("../../img/categorias/", $datosArchivo);
+    $img = Imagen::subirImagen("../../img/categorias/desktop/", $datosArchivo);
     $banner_img = Imagen::subirImagen("../../img/banner/desktop/", $datosArchivoBanner);
+    $banner_img = Imagen::subirImagen("../../img/banner/tablet/", $datosArchivoBanner);
+    $banner_img = Imagen::subirImagen("../../img/banner/", $datosArchivoBanner);
+
     categoria::save(
         $postData['nombre'],
         $img,

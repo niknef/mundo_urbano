@@ -82,6 +82,45 @@ class categoria
 
         return $result;
     }
+
+    /**
+     * Edita una categoría en la base de datos
+     * 
+     * @param string $nombre El nombre de la categoría
+     * @param string $img El nombre de la imagen de la categoría
+     * @param string $banner_img El nombre del banner de la categoría
+     * @param string $descripcion La descripción de la categoría
+     */
+    public function edit(string $nombre, string $img, string $banner_img, string $descripcion){
+        $conexion = Conexion::getConexion();
+        $query = "UPDATE categorias SET nombre = :nombre, img = :img, banner_img = :banner_img, descripcion = :descripcion WHERE id = :id";
+
+        $PDOStatement = $conexion->prepare($query);
+        $result = $PDOStatement->execute([
+            'nombre' => $nombre,
+            'img' => $img,
+            'banner_img' => $banner_img,
+            'descripcion' => $descripcion,
+            'id' => $this->id
+        ]);
+
+        return $result;
+    }
+
+    /**
+     * Elimina una categoria de la base de datos
+     * 
+     */
+    public function delete(){
+        $conexion = Conexion::getConexion();
+        $query = "DELETE FROM categorias WHERE id = ?";
+
+        $PDOStatement = $conexion->prepare($query);
+        $PDOStatement->execute([$this->id]);
+
+    }
+
+
     /**
      * Get the value of id
      */ 
