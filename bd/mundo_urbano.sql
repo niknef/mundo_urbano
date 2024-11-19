@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 12, 2024 at 12:51 PM
+-- Generation Time: Nov 19, 2024 at 07:38 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -40,10 +40,10 @@ CREATE TABLE `categorias` (
 --
 
 INSERT INTO `categorias` (`id`, `nombre`, `img`, `banner_img`, `descripcion`) VALUES
-(1, 'Zapatillas', 'zapatillas-banner-cat.jpg', 'banner-zapas-dc.jpg', 'Descubre nuestra amplia selección de zapatillas urbanas y deportivas para hombre y mujer. En Mundo Urbano, encontrarás modelos exclusivos de las mejores marcas, diseñados para brindar comodidad, estilo y rendimiento.'),
-(2, 'Hombre', 'hombre-banner-cat.jpg', 'banner-hombre-dc.jpg', 'Explora la categoría de hombre en Mundo Urbano, donde la moda urbana se encuentra con la comodidad y el estilo. Nuestra selección incluye ropa y calzado de las mejores marcas, diseñados para el hombre moderno que busca destacar en cualquier ocasión.'),
-(3, 'Mujer', 'mujer-banner-cat.jpg', 'banner-rusty-mujer.jpg', 'Descubre la mejor selección en moda para mujer con prendas y accesorios que resaltan tu estilo único. Desde ropa casual hasta elegantes atuendos para eventos especiales, nuestra categoría de mujer ofrece opciones para cada ocasión.'),
-(4, 'Accesorios', 'accesorios-banner-cat.jpg', 'banner-accesorios.jpg', 'Completa tu estilo con nuestra selección de accesorios. Encuentra todo lo que necesitas para cada ocasión: desde boxers y medias hasta gorras y perfumes que complementan tu look. Cada pieza está diseñada con calidad y estilo, perfecta para destacar en tu día a día o en tus aventuras. ¡Explora nuestra colección y encuentra el accesorio ideal para ti!');
+(1, 'Zapatillas', 'zapatillas-banner-cat.jpg', 'banner-zapas-dc.jpg', 'Descubre nuestra amplia selección de zapatillas urbanas y deportivas para hombre y mujer. '),
+(2, 'Hombre', 'hombre-banner-cat.jpg', 'banner-hombre-dc.jpg', 'Explora la categoría de hombre en Mundo Urbano, donde la moda urbana se encuentra con la comodidad y el estilo. '),
+(3, 'Mujer', 'mujer-banner-cat.jpg', 'banner-rusty-mujer.jpg', 'Descubre la mejor selección en moda para mujer con prendas y accesorios que resaltan tu estilo único. '),
+(4, 'Accesorios', 'accesorios-banner-cat.jpg', 'banner-accesorios.jpg', 'Completa tu estilo con nuestra selección de accesorios. Encuentra todo lo que necesitas para cada ocasión.');
 
 -- --------------------------------------------------------
 
@@ -68,7 +68,10 @@ INSERT INTO `colores` (`id`, `color`, `codigo`) VALUES
 (4, 'Naranja', '#F28B30'),
 (5, 'Celeste', '#96BFD9'),
 (6, 'Verde agua', '#67B9B5'),
-(7, 'Mix', '#FFFFFF');
+(7, 'Mix', '#FFFFFF'),
+(8, 'Azul', '#0000ff'),
+(9, 'Purpura', '#7d2181'),
+(11, 'Rojo', '#ff0000');
 
 -- --------------------------------------------------------
 
@@ -245,6 +248,50 @@ CREATE TABLE `usuario` (
 INSERT INTO `usuario` (`id`, `email`, `alias_usuario`, `nombre`, `apellido`, `password`, `rol`) VALUES
 (1, 'nicolas.firpo@davinci.edu.ar', 'nicofirpo', 'nicolas', 'firpo', 'test1234', 'superadmin');
 
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `vistas`
+--
+
+CREATE TABLE `vistas` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `nombre` varchar(256) NOT NULL,
+  `titulo` varchar(256) NOT NULL,
+  `restringida` tinyint(3) UNSIGNED NOT NULL,
+  `activa` tinyint(3) UNSIGNED NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `vistas`
+--
+
+INSERT INTO `vistas` (`id`, `nombre`, `titulo`, `restringida`, `activa`) VALUES
+(1, 'inicio', 'Tienda Online de Indumentaria y Calzado', 0, 1),
+(2, 'todos_productos', 'Todos los Productos', 0, 1),
+(3, 'nosotros', 'Nosotros', 0, 0),
+(4, 'productos', 'Todos los productos', 0, 1),
+(5, 'detalle_producto', 'Detalle del Producto', 0, 1),
+(6, 'oferta', 'Ofertas', 0, 1),
+(7, 'alumno', 'Alumno', 0, 1),
+(8, 'contacto', 'Contacto', 0, 1),
+(9, '404', 'Página no encontrada', 0, 1),
+(10, '403', 'Pagina no disponible', 0, 1),
+(11, 'dashboard', 'Panel de control', 0, 1),
+(12, 'admin_marcas', 'Administrador de marcas', 0, 1),
+(13, 'admin_colores', 'Administrador de colores', 0, 1),
+(14, 'admin_categorias', 'Administrador de categorias', 0, 1),
+(15, 'admin_productos', 'Administrador de productos', 0, 1),
+(17, 'add_color', 'Agregar un color', 0, 1),
+(18, 'add_marcas', 'Agregar una Marca', 0, 1),
+(19, 'add_categorias', 'Agregar una categoria', 0, 1),
+(20, 'edit_color', 'Edita un color', 0, 1),
+(21, 'delete_color', 'Eliminar un color', 0, 1),
+(22, 'edit_categoria', 'Editar categoria', 0, 1),
+(23, 'edit_marca', 'Editar Marca', 0, 1),
+(24, 'delete_marca', 'Eliminar Marca', 0, 1),
+(25, 'delete_categoria', 'Eliminar categoria', 0, 1);
+
 --
 -- Indexes for dumped tables
 --
@@ -300,6 +347,12 @@ ALTER TABLE `usuario`
   ADD UNIQUE KEY `alias_usuario` (`alias_usuario`);
 
 --
+-- Indexes for table `vistas`
+--
+ALTER TABLE `vistas`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -307,19 +360,19 @@ ALTER TABLE `usuario`
 -- AUTO_INCREMENT for table `categorias`
 --
 ALTER TABLE `categorias`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'identificador de la categoria', AUTO_INCREMENT=5;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'identificador de la categoria', AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `colores`
 --
 ALTER TABLE `colores`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `marcas`
 --
 ALTER TABLE `marcas`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'identificador de la marca', AUTO_INCREMENT=5;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'identificador de la marca', AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `productos`
@@ -344,6 +397,12 @@ ALTER TABLE `talle_x_producto`
 --
 ALTER TABLE `usuario`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `vistas`
+--
+ALTER TABLE `vistas`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- Constraints for dumped tables
