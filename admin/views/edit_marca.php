@@ -8,7 +8,7 @@ $marca = Marca::get_x_id($id);
         <h2 class="text-center mb-5 fw-bold">Edita la Marca</h2>
 
         <!-- Formulario -->
-        <form class="row g-4 p-4 shadow rounded bg-light" action="actions/edit_marca_acc.php" method="POST" enctype="multipart/form-data">
+        <form class="row g-4 p-4 shadow rounded bg-light" action="actions/edit_marca_acc.php?id=<?= $marca->getId() ?>" method="POST" enctype="multipart/form-data">
 
             <!-- Nombre de la marca -->
             <div class="col-md-6">

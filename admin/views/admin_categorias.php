@@ -27,7 +27,7 @@ $categorias = Categoria::get_all();
                         <img src="../img/categorias/<?= $C->getImg() ?>" alt="Imagen de <?= $C->getNombre() ?>" class="img-thumbnail" style="max-height: 100px;">
                     </td>
                     <td>
-                        <img src="../img/banner/desktop/<?= $C->getBanner_img() ?>" alt="Imagen de <?= $C->getNombre() ?>" class="img-thumbnail" style="max-height: 100px;">
+                        <img src="../img/banner/<?= $C->getBanner_img() ?>" alt="Imagen de <?= $C->getNombre() ?>" class="img-thumbnail" style="max-height: 100px;">
                     </td>
                     <td><?= $C->getNombre() ?></td>
                     <td><?= $C->getDescripcion() ?></td>

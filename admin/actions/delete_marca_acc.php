@@ -10,7 +10,7 @@ try {
     Imagen::borrarImagen( "../../img/logos/" . $marca->getImg());
     
 } catch (Exception $e) {
-    die("No se pudo eliminar el color de la base de datos");
+    die("No se pudo eliminar la marca de la base de datos");
     
 }
 header('Location: ../index.php?link=admin_marcas');

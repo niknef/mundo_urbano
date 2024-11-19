@@ -3,32 +3,37 @@ require_once "../../functions/autoload.php";
 
 $id = $_GET['id'] ?? FALSE;
 
+echo "<pre>";
+print_r($_POST);
+echo "</pre>";
+
 $postData = $_POST;
-$datosArchivo = $_FILES['imagen'];
+$datosArchivo = $_FILES['img'];
 $datosArchivoBanner = $_FILES['banner_img'];
 
 try {
 
     $categoria = Categoria::get_x_id($id);
+    echo "<pre>";
+    print_r($categoria);
+    echo "</pre>";
 
     // Procesar imagen principal
     if (!empty($datosArchivo['tmp_name'])) {
-        $img = Imagen::subirImagen("../../img/categorias", $datosArchivo);
+        $img = Imagen::subirImagen("../../img/categorias/", $datosArchivo);
         Imagen::borrarImagen("../../img/categorias/" . $categoria->getImg());
-        $img = Imagen::subirImagen("../../img/categorias/desktop", $datosArchivo);
-        Imagen::borrarImagen("../../img/categorias/desktop/" . $categoria->getImg());
+        
     } else {
         $img = $postData['imagen_org'];
     }
 
     // Procesar banner
     if (!empty($datosArchivoBanner['tmp_name'])) {
-        $banner_img = Imagen::subirImagen("../../img/banner/desktop", $datosArchivoBanner);
-        Imagen::borrarImagen("../../img/banner/desktop/" . $categoria->getBanner_img());
-        $banner_img = Imagen::subirImagen("../../img/banner/tablet", $datosArchivoBanner);
-        Imagen::borrarImagen("../../img/banner/tablet/" . $categoria->getBanner_img());
+        
         $banner_img = Imagen::subirImagen("../../img/banner/", $datosArchivoBanner);
         Imagen::borrarImagen("../../img/banner/" . $categoria->getBanner_img());
+        
+        
         
     } else {
         $banner_img = $postData['banner_img_org'];
@@ -47,4 +52,4 @@ try {
     //Alerta::add_alerta('danger', "El personaje no se puede editar, disculpe las molestias ocasionadas");
 }
 
-header('Location: ../index.php?sec=admin_categorias');
+header('Location: ../index.php?link=admin_categorias');

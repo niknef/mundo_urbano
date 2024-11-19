@@ -12,7 +12,7 @@ try {
     Imagen::borrarImagen( "../../img/banner/tablet/" . $categoria->getBanner_img());
     Imagen::borrarImagen( "../../img/banner/" . $categoria->getBanner_img());
 } catch (Exception $e) {
-    die("No se pudo eliminar el color de la base de datos");
+    die("No se pudo eliminar la categoria de la base de datos");
     
 }
 header('Location: ../index.php?link=admin_categorias');

@@ -4,12 +4,15 @@ require_once "../../functions/autoload.php";
 $id = $_GET['id'] ?? FALSE;
 
 $postData = $_POST;
-$fileData = $_FILES['imagen'];
+$fileData = $_FILES['img'];
 
 try {
 
     $marca = Marca::get_x_id($id);
 
+    echo "<pre>";
+    var_dump($marca);
+    echo "</pre>";
     if (!empty($fileData['tmp_name'])) {
         //Si el usuario decide remplazar la imagen
         $img = Imagen::subirImagen("../../img/logos", $fileData);
@@ -31,4 +34,4 @@ try {
     //Alerta::add_alerta('danger', "El personaje no se puede editar, disculpe las molestias ocasionadas");
 }
 
-header('Location: ../index.php?sec=admin_marcas');
+header('Location: ../index.php?link=admin_marcas');
