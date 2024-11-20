@@ -3,7 +3,6 @@ require_once "../functions/autoload.php";
 
 $vista = Vista::validar_vista($_GET['link'] ?? 'dashboard');
 
-
 ?>
 
 <!DOCTYPE html>

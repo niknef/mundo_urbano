@@ -1,59 +1,128 @@
 <?PHP
 class Producto
 {
-        private $id;
-        private $categoria_id;
-        private $marca_id;
-        private $color_id;
-        private $nombre;
-        private $descripcion;
-        private $tipo;
-        private $precio;
-        private $img;
-        private $temporada;
-        private $fecha_ingreso;
+        private int $id;
+        private Categoria $categoria;
+        private Marca $marca;
+        private Color $color;
+        private string $nombre;
+        private string $descripcion;
+        private string $tipo;
+        private float $precio;
+        private string $img;
+        private string $temporada;
+        private string $fecha_ingreso;
+        private array $talles;
+
+        private static $createValues = [ "id", "nombre", "descripcion", "tipo", "precio", "img", "temporada", "fecha_ingreso"];
+
+        
+        private static function createProducto($productoData): Producto
+        {
+        $producto = new self();
+
+        // Configurar propiedades básicas
+        foreach (self::$createValues as $value) {
+                $producto->{$value} = $productoData[$value];
+        }
+
+        // Cargar relaciones (categoría, marca, color)
+        $producto->categoria = Categoria::get_x_id($productoData["categoria_id"]);
+        $producto->marca = Marca::get_x_id($productoData["marca_id"]);
+        $producto->color = Color::get_x_id($productoData["color_id"]);
+
+        // Procesar los talles y cantidades
+        $tallesIds = !empty($productoData["talles_ids"]) ? explode(",", $productoData["talles_ids"]) : [];
+        $cantidades = !empty($productoData["cantidades"]) ? explode(",", $productoData["cantidades"]) : [];
+
+        $talles = [];
+        foreach ($tallesIds as $index => $talleId) {
+                $talleId = (int)$talleId; // Asegurarse de que sea un entero
+                if ($talleId > 0) { // Validar que el ID sea válido
+                $talle = Talle::get_x_id($talleId);
+                if ($talle) {
+                        $cantidad = $cantidades[$index] ?? 0; // Obtener la cantidad correspondiente al talle
+                        $talles[] = [
+                        "talle" => $talle,
+                        "cantidad" => (int)$cantidad
+                        ];
+                }
+                }
+        }
+
+        $producto->talles = $talles;
+
+        return $producto;
+        }
+
 
         /**
-         * Devuelve el inventario completo
+         * Devuelve el inventario completo con talles y cantidades
          *  
-         * @return Producto[]   Un array con todos los productos del inventario.
+         * @return array Un array con todos los productos y sus talles/cantidades.
          */
         public static function inventario_completo(): array
         {
-                
+        $conexion = Conexion::getConexion();
 
-                $conexion = Conexion::getConexion();
-                $query = "SELECT * FROM productos";
+        // Query para obtener el inventario completo con talles y cantidades
+        $query = "SELECT 
+                p.*, 
+                GROUP_CONCAT(txp.talle_id) AS talles_ids,
+                GROUP_CONCAT(txp.talle_id) AS talles,
+                GROUP_CONCAT(txp.cantidad) AS cantidades
+                FROM productos p
+                LEFT JOIN talle_x_producto txp ON p.id = txp.producto_id
+                LEFT JOIN talles t ON txp.talle_id = t.id
+                GROUP BY p.id
+        ";
 
-                $PDOStatement = $conexion->prepare($query);
-                $PDOStatement->setFetchMode(PDO::FETCH_CLASS, self::class);
-                $PDOStatement->execute();
-                
-                $inventario = $PDOStatement->fetchAll();
-                
+        $PDOStatement = $conexion->prepare($query);
+        $PDOStatement->setFetchMode(PDO::FETCH_ASSOC);
+        $PDOStatement->execute();
 
-                return $inventario;
+        $inventario = [];
+
+        while ($result = $PDOStatement->fetch()) {
+                $inventario[] = self::createProducto($result);
+        }
+
+        return $inventario;
         }
         
         /**
-         * Devuelve un producto por su ID
+         * Devuelve los datos de un producto en particular, incluyendo sus talles y cantidades.
          * 
          * @param int $id El ID del producto a buscar
-         * @return Producto El producto con el ID especificado
+         * @return ?Producto Devuelve un objeto Producto o null si no se encuentra.
          */
-        public static function buscarProductoPorId($id): ?Producto
+        public static function buscarProductoPorId(int $id): ?Producto
         {
-                $conexion = Conexion::getConexion();
-                $query = "SELECT * FROM productos WHERE id = ?";
+        $conexion = Conexion::getConexion();
 
-                $PDOStatement = $conexion->prepare($query);
-                $PDOStatement->setFetchMode(PDO::FETCH_CLASS, self::class);
-                $PDOStatement->execute([$id]);
+        // Query para obtener el producto junto con sus talles y cantidades
+        $query = "SELECT 
+                p.*, 
+                GROUP_CONCAT(txp.talle_id) AS talles_ids,
+                GROUP_CONCAT(t.talle) AS talles,
+                GROUP_CONCAT(txp.cantidad) AS cantidades
+                FROM productos p
+                LEFT JOIN talle_x_producto txp ON p.id = txp.producto_id
+                LEFT JOIN talles t ON txp.talle_id = t.id
+                WHERE p.id = ?
+                GROUP BY p.id
+        ";
 
-                $producto = $PDOStatement->fetch();
+        $PDOStatement = $conexion->prepare($query);
+        $PDOStatement->setFetchMode(PDO::FETCH_ASSOC);
+        $PDOStatement->execute([$id]);
 
-                return $producto ? $producto : null;
+        // Obtener el resultado y crear el objeto Producto
+        $result = $PDOStatement->fetch();
+
+        return $result ? self::createProducto($result) : null;
         }
+
         
         /**
          * Devuelve el catalogo de productos de una categoria especifica.
@@ -188,8 +257,8 @@ class Producto
          * 
          */
         public function getCodigoColor(): string{
-                $color = Color::get_x_id($this->color_id);
-                return $color->getCodigo();
+
+                return $this->color->getCodigo();
         }
 
         /**
@@ -199,8 +268,8 @@ class Producto
          */
         public function getMarca(): string
         {
-                $marca = Marca::get_x_id($this->marca_id);
-                return $marca->getNombre();
+                return $this->marca->getNombre();
+                
         }
 
         /**
@@ -210,8 +279,7 @@ class Producto
          */
         public function getCategoria(): string
         {
-                $categoria = Categoria::get_x_id($this->categoria_id);
-                return $categoria->getNombre();
+                return $this->categoria->getNombre();
         }
 
         /**
@@ -221,8 +289,7 @@ class Producto
          */
         public function getColor(): string
         {
-                $color = Color::get_x_id($this->color_id);
-                return $color->getColor();
+                return $this->color->getColor();
         }
 
         /**
@@ -535,6 +602,26 @@ class Producto
         public function setFecha_ingreso($fecha_ingreso)
         {
                 $this->fecha_ingreso = $fecha_ingreso;
+
+                return $this;
+        }
+
+        /**
+         * Get the value of talles
+         */ 
+        public function getTalles()
+        {
+                return $this->talles;
+        }
+
+        /**
+         * Set the value of talles
+         *
+         * @return  self
+         */ 
+        public function setTalles($talles)
+        {
+                $this->talles = $talles;
 
                 return $this;
         }

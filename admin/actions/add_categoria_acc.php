@@ -10,7 +10,7 @@ $datosArchivoBanner = $_FILES['banner_img'];
 
 try{
     $img = Imagen::subirImagen("../../img/categorias/", $datosArchivo);
-    $banner_img = Imagen::subirImagen("../../img/banner/", $datosArchivoBanner);
+    $banner_img = Imagen::subirImagen("../../img/banner/desktop", $datosArchivoBanner);
 
     categoria::save(
         $postData['nombre'],

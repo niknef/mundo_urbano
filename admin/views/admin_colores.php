@@ -7,23 +7,22 @@ $colores = Color::get_all();
         <h2 class="fw-bold m-0">Administrador de Colores</h2>
 
        
-        <a href="index.php?link=add_color" class="btn btn-primary">Cargar nuevo Color</a>
+        <a href="index.php?link=add_color" class="btn boton-custom">Cargar nuevo Color</a>
     </div>
 <div class="table-responsive">
     <table class="table table-striped table-hover align-middle table-custom">
         <thead class="table-dark">
             <tr>
-                <th scope="col" width="10%">Color</th>
-                <th scope="col" width="10%">Nombre</th>
-                <th scope="col" width="15%">Codigo</th>
+                <th scope="col" width="25%">Nombre</th>
+                <th scope="col" width="25%">Codigo</th>
                 <th scope="col" width="5%">Acciones</th>
             </tr>
         </thead>
         <tbody>
             <?php foreach ($colores as $C): ?>
                 <tr>
-                    <td><div style="width: 50px; border-radius: 100%; height: 50px; background-color: <?= $C->getCodigo() ?>"></div></td>
-                    <td><?= $C->getColor() ?></td>
+                    
+                    <td><span class="badge-personalizado d-flex align-items-center"><span class="bola" style="background-color: <?= $C->getCodigo() ?>;"></span><?= $C->getColor() ?></span></td>
                     <td><?= $C->getCodigo() ?></td>
                     <td>
                         <div class="d-flex flex-column gap-1">

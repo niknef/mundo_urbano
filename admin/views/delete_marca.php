@@ -17,7 +17,7 @@ $marca = Marca::get_x_id($id);
             <div class="mb-3">
                 <h3 class="fs-6 text-secondary">Logo de la Marca</h3>
                 <div class="text-center">
-                    <img src="../img/logos/<?= $marca->getImg() ?>" alt="<?= $marca->getNombre() ?>" class="img-fluid border rounded" style="max-height: 200px; object-fit: cover;">
+                    <img src="../img/logos/<?= $marca->getImg() ?>" alt="<?= $marca->getNombre() ?>" class="img-fluid border rounded img-admin" >
                 </div>
             </div>
 

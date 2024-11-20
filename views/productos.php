@@ -7,6 +7,8 @@ $orden = isset($_GET['orden']) ? $_GET['orden'] : '';
 $categoriaSeleccionada = isset($_GET['categoria']) && $_GET['categoria'] !== '' ? (int)$_GET['categoria'] : null;
 
 
+
+
 // Obtener el inventario inicial
 if ($categoriaSeleccionada) {
     $catalogo = Producto::inventario_por_categoria($categoriaSeleccionada);
@@ -40,6 +42,10 @@ if (isset($categoriaSeleccionada) && !empty($categoriaSeleccionada)) {
         $tituloCategoria = "Categoría no encontrada";
     }
 }
+
+// echo "<pre>";
+// print_r($catalogo);
+// echo "</pre>";
 ?>
 
 

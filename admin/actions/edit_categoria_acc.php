@@ -30,8 +30,8 @@ try {
     // Procesar banner
     if (!empty($datosArchivoBanner['tmp_name'])) {
         
-        $banner_img = Imagen::subirImagen("../../img/banner/", $datosArchivoBanner);
-        Imagen::borrarImagen("../../img/banner/" . $categoria->getBanner_img());
+        $banner_img = Imagen::subirImagen("../../img/banner/desktop/", $datosArchivoBanner);
+        Imagen::borrarImagen("../../img/banner/desktop/" . $categoria->getBanner_img());
         
         
         

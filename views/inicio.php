@@ -12,12 +12,12 @@
         <div class="carousel-inner">
             <?php foreach ($categorias as $index => $categoria): ?>
                 <div class="carousel-item <?= $index == 0 ? 'active' : '' ?>">
-                    <picture>
-                        <source media="(min-width: 1200px)" srcset="img/banner/desktop/<?= $categoria->getBanner_img() ?>">
-                        <source media="(min-width: 768px)" srcset="img/banner/tablet/<?= $categoria->getBanner_img() ?>">
-                        <source media="(max-width: 767px)" srcset="img/banner/<?= $categoria->getBanner_img() ?>">
-                        <img src="img/banner/<?= $categoria->getBanner_img() ?>" alt="Banner <?= $categoria->getNombre() ?>" class="d-block w-100 h-100 fit-cover">
-                    </picture>
+                <picture>
+                    <source media="(min-width: 1200px)" srcset="img/banner/desktop/<?= $categoria->getBanner_img() ?>">
+                    <source media="(min-width: 768px)" srcset="img/banner/tablet/<?= $categoria->getBanner_img() ?>">
+                    <source media="(max-width: 767px)" srcset="img/banner/<?= $categoria->getBanner_img() ?>">
+                    <img src="img/banner/desktop/<?= $categoria->getBanner_img() ?>" alt="Banner <?= $categoria->getNombre() ?>" class="d-block w-100 h-100 fit-cover">
+                </picture>
                     <div class="carousel-overlay">
                         <div class="container">
                             <div class="carousel-caption <?= $index % 2 == 0 ? 'text-start' : 'text-end' ?>">

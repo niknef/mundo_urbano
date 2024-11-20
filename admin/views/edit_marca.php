@@ -18,7 +18,7 @@ $marca = Marca::get_x_id($id);
 
             <div class="col-md-6">
                     <label for="imagen" class="form-label">Logo actual</label>
-                    <img src="../img/logos/<?= $marca->getImg() ?>" alt="Logo de <?= $marca->getNombre() ?>" class="img-fluid rounded shadow-sm d-block">
+                    <img src="../img/logos/<?= $marca->getImg() ?>" alt="Logo de <?= $marca->getNombre() ?>" class="img-fluid rounded shadow-sm d-block img-admin">
                     <input class="form-control" type="hidden" id="imagen_org" name="imagen_org" value="<?= $marca->getImg() ?>">
             </div>
 

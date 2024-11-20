@@ -19,7 +19,7 @@ $categoria = Categoria::get_x_id($id);
             <div class="col-12">
                 <label class="form-label fw-bold">Imagen de la Categoría</label>
                 <div class="d-flex align-items-center gap-3">
-                    <img src="../img/categorias/<?= $categoria->getImg() ?>" alt="Imagen de <?= $categoria->getNombre() ?>" class="img-thumbnail shadow-sm" style="width: 150px; height: auto;">
+                    <img src="../img/categorias/<?= $categoria->getImg() ?>" alt="Imagen de <?= $categoria->getNombre() ?>" class="img-thumbnail shadow-sm img-admin">
                     <div>
                         <label for="img" class="form-label">Cargar nueva imagen</label>
                         <input type="file" class="form-control" id="img" name="img">
@@ -32,7 +32,7 @@ $categoria = Categoria::get_x_id($id);
             <div class="col-12">
                 <label class="form-label fw-bold">Banner de la Categoría</label>
                 <div class="d-flex align-items-center gap-3">
-                    <img src="../img/banner/<?= $categoria->getBanner_img() ?>" alt="Banner de <?= $categoria->getNombre() ?>" class="img-thumbnail shadow-sm" style="width: 150px; height: auto;">
+                    <img src="../img/banner/desktop/<?= $categoria->getBanner_img() ?>" alt="Banner de <?= $categoria->getNombre() ?>" class="img-thumbnail shadow-sm img-admin">
                     <div>
                         <label for="banner_img" class="form-label">Cargar nuevo banner</label>
                         <input type="file" class="form-control" id="banner_img" name="banner_img">

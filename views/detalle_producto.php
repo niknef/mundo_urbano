@@ -22,19 +22,28 @@
             </div>
             <p class="mt-2"><?= $producto->getDescripcion() ?></p>
             
-            <!-- Temporada  
-            <p><strong>Talles disponibles:</strong>
-                ?php if (count($producto->getTalles()) > 1): ?>
-                    <select class="form-select w-25 mt-1">
-                        ?php foreach ($producto->getTalles() as $talle): ?>
-                            <option value="?= $talle ?>">?= $talle; ?></option>
-                        ?php endforeach; ?>
+            <p><strong>Talles disponibles:</strong></p>
+                <?php
+                $tallesDisponibles = array_filter($producto->getTalles(), function ($detalleTalle) {
+                    return $detalleTalle['cantidad'] > 0; // Filtrar talles con cantidad mayor a 0
+                });
+
+                $totalStock = array_sum(array_column($producto->getTalles(), 'cantidad')); // Calculo el stock total
+                ?>
+
+                <?php if (!empty($tallesDisponibles)) : ?>
+                    <select class="form-select mt-1 talle-ancho">
+                        <?php foreach ($tallesDisponibles as $detalleTalle) : ?>
+                            <option value="<?= $detalleTalle['talle']->getTalle(); ?>">
+                                <?= $detalleTalle['talle']->getTalle(); ?> (Stock: <?= $detalleTalle['cantidad']; ?>)
+                            </option>
+                        <?php endforeach; ?>
                     </select>
-                ?php else: ?>
-                    ?= $producto->getTalles()[0]; ?>
-                ?php endif; ?>
-            </p>
-            -->
+                <?php else : ?>
+                    <p class="text-muted">No hay talles disponibles.</p>
+                <?php endif; ?>
+
+                <p class="mt-2"><strong>Stock total:</strong> <?= $totalStock > 0 ? $totalStock : 'Sin stock'; ?></p>
             
             <h3>
                 <?= $producto->obtenerPrecioConDescuento($temporada, $anio, $descuento); ?>

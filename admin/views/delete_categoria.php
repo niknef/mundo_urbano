@@ -17,14 +17,14 @@ $categoria = Categoria::get_x_id($id);
             <div class="mb-3">
                 <h3 class="fs-6 text-secondary">Imagen de la Categoría</h3>
                 <div class="text-center">
-                    <img src="../img/categorias/<?= $categoria->getImg() ?>" alt="<?= $categoria->getNombre() ?>" class="img-fluid border rounded" style="max-height: 200px; object-fit: cover;">
+                    <img src="../img/categorias/<?= $categoria->getImg() ?>" alt="<?= $categoria->getNombre() ?>" class="img-fluid border rounded img-admin">
                 </div>
             </div>
 
             <div class="mb-3">
                 <h3 class="fs-6 text-secondary">Banner de la Categoría</h3>
                 <div class="text-center">
-                    <img src="../img/banner/<?= $categoria->getBanner_img() ?>" alt="<?= $categoria->getNombre() ?>" class="img-fluid border rounded" style="max-height: 200px; object-fit: cover;">
+                    <img src="../img/banner/desktop/<?= $categoria->getBanner_img() ?>" alt="<?= $categoria->getNombre() ?>" class="img-fluid border img-admin">
                 </div>
             </div>
 

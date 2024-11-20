@@ -7,7 +7,7 @@ $categorias = Categoria::get_all();
         <h2 class="fw-bold m-0">Administrador de Categorias</h2>
 
        
-        <a href="index.php?link=add_categorias" class="btn btn-primary">Cargar nueva Categoria</a>
+        <a href="index.php?link=add_categorias" class="btn boton-custom">Cargar nueva Categoria</a>
     </div>
 <div class="table-responsive">
     <table class="table table-striped table-hover align-middle table-custom">
@@ -24,10 +24,10 @@ $categorias = Categoria::get_all();
             <?php foreach ($categorias as $C): ?>
                 <tr>
                     <td>
-                        <img src="../img/categorias/<?= $C->getImg() ?>" alt="Imagen de <?= $C->getNombre() ?>" class="img-thumbnail" style="max-height: 100px;">
+                        <img src="../img/categorias/<?= $C->getImg() ?>" alt="Imagen de <?= $C->getNombre() ?>" class="img-thumbnail">
                     </td>
                     <td>
-                        <img src="../img/banner/<?= $C->getBanner_img() ?>" alt="Imagen de <?= $C->getNombre() ?>" class="img-thumbnail" style="max-height: 100px;">
+                        <img src="../img/banner/desktop/<?= $C->getBanner_img() ?>" alt="Imagen de <?= $C->getNombre() ?>" class="img-thumbnail">
                     </td>
                     <td><?= $C->getNombre() ?></td>
                     <td><?= $C->getDescripcion() ?></td>

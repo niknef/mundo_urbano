@@ -7,7 +7,7 @@ $marcas = Marca::get_all();
         <h2 class="fw-bold m-0">Administrador de Marcas</h2>
 
        
-        <a href="index.php?link=add_marcas" class="btn btn-primary">Cargar nueva Marca</a>
+        <a href="index.php?link=add_marcas" class="btn boton-custom">Cargar nueva Marca</a>
     </div>
 <div class="table-responsive">
     <table class="table table-striped table-hover align-middle table-custom">
@@ -23,7 +23,7 @@ $marcas = Marca::get_all();
             <?php foreach ($marcas as $M): ?>
                 <tr>
                     <td>
-                        <img src="../img/logos/<?= $M->getImg() ?>" alt="Logo de <?= $M->getNombre() ?>" class="img-thumbnail" style="max-height: 100px;">
+                        <img src="../img/logos/<?= $M->getImg() ?>" alt="Logo de <?= $M->getNombre() ?>" class="img-thumbnail img-admin">
                     </td>
                     <td><?= $M->getNombre() ?></td>
                     <td><?= $M->getDescripcion() ?></td>

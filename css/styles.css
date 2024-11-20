@@ -214,3 +214,11 @@ footer .nav-link:hover {
     overflow: hidden; 
     border: 1px solid #dee2e6; 
 }
+
+.img-admin{
+    max-height: 120px;
+}
+
+.talle-ancho{
+    max-width: 150px;
+}

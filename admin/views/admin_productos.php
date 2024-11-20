@@ -7,7 +7,7 @@ $inventario = Producto::inventario_completo();
         <h2 class="fw-bold m-0">Administrador de Productos</h2>
 
        
-        <a href="index.php?link=add_producto" class="btn btn-primary">Cargar nuevo Producto</a>
+        <a href="index.php?link=add_producto" class="btn boton-custom">Cargar nuevo Producto</a>
     </div>
 <div class="table-responsive">
     <table class="table table-striped table-hover align-middle table-custom">
@@ -29,7 +29,7 @@ $inventario = Producto::inventario_completo();
             <?php foreach ($inventario as $P): ?>
                 <tr>
                     <td>
-                        <img src="../img/productos/<?= $P->getImg() ?>" alt="Imagen de <?= $P->getNombre() ?>" class="img-thumbnail" style="max-height: 100px;">
+                        <img src="../img/productos/<?= $P->getImg() ?>" alt="Imagen de <?= $P->getNombre() ?>" class="img-thumbnail">
                     </td>
                     <td><?= $P->getNombre() ?></td>
                     <td><?= $P->getMarca() ?></td>

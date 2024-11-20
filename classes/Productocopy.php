@@ -1,49 +1,17 @@
 <?PHP
 class Producto
 {
-        private int $id;
-        private Categoria $categoria;
-        private Marca $marca;
-        private Color $color;
-        private string $nombre;
-        private string $descripcion;
-        private string $tipo;
-        private float $precio;
-        private string $img;
-        private string $temporada;
-        private string $fecha_ingreso;
-        private array $talles;
-
-        private static $createValues = [ "id", "nombre", "descripcion", "tipo", "precio", "img", "temporada", "fecha_ingreso"];
-
-        /**
-         * Devuelve una instancia del objeto producto con todas las propiedades configuradas
-         * @return Producto
-         */
-        private static function createProducto($productoData): Producto
-        {
-
-                $producto = new self();
-
-                foreach (self::$createValues as $value) {
-                        $producto->{$value} = $productoData[$value];
-                }
-
-                $producto->categoria = Categoria::get_x_id($productoData["categoria_id"]);
-                $producto->marca = Marca::get_x_id($productoData["marca_id"]);
-                $producto->color = Color::get_x_id($productoData["color_id"]);
-
-                $tallesIds = 
-                !empty($productoData["talles"]) ? explode(",", $productoData["talles"]) : [];
-
-                $talles = [];
-                foreach ($tallesIds as $talleId) {
-                        $talle = Talle::get_x_id($talleId);
-                        $talles[] = $talle;
-                }
-                return $producto;
-                
-        }
+        private $id;
+        private $categoria_id;
+        private $marca_id;
+        private $color_id;
+        private $nombre;
+        private $descripcion;
+        private $tipo;
+        private $precio;
+        private $img;
+        private $temporada;
+        private $fecha_ingreso;
 
         /**
          * Devuelve el inventario completo
