@@ -1,42 +1,18 @@
 <?php
-$categoriaSeleccionada = isset($_GET['categoria']) && $_GET['categoria'] !== '' ? (int)$_GET['categoria'] : null;
-$marcaSeleccionada = isset($_GET['marca']) && $_GET['marca'] !== '' ? (int)$_GET['marca'] : null;
+$categoriaSeleccionada = isset($_GET['categoria']) ? (int)$_GET['categoria'] : null;
+$marcaSeleccionada = isset($_GET['marca']) ? (int)$_GET['marca'] : null;
 
+$catalogo = Producto::obtenerProductosFiltrados($categoriaSeleccionada, $marcaSeleccionada);
 
-
-// Obtener el inventario inicial
 if ($categoriaSeleccionada) {
-    $catalogo = Producto::inventario_por_categoria($categoriaSeleccionada);
-} elseif ($marcaSeleccionada) {
-    $catalogo = Producto::inventario_por_marca($marcaSeleccionada);
-} else {
-    $catalogo = Producto::inventario_completo();
-}
-
-
-// Inicializamos el nombre de la categoría
-$tituloCategoria = "Todos los productos";
-
-// Verificamos si se seleccionó una categoría por ID
-if (isset($categoriaSeleccionada) && !empty($categoriaSeleccionada)) {
     $categoria = Categoria::get_x_id($categoriaSeleccionada);
-    if ($categoria) {
-        $tituloCategoria = $categoria->getNombre();
-    } else {
-        
-        $tituloCategoria = "Categoría no encontrada";
-    }
-} elseif (isset($marcaSeleccionada) && !empty($marcaSeleccionada)) {
+    $tituloCategoria = $categoria ? $categoria->getNombre() : "Categoría no encontrada";
+} elseif ($marcaSeleccionada) {
     $marca = Marca::get_x_id($marcaSeleccionada);
-    if ($marca) {
-        $tituloCategoria = $marca->getNombre();
-    } else {
-        $tituloCategoria = "Marca no encontrada";
-    }
-}else {
+    $tituloCategoria = $marca ? $marca->getNombre() : "Marca no encontrada";
+} else {
     $tituloCategoria = "Todos los productos";
 }
-
 ?>
 
 

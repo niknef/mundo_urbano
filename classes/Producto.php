@@ -123,47 +123,38 @@ class Producto
         return $result ? self::createProducto($result) : null;
         }
 
-        
         /**
-         * Devuelve el catalogo de productos de una categoria especifica.
+         * Obtiene todos los productos de la base de datos.
          * 
-         * @param int $id el id de la categoria de la cual se desea obtener el catalogo.
-         * @return Producto[] Un array con los productos de la categoria especificada.
+         * @return Producto[] Un array con todos los productos.
          */
-        public static function inventario_por_categoria($id): array
+        public static function obtenerProductosFiltrados(?int $categoriaId = null, ?int $marcaId = null): array
         {
-                $conexion = Conexion::getConexion();
-                $query = "SELECT * FROM productos WHERE categoria_id = ?";
+        $conexion = Conexion::getConexion();
+        $query = "SELECT * FROM productos";
+        $conditions = [];
+        $params = [];
 
-                $PDOStatement = $conexion->prepare($query);
-                $PDOStatement->setFetchMode(PDO::FETCH_CLASS, self::class);
-                $PDOStatement->execute([$id]);
-
-                $inventario = $PDOStatement->fetchAll();
-
-                return $inventario;
+        if ($categoriaId) {
+                $conditions[] = "categoria_id = ?";
+                $params[] = $categoriaId;
         }
 
-        /**
-         * Devuelve el catalogo de productos de una marca especifica.
-         * 
-         * @param int $id el id de la marca de la cual se desea obtener el catalogo.
-         * @return Producto[] Un array con los productos de la marca especificada.
-         */
-        public static function inventario_por_marca($id): array
-        {
-                $conexion = Conexion::getConexion();
-                $query = "SELECT * FROM productos WHERE marca_id = ?";
-
-                $PDOStatement = $conexion->prepare($query);
-                $PDOStatement->setFetchMode(PDO::FETCH_CLASS, self::class);
-                $PDOStatement->execute([$id]);
-
-                $inventario = $PDOStatement->fetchAll();
-
-                return $inventario;
+        if ($marcaId) {
+                $conditions[] = "marca_id = ?";
+                $params[] = $marcaId;
         }
-        
+
+        if (!empty($conditions)) {
+                $query .= " WHERE " . implode(" AND ", $conditions);
+        }
+
+        $PDOStatement = $conexion->prepare($query);
+        $PDOStatement->setFetchMode(PDO::FETCH_CLASS, self::class);
+        $PDOStatement->execute($params);
+
+        return $PDOStatement->fetchAll();
+        }
 
         /**
          * Filtra los productos de un inventario basándose en la temporada y/o año proporcionados.
