@@ -143,6 +143,26 @@ class Producto
 
                 return $inventario;
         }
+
+        /**
+         * Devuelve el catalogo de productos de una marca especifica.
+         * 
+         * @param int $id el id de la marca de la cual se desea obtener el catalogo.
+         * @return Producto[] Un array con los productos de la marca especificada.
+         */
+        public static function inventario_por_marca($id): array
+        {
+                $conexion = Conexion::getConexion();
+                $query = "SELECT * FROM productos WHERE marca_id = ?";
+
+                $PDOStatement = $conexion->prepare($query);
+                $PDOStatement->setFetchMode(PDO::FETCH_CLASS, self::class);
+                $PDOStatement->execute([$id]);
+
+                $inventario = $PDOStatement->fetchAll();
+
+                return $inventario;
+        }
         
 
         /**
@@ -155,27 +175,32 @@ class Producto
          */
         public static function filtrarProductosTemporada(?string $temporada = null, ?int $anio = null): array
         {
-        // Si ambos son null, no hay productos en oferta
+        // Si ambos parámetros son null, no hay filtros que aplicar
         if (is_null($temporada) && is_null($anio)) {
-                return []; // Devolvemos un array vacío
+                return []; // Retornamos un array vacío
         }
 
-        // Construcción de la consulta
+        // Construcción dinámica de la consulta
         $conexion = Conexion::getConexion();
-        $query = "SELECT * FROM productos WHERE 1=1"; // Condición base
-
+        $query = "SELECT * FROM productos";
+        $conditions = [];
         $params = [];
-        
-        // Filtro por temporada (si aplica)
+
+        // Filtro por temporada
         if (!is_null($temporada)) {
-                $query .= " AND LOWER(temporada) = LOWER(?)";
+                $conditions[] = "LOWER(temporada) = LOWER(?)";
                 $params[] = $temporada;
         }
 
-        // Filtro por año (si aplica)
+        // Filtro por año
         if (!is_null($anio)) {
-                $query .= " AND YEAR(fecha_ingreso) = ?";
+                $conditions[] = "YEAR(fecha_ingreso) = ?";
                 $params[] = $anio;
+        }
+
+        // Añadimos las condiciones si existen
+        if (!empty($conditions)) {
+                $query .= " WHERE " . implode(" AND ", $conditions);
         }
 
         // Preparar y ejecutar consulta
@@ -183,7 +208,7 @@ class Producto
         $PDOStatement->setFetchMode(PDO::FETCH_CLASS, self::class);
         $PDOStatement->execute($params);
 
-        // Retornar resultados
+        // Retornar los resultados
         return $PDOStatement->fetchAll();
         }
 
@@ -292,99 +317,7 @@ class Producto
                 return $this->color->getColor();
         }
 
-        /**
-         * Ordena los productos por precio y opcionalmente filtra por categoría.
-         * 
-         * @param string $orden El orden de la ordenación: "asc" para ascendente (menor a mayor) y "desc" para descendente (mayor a menor).
-         * @param int|null $categoriaId El ID de la categoría para filtrar (opcional).
-         * @return Producto[] El catálogo ordenado según el precio.
-         */
-        public static function ordenarPorPrecio(string $orden = 'asc', ?int $categoriaId = null): array
-        {
-        $conexion = Conexion::getConexion();
-
-        // Construir la consulta
-        $query = "SELECT * FROM productos WHERE 1=1";
-        $valores = [];
-
-        if (!is_null($categoriaId)) {
-                $query .= " AND categoria_id = :categoria_id";
-                $valores[':categoria_id'] = $categoriaId;
-        }
-
-        $query .= " ORDER BY precio " . ($orden === 'asc' ? "ASC" : "DESC");
-
-        // Preparar y ejecutar
-        $PDOStatement = $conexion->prepare($query);
-        $PDOStatement->setFetchMode(PDO::FETCH_CLASS, self::class);
-        $PDOStatement->execute($valores);
-
-        return $PDOStatement->fetchAll();
-        }
-
-        /**
-         * Devuelve los productos en un determinado rango de precios y opcionalmente filtra por categoría.
-         * 
-         * @param int $minimo El precio mínimo, por defecto 0.
-         * @param int $maximo El precio máximo, por defecto infinito.
-         * @param int|null $categoriaId El ID de la categoría para filtrar (opcional).
-         * @return Producto[] Un array con los productos que se encuentran en el rango de precios especificado.
-         */
-        public static function productos_x_rango(int $minimo = 0, int $maximo = 0, ?int $categoriaId = null): array
-        {
-        $conexion = Conexion::getConexion();
-
-        if($maximo){
-                $query = "SELECT * FROM productos WHERE precio BETWEEN :minimo AND :maximo";
-                $valores = [
-                        ':minimo' => $minimo,
-                        ':maximo' => $maximo,
-                ];
-        }else{
-                $query = "SELECT * FROM productos WHERE precio >= :minimo";
-                $valores = [
-                        ':minimo' => $minimo,
-                ];
-        }
-
-        if (!is_null($categoriaId)) {
-                $query .= " AND categoria_id = :categoria_id";
-                $valores[':categoria_id'] = $categoriaId;
-        }
-
-        $PDOStatement = $conexion->prepare($query);
-        $PDOStatement->setFetchMode(PDO::FETCH_CLASS, self::class);
-        $PDOStatement->execute($valores);
-
-        return $PDOStatement->fetchAll();
-        }
-
-        /**
-         * Devuelve los productos que contienen una palabra en su nombre, descripción o tipo y opcionalmente filtra por categoría.
-         * 
-         * @param string $busqueda La palabra a buscar.
-         * @param int|null $categoriaId El ID de la categoría para filtrar (opcional).
-         * @return Producto[] Un array con los productos que contienen la palabra buscada.
-         */
-        public static function buscarProducto(string $busqueda, ?int $categoriaId = null): array
-        {
-        $conexion = Conexion::getConexion();
-
-        $query = "SELECT * FROM productos WHERE (nombre LIKE :busqueda OR descripcion LIKE :busqueda OR tipo LIKE :busqueda)";
-        $valores = [':busqueda' => "%$busqueda%"];
-
-        if (!is_null($categoriaId)) {
-                $query .= " AND categoria_id = :categoria_id";
-                $valores[':categoria_id'] = $categoriaId;
-        }
-
-        $PDOStatement = $conexion->prepare($query);
-        $PDOStatement->setFetchMode(PDO::FETCH_CLASS, self::class);
-        $PDOStatement->execute($valores);
-
-        return $PDOStatement->fetchAll();
-}
-
+       
 
         /**
          * Get the value of id

@@ -7,7 +7,7 @@ $talle = Talle::get_x_id($id);
 
 <div class="row my-5 justify-content-center">
     <div class="col-12 col-md-8 col-lg-6 text-center p-4 shadow rounded bg-light">
-        <h2 class="mb-4 fw-bold text-danger">¿Está seguro que desea eliminar esta Categoría de Talles?</h2>
+        <h2 class="mb-4 fw-bold text-danger">¿Está seguro que desea eliminar este talle?</h2>
 
     
 

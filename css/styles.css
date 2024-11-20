@@ -223,3 +223,46 @@ footer .nav-link:hover {
     max-width: 150px;
 }
 
+
+.brand-card {
+    border: 1px solid #ddd;
+    padding: 10px;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.brand-card:hover {
+    transform: scale(1.02);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.brand-logo img {
+    max-width: 200px;
+}
+
+.brand-details h3 {
+    margin-bottom: 5px;
+    font-weight: 600;
+}
+
+.brand-details p {
+    font-size: 0.9rem;
+    color: #666;
+}
+
+@media (max-width: 768px) {
+    .brand-card {
+        justify-content: center;
+        padding: 15px;
+    }
+
+    .brand-logo img {
+        width: 100px;
+        height: 100px;
+    }
+
+    .brand-details {
+        display: none;
+    }
+}

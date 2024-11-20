@@ -55,6 +55,9 @@ $productosEnOferta = Producto::filtrarProductosTemporada($temporada, $anio);
                         </div>
                     </li>
                     <li class="nav-item">
+                        <a class="nav-link" href="index.php?link=marcas">Marcas</a>
+                    </li>
+                    <li class="nav-item">
                         <a class="nav-link" href="index.php?link=oferta">Ofertas</a>
                     </li>
                     <li class="nav-item">
@@ -104,6 +107,7 @@ $productosEnOferta = Producto::filtrarProductosTemporada($temporada, $anio);
                     <li><a class="dropdown-item" href="index.php?link=oferta">Oferta</a></li>
                 </ul>
             </li>
+            
             <li class="nav-item">
                 <a class="nav-link" href="index.php?link=nosotros">Contacto</a>
             </li>
