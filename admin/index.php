@@ -49,6 +49,9 @@ $vista = Vista::validar_vista($_GET['link'] ?? 'dashboard');
                     <li class="nav-item">
                         <a class="nav-link" href="index.php?link=admin_colores">Colores</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.php?link=admin_talles">Talles</a>
+                    </li>
                 </ul>
             </div>
         </div>
@@ -80,9 +83,7 @@ $vista = Vista::validar_vista($_GET['link'] ?? 'dashboard');
                     <li class="nav-item">
                         <a class="nav-link" href="index.php?link=admin_marcas">Marcas</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="index.php?link=admin_colores">Colores</a>
-                    </li>
+                    
         </ul>
     </div>
 </footer>

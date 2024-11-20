@@ -84,6 +84,22 @@ class Talle {
         return $talles;
     }
 
+    public static function get_all_grouped_by_categoria(): array
+    {
+        $conexion = Conexion::getConexion();
+        $query = "SELECT * FROM talles ORDER BY categoria_talle, id";
+        $PDOStatement = $conexion->prepare($query);
+        $PDOStatement->setFetchMode(PDO::FETCH_CLASS, self::class);
+        $PDOStatement->execute();
+
+        $tallesPorCategoria = [];
+        while ($talle = $PDOStatement->fetch()) {
+            $tallesPorCategoria[$talle->getCategoria_talle()][] = $talle;
+        }
+
+        return $tallesPorCategoria;
+    }
+
     /**
      * Guarda un talle en la base de datos
      * 
@@ -109,17 +125,17 @@ class Talle {
     /**
      * Edita los datos de un talle en la base de datos
      * 
-     * @param string $categoria_talle La categoría del talle
+     * 
      * @param string $talle El nombre del talle
      * 
      */
-    public function edit(string $categoria_talle, string $talle){
+    public function edit(string $talle){
         $conexion = Conexion::getConexion();
         $query = "UPDATE talles SET categoria_talle = :categoria_talle, talle = :talle WHERE id = :id";
 
         $PDOStatement = $conexion->prepare($query);
         $result = $PDOStatement->execute([
-            'categoria_talle' => $categoria_talle,
+            'categoria_talle' => $this->categoria_talle,
             'talle' => $talle,
             'id' => $this->id
         ]);
@@ -142,6 +158,60 @@ class Talle {
         ]);
 
     
+    }
+
+    /**
+     * Verifica si una categoría de talles existe en la base de datos
+     * 
+     * @param string $categoria_talle El nombre de la categoría
+     * @return bool Retorna true si existe, false si no
+     */
+    public static function existe_categoria(string $categoria_talle): bool
+    {
+        $conexion = Conexion::getConexion();
+
+        $query = "SELECT COUNT(*) FROM talles WHERE categoria_talle = :categoria_talle";
+        $stmt = $conexion->prepare($query);
+        $stmt->execute(['categoria_talle' => $categoria_talle]);
+
+        return $stmt->fetchColumn() > 0;
+    }
+
+    /**
+     * Elimina todos los talles de una categoría
+     * 
+     * @param string $categoria_talle La categoría de los talles a eliminar
+     * 
+     */
+    public static function delete_by_categoria(string $categoria_talle)
+    {
+        $conexion = Conexion::getConexion();
+
+        $query = "DELETE FROM talles WHERE categoria_talle = :categoria_talle";
+        $PDOStatement = $conexion->prepare($query);
+        $PDOStatement->execute(['categoria_talle' => $categoria_talle]);
+
+        return true;
+    }
+
+    /**
+     * Actualiza el nombre de una categoría de talles
+     * 
+     * @param string $categoria_talle La categoría a actualizar
+     * @param string $nuevo_nombre El nuevo nombre de la categoría
+     * 
+     */
+    public static function update_categoria_nombre(string $categoria_talle, string $nuevo_nombre){
+        $conexion = Conexion::getConexion();
+
+        $query = "UPDATE talles SET categoria_talle = :nuevo_nombre WHERE categoria_talle = :categoria_talle";
+        $PDOStatement = $conexion->prepare($query);
+        $result = $PDOStatement->execute([
+            'nuevo_nombre' => $nuevo_nombre,
+            'categoria_talle' => $categoria_talle
+        ]);
+
+        return $result;
     }
 
     /**

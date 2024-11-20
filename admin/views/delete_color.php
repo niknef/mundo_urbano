@@ -23,7 +23,7 @@ $color = Color::get_x_id($id);
 
         <!-- Botones de acción -->
         <div class="d-flex justify-content-center gap-3">
-            <a href="index.php?link=admin_colors" class="btn btn-outline-secondary px-4">Cancelar</a>
+            <a href="index.php?link=admin_colores" class="btn btn-outline-secondary px-4">Cancelar</a>
             <a href="actions/delete_color_acc.php?id=<?= $color->getId() ?>" class="btn btn-danger px-4">Eliminar</a>
         </div>
     </div>

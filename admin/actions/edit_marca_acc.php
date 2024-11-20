@@ -10,9 +10,7 @@ try {
 
     $marca = Marca::get_x_id($id);
 
-    echo "<pre>";
-    var_dump($marca);
-    echo "</pre>";
+    
     if (!empty($fileData['tmp_name'])) {
         //Si el usuario decide remplazar la imagen
         $img = Imagen::subirImagen("../../img/logos", $fileData);
