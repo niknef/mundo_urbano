@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 21-11-2024 a las 16:36:49
+-- Tiempo de generación: 22-11-2024 a las 00:13:49
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -159,7 +159,8 @@ INSERT INTO `productos` (`id`, `categoria_id`, `marca_id`, `color_id`, `nombre`,
 (16, 4, 3, 1, 'Mochila Off Road* Black/Purple', 'Esta mochila de viaje y outdoor, con capacidad de 22 litros, está diseñada para la aventura y la comodidad. Sus dimensiones de 44 cm de alto, 31 cm de ancho y 16 cm de profundidad la hacen ideal para llevar lo esencial. Fabricada en poliéster resistente con detalles en red de poliéster.', 'Mochila', 74890.00, 'mochila-rusty-road.jpg', 'Invierno', '2023-05-10'),
 (17, 4, 3, 7, 'Medias All Day Invisible 5- Pack', 'El pack de 5 medias All Day Invisible está diseñado para brindar comodidad y discreción en cualquier calzado. Fabricadas con materiales suaves y elásticos, estas medias invisibles se ajustan perfectamente al pie, proporcionando una sensación de ligereza durante todo el día.', 'Medias Cortas', 27490.00, 'media-rusty-allday.jpg', 'Verano', '2021-11-10'),
 (18, 4, 3, 1, 'Gorra Chronic 4 Flexfit', 'Gorra de gabardina elastizada con visera semi curva y logo bordado en 3D El calce esta regulado por elástico con personalizado de marca.', 'Gorra', 34890.00, 'gorra-rusty-chronic-negra.jpg', 'Verano', '2024-11-10'),
-(19, 4, 3, 1, 'Morral Sicarius Negro', 'Este morral de cordura, con dimensiones de 18 cm de ancho, 24 cm de alto y 7 cm de profundidad, combina estilo y funcionalidad en un diseño compacto. Incluye un patch festoneado en el frente que le añade un toque distintivo.', 'Morral', 25990.00, 'morral-rusty-sicarius.jpg', 'Mixto', '2021-11-10');
+(19, 4, 3, 1, 'Morral Sicarius Negro', 'Este morral de cordura, con dimensiones de 18 cm de ancho, 24 cm de alto y 7 cm de profundidad, combina estilo y funcionalidad en un diseño compacto. Incluye un patch festoneado en el frente que le añade un toque distintivo.', 'Morral', 25990.00, 'morral-rusty-sicarius.jpg', 'Mixto', '2021-11-10'),
+(20, 1, 1, 1, 'DC Union La ', 'Capellada de descarne + Forrería liviana de lengüeta + Cuello y lengüeta con espuma acolchada para máximo confort y soporte + Perforaciones de ventilación para una mejor respirabilidad del pie + Suela Cupsole de caucho resistente a la abrasión con costura alrededor, proveyendo mayor durabilidad y resistencia + Diseño Pill Pattern de DC en pisada.', 'Zapatillas Urbanas', 153900.00, '1732228123.jpg', 'Verano', '2024-11-21');
 
 -- --------------------------------------------------------
 
@@ -321,7 +322,9 @@ INSERT INTO `vistas` (`id`, `nombre`, `titulo`, `restringida`, `activa`) VALUES
 (32, 'delete_talle', 'Eliminar un talle', 0, 1),
 (33, 'marcas', 'Marcas', 0, 1),
 (34, 'edit_oferta', 'Edita la Oferta', 0, 1),
-(35, 'add_producto', 'Agregar un producto', 0, 1);
+(36, 'add_productos', 'Agrega un nuevo producto', 0, 1),
+(37, 'delete_producto', 'Eliminar un producto', 0, 1),
+(38, 'edit_producto', 'Edita un producto', 0, 1);
 
 --
 -- Índices para tablas volcadas
@@ -421,7 +424,7 @@ ALTER TABLE `oferta`
 -- AUTO_INCREMENT de la tabla `productos`
 --
 ALTER TABLE `productos`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'Campo identificador principal de la tabla', AUTO_INCREMENT=20;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'Campo identificador principal de la tabla', AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT de la tabla `talles`
@@ -433,7 +436,7 @@ ALTER TABLE `talles`
 -- AUTO_INCREMENT de la tabla `talle_x_producto`
 --
 ALTER TABLE `talle_x_producto`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT de la tabla `usuario`
@@ -445,7 +448,7 @@ ALTER TABLE `usuario`
 -- AUTO_INCREMENT de la tabla `vistas`
 --
 ALTER TABLE `vistas`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
 
 --
 -- Restricciones para tablas volcadas
