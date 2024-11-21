@@ -52,6 +52,9 @@ $vista = Vista::validar_vista($_GET['link'] ?? 'dashboard');
                     <li class="nav-item">
                         <a class="nav-link" href="index.php?link=admin_talles">Talles</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.php?link=edit_oferta">Oferta</a>
+                    </li>
                 </ul>
             </div>
         </div>

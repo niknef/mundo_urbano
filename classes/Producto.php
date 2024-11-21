@@ -16,7 +16,13 @@ class Producto
 
         private static $createValues = [ "id", "nombre", "descripcion", "tipo", "precio", "img", "temporada", "fecha_ingreso"];
 
-        
+        /**
+         * Crea una instancia de Producto a partir de los datos proporcionados, incluyendo sus relaciones y talles.
+         *
+         * @param array $productoData Un array asociativo que contiene los datos del producto, incluyendo propiedades básicas y relaciones.
+         *
+         * @return Producto Una instancia de Producto completamente inicializada.
+         */
         private static function createProducto($productoData): Producto
         {
         $producto = new self();
@@ -38,10 +44,12 @@ class Producto
         $talles = [];
         foreach ($tallesIds as $index => $talleId) {
                 $talleId = (int)$talleId; // Asegurarse de que sea un entero
-                if ($talleId > 0) { // Validar que el ID sea válido
+                $cantidad = $cantidades[$index] ?? null; // Obtener la cantidad correspondiente al talle o null
+
+                // Validar el talle y la cantidad
+                if ($talleId > 0 && $cantidad !== null && $cantidad !== '' && is_numeric($cantidad) && $cantidad >= 0) {
                 $talle = Talle::get_x_id($talleId);
                 if ($talle) {
-                        $cantidad = $cantidades[$index] ?? 0; // Obtener la cantidad correspondiente al talle
                         $talles[] = [
                         "talle" => $talle,
                         "cantidad" => (int)$cantidad
@@ -55,7 +63,81 @@ class Producto
         return $producto;
         }
 
+        /**
+         * Inserta un nuevo producto en la base de datos
+         * 
+         * @param int $categoria_id El ID de la categoría del producto
+         * @param int $marca_id El ID de la marca del producto
+         * @param int $color_id El ID del color del producto
+         * @param string $nombre El nombre del producto
+         * @param string $descripcion La descripción del producto
+         * @param string $tipo El tipo del producto
+         * @param float $precio El precio del producto
+         * @param string $img La URL de la imagen del producto
+         * @param string $temporada La temporada del producto
+         * @param string $fecha_ingreso La fecha de ingreso del producto
+         * 
+         */
+        public static function insert( int $categoria_id, int $marca_id, int $color_id, string $nombre, string $descripcion, string $tipo, float $precio, string $img, string $temporada, string $fecha_ingreso): int
+        {
+        $conexion = Conexion::getConexion();
+        $query = "INSERT INTO productos VALUES (NULL, :categoria_id, :marca_id, :color_id, :nombre, :descripcion, :tipo, :precio, :img, :temporada, :fecha_ingreso)";
 
+        $PDOStatement = $conexion->prepare($query);
+        $PDOStatement->execute(
+                [
+                ":categoria_id" => $categoria_id,
+                ":marca_id" => $marca_id,
+                ":color_id" => $color_id,
+                ":nombre" => $nombre,
+                ":descripcion" => $descripcion,
+                ":tipo" => $tipo,
+                ":precio" => $precio,
+                ":img" => $img,
+                ":temporada" => $temporada,
+                ":fecha_ingreso" => $fecha_ingreso
+                ]
+                );
+
+        return $conexion->lastInsertId();
+        }
+
+        /**
+         * Crea un vinculo entre un producto y sus talles y cantidades
+         * 
+         * @param int $producto_id El ID del producto
+         * @param int $talle_id El ID del talle
+         * @param int $cantidad La cantidad de unidades disponibles
+         * 
+         */
+        public static function insertTalleXProducto(int $producto_id, int $talle_id, int $cantidad)
+        {
+        $conexion = Conexion::getConexion();
+        $query = "INSERT INTO talle_x_producto (producto_id, talle_id, cantidad) 
+                VALUES (:producto_id, :talle_id, :cantidad)";
+
+        $PDOStatement = $conexion->prepare($query);
+        $PDOStatement->execute(
+                [
+                ":producto_id" => $producto_id,
+                ":talle_id" => $talle_id,
+                ":cantidad" => $cantidad
+                ]
+        );
+        }
+
+        /**
+         * vacia los talles de un producto
+         * 
+         */
+        public function vaciarTalles(){
+                $conexion = Conexion::getConexion();
+                $query = "DELETE FROM talle_x_producto WHERE producto_id = :producto_id";
+
+                $PDOStatement = $conexion->prepare($query);
+                $PDOStatement->execute([":producto_id" => $this->id]);
+
+        }
         /**
          * Devuelve el inventario completo con talles y cantidades
          *  
@@ -268,6 +350,8 @@ class Producto
                 return "$" . number_format($this->precio, 2, ",", ".");
         }
 
+
+
         /**
          * Devuelve el codigo de color de un producto
          * 
@@ -335,60 +419,27 @@ class Producto
          */ 
         public function getCategoria_id()
         {
-                return $this->categoria_id;
+                return $this->categoria->getId();
         }
 
-        /**
-         * Set the value of categoria_id
-         *
-         * @return  self
-         */ 
-        public function setCategoria_id($categoria_id)
-        {
-                $this->categoria_id = $categoria_id;
-
-                return $this;
-        }
 
         /**
          * Get the value of marca_id
          */ 
         public function getMarca_id()
         {
-                return $this->marca_id;
+                return $this->marca->getId();
         }
 
-        /**
-         * Set the value of marca_id
-         *
-         * @return  self
-         */ 
-        public function setMarca_id($marca_id)
-        {
-                $this->marca_id = $marca_id;
-
-                return $this;
-        }
-
+      
         /**
          * Get the value of color_id
          */ 
         public function getColor_id()
         {
-                return $this->color_id;
+                return $this->color->getId();
         }
 
-        /**
-         * Set the value of color_id
-         *
-         * @return  self
-         */ 
-        public function setColor_id($color_id)
-        {
-                $this->color_id = $color_id;
-
-                return $this;
-        }
 
         /**
          * Get the value of nombre

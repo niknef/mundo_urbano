@@ -4,7 +4,7 @@ $inventario = Producto::inventario_completo();
 <div class="container py-5">
     <div class="d-flex justify-content-between align-items-center mb-5">
         <h2 class="fw-bold m-0">Administrador de Productos</h2>
-        <a href="index.php?link=add_producto" class="btn boton-custom">Cargar nuevo Producto</a>
+        <a href="index.php?link=add_productos" class="btn boton-custom">Cargar nuevo Producto</a>
     </div>
     <div class="table-responsive">
         <table class="table table-striped table-hover align-middle table-custom">

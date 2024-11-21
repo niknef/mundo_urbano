@@ -27,6 +27,23 @@
     box-shadow: 0 4px 8px rgba(50, 168, 156, 0.2);
 }
 
+.boton-custom-2 {
+    background-color: #01c7b3d8;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    font-weight: 600;
+    border-radius: 15px;
+    transition: background-color 0.3s ease;
+}
+
+.boton-custom-2:hover {
+    background-color: #009688; 
+    color: #fff;
+    box-shadow: 0 4px 8px rgba(50, 168, 156, 0.2);
+}
+
 .boton-outline-custom {
     border: 1px solid #00E3CC; 
     color: #00E3CC; 
@@ -265,4 +282,8 @@ footer .nav-link:hover {
     .brand-details {
         display: none;
     }
+}
+
+.cantidad {
+    max-width: 120px;
 }
