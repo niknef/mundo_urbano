@@ -103,6 +103,60 @@ class Producto
         }
 
         /**
+         * Actualiza un producto en la base de datos
+         * 
+         * @param int $id El ID del producto a actualizar
+         * @param int $categoria_id El ID de la categoría del producto
+         * @param int $marca_id El ID de la marca del producto
+         * @param int $color_id El ID del color del producto
+         * @param string $nombre El nombre del producto
+         * @param string $descripcion La descripción del producto
+         * @param string $tipo El tipo del producto
+         * @param float $precio El precio del producto
+         * @param string $img La URL de la imagen del producto
+         * @param string $temporada La temporada del producto
+         * @param string $fecha_ingreso La fecha de ingreso del producto
+         * 
+         */
+        public function edit(int $categoria_id, int $marca_id, int $color_id, string $nombre, string $descripcion, string $tipo, float $precio, string $img, string $temporada, string $fecha_ingreso)
+        {
+                $conexion = Conexion::getConexion();
+                $query = "UPDATE productos SET categoria_id = :categoria_id, marca_id = :marca_id, color_id = :color_id, nombre = :nombre, descripcion = :descripcion, tipo = :tipo, precio = :precio, img = :img, temporada = :temporada, fecha_ingreso = :fecha_ingreso WHERE id = :id";
+
+                $PDOStatement = $conexion->prepare($query);
+                $PDOStatement->execute(
+                        [
+                        ":id" => $this->id,
+                        ":categoria_id" => $categoria_id,
+                        ":marca_id" => $marca_id,
+                        ":color_id" => $color_id,
+                        ":nombre" => $nombre,
+                        ":descripcion" => $descripcion,
+                        ":tipo" => $tipo,
+                        ":precio" => $precio,
+                        ":img" => $img,
+                        ":temporada" => $temporada,
+                        ":fecha_ingreso" => $fecha_ingreso
+                        ]
+                );
+        }
+
+        /**
+         * Elimina un producto de la base de datos
+         * 
+         * 
+         * 
+         */
+        public function delete()
+        {
+                $conexion = Conexion::getConexion();
+                $query = "DELETE FROM productos WHERE id = :id";
+
+                $PDOStatement = $conexion->prepare($query);
+                $PDOStatement->execute([":id" => $this->id]);
+        }
+
+        /**
          * Crea un vinculo entre un producto y sus talles y cantidades
          * 
          * @param int $producto_id El ID del producto
