@@ -6,9 +6,11 @@ $categorias = Categoria::get_all();
 $categoriaSeleccionada = $_GET['categoria'] ?? null;
 $vista = Vista::validar_vista($_GET['link'] ?? 'inicio', $categoriaSeleccionada);
 
-$temporada = null;
-$anio = 2022;
-$descuento = 50; 
+$oferta = Oferta::get_x_id(1);
+
+$temporada = $oferta->getTemporada();
+$anio = $oferta->getAnio();
+$descuento = $oferta->getDescuento();
 $productosEnOferta = Producto::filtrarProductosTemporada($temporada, $anio);
 
 ?>
