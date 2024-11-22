@@ -6,6 +6,9 @@ $categorias = Categoria::get_all();
 $categoriaSeleccionada = $_GET['categoria'] ?? null;
 $vista = Vista::validar_vista($_GET['link'] ?? 'inicio', $categoriaSeleccionada);
 
+Autenticacion::verify($vista->getRestringida());
+$userData = $_SESSION['loggedIn'] ?? FALSE;
+
 $oferta = Oferta::get_x_id(1);
 
 $temporada = $oferta->getTemporada();

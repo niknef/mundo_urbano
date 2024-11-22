@@ -44,6 +44,10 @@
     box-shadow: 0 4px 8px rgba(50, 168, 156, 0.2);
 }
 
+.busqueda{
+    border-radius: 15px 0px 0px 15px;
+}
+
 .boton-outline-custom {
     border: 1px solid #00E3CC; 
     color: #00E3CC; 

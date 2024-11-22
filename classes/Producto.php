@@ -279,13 +279,14 @@ class Producto
 
 
         /**
-         * Obtiene todos los productos de la base de datos con parámetros nombrados.
-         * 
+         * Obtiene productos filtrados por categoría, marca y/o búsqueda.
+         *
          * @param int|null $categoriaId ID de la categoría para filtrar (opcional).
          * @param int|null $marcaId ID de la marca para filtrar (opcional).
-         * @return Producto[] Un array con todos los productos filtrados.
+         * @param string|null $terminoBusqueda Término de búsqueda para filtrar por nombre, descripción o tipo (opcional).
+         * @return Producto[] Un array con los productos filtrados.
          */
-        public static function obtenerProductosFiltrados(?int $categoriaId = null, ?int $marcaId = null): array
+        public static function obtenerProductosFiltrados(?int $categoriaId = null, ?int $marcaId = null, ?string $terminoBusqueda = null): array
         {
                 $conexion = Conexion::getConexion();
                 $query = "SELECT * FROM productos";
@@ -302,6 +303,11 @@ class Producto
                         $params[':marca'] = $marcaId;
                 }
 
+                if ($terminoBusqueda !== null) {
+                        $conditions[] = "(LOWER(nombre) LIKE LOWER(:terminoBusqueda) OR LOWER(descripcion) LIKE LOWER(:terminoBusqueda) OR LOWER(tipo) LIKE LOWER(:terminoBusqueda))";
+                        $params[':terminoBusqueda'] = "%$terminoBusqueda%";
+                }
+
                 if (!empty($conditions)) {
                         $query .= " WHERE " . implode(" AND ", $conditions);
                 }
@@ -312,7 +318,6 @@ class Producto
 
                 return $PDOStatement->fetchAll();
         }
-
 
 
        /**
