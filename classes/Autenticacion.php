@@ -20,8 +20,10 @@ class Autenticacion
             if (password_verify($pass, $datosUsuario->getPassword())) {
                 $datosLogin['nombre'] = $datosUsuario->getNombre();
                 $datosLogin['apellido'] = $datosUsuario->getApellido();
+                $datosLogin['email'] = $datosUsuario->getEmail();
                 $datosLogin['id'] = $datosUsuario->getId();
                 $datosLogin['rol'] = $datosUsuario->getRol();
+                $datosLogin['alias_usuario'] = $datosUsuario->getAlias_usuario();
             
                 $_SESSION['loggedIn'] = $datosLogin;
             
@@ -73,10 +75,13 @@ class Autenticacion
             } else {
                 return TRUE; //SIGA PARA ADELANTE!
             }
+           
 
         } else {
-            $routeMod = $nivel > 1 ? "/admin/" : "";
-            header("location: {$routeMod}index.php?link=login");
+          
+        $routeMod = $nivel > 1 ? "/admin/" : "";
+        header("location: {$routeMod}index.php?link=login");
+    
         }
     }
 }

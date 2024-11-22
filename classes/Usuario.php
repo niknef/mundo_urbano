@@ -32,6 +32,61 @@ class Usuario
     }
 
     /**
+     * Guarda un nuevo usuario en la base de datos
+     * 
+     * @param string $email El email del usuario
+     * @param string $alias_usuario El alias del usuario
+     * @param string $nombre El nombre del usuario
+     * @param string $apellido El apellido del usuario
+     * @param string $password La contraseña del usuario
+     * @param string $rol El rol del usuario
+     */
+    public static function save(string $email, string $alias_usuario, string $nombre, string $apellido, string $password, string $rol){
+        $conexion = Conexion::getConexion();
+        $query = "INSERT INTO usuario (`email`, `alias_usuario`, `nombre`, `apellido`, `password`, `rol`) VALUES (:email, :alias_usuario, :nombre, :apellido, :password, :rol)";
+
+        $PDOStatement = $conexion->prepare($query);
+        $result = $PDOStatement->execute([
+            'email' => $email,
+            'alias_usuario' => $alias_usuario,
+            'nombre' => $nombre,
+            'apellido' => $apellido,
+            'password' => $password,
+            'rol' => $rol
+        ]);
+
+        return $result;
+    }
+
+    /**
+     * Edita los datos de un usuario en la base de datos
+     * 
+     * @param string $email El email del usuario
+     * @param string $alias_usuario El alias del usuario
+     * @param string $nombre El nombre del usuario
+     * @param string $apellido El apellido del usuario
+     * @param string $password La contraseña del usuario
+     * @param string $rol El rol del usuario
+     */
+    public function edit(string $alias_usuario, string $nombre, string $apellido){
+        $conexion = Conexion::getConexion();
+        $query = "UPDATE usuario SET email = :email, alias_usuario = :alias_usuario, nombre = :nombre, apellido = :apellido, password = :password, rol = :rol WHERE id = :id";
+
+        $PDOStatement = $conexion->prepare($query);
+        $result = $PDOStatement->execute([
+            'email' => $this->email,
+            'alias_usuario' => $alias_usuario,
+            'nombre' => $nombre,
+            'apellido' => $apellido,
+            'password' => $this->password,
+            'rol' => $this->rol,
+            'id' => $this->id
+        ]);
+
+        return $result;
+    }
+
+    /**
      * Get the value of id
      */ 
     public function getId()

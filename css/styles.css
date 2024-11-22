@@ -44,6 +44,23 @@
     box-shadow: 0 4px 8px rgba(50, 168, 156, 0.2);
 }
 
+.boton-custom-rojo {
+    background-color: #bb0909;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    font-weight: 600;
+    border-radius: 15px;
+    transition: background-color 0.3s ease;
+}
+
+.boton-custom-rojo:hover {
+    background-color: #a00b0b; 
+    color: #fff;
+    box-shadow: 0 4px 8px rgba(50, 168, 156, 0.2);
+}
+
 .busqueda{
     border-radius: 15px 0px 0px 15px;
 }
@@ -205,19 +222,35 @@ footer .nav-link:hover {
     color: #fff;
     border: none;
     padding: 5px 10px;
-    font-size: 12px;
+    font-size: 14px;
     border-radius: 12px;
     transition: background-color 0.3s ease;
 }
 
 .btn-iniciar{
-    background-color: #00E3CC;
+    background-color: #00a393;
     color: #fff;
-    border: none;
+    border: 1px solid #00a393;
     padding: 5px 10px;
-    font-size: 12px;
+    font-size: 14px;
     border-radius: 12px;
     transition: background-color 0.3s ease;
+}
+.btn-register {
+    border: 0.5px solid #00a393; 
+    color: #00a393; 
+    background-color: transparent;
+    padding: 5px 10px;
+    font-size: 14px;
+    border-radius: 12px;
+    transition: background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.btn-register:hover {
+    background-color: #00a393; 
+    border-color: #00a393;
+    color: #fff; 
+    box-shadow: 0 4px 8px rgba(0, 227, 204, 0.2); 
 }
 
 .btn-rojo:hover{
@@ -237,7 +270,7 @@ footer .nav-link:hover {
     color: #fff;
     border: none;
     padding: 5px 10px;
-    font-size: 12px;
+    font-size: 14px;
     border-radius: 12px;
     transition: background-color 0.3s ease;
 }

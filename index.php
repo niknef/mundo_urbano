@@ -50,12 +50,18 @@ $productosEnOferta = Producto::filtrarProductosTemporada($temporada, $anio);
                             <i class="bi bi-tools"></i> Admin
                         </a>
                     <?php } ?>
+                    <a href="index.php?link=usuario" class="btn btn-admin btn-sm">
+                    <i class="bi bi-person"></i> Usuario
+                    </a>
                     <a href="admin/actions/auth_logout.php" class="btn btn-rojo btn-sm">
                         <i class="bi bi-door-open"></i> Cerrar Sesión
                     </a>
                 <?php } else { ?>
                     <a href="index.php?link=login" class="btn btn-iniciar btn-sm">
                         <i class="bi bi-box-arrow-in-right"></i> Iniciar Sesión
+                    </a>
+                    <a href="index.php?link=register" class="btn btn-register btn-sm">
+                    <i class="bi bi-person-plus"></i></i> Registrarse
                     </a>
                 <?php } ?>
             </div>
