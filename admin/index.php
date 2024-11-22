@@ -21,6 +21,35 @@ $vista = Vista::validar_vista($_GET['link'] ?? 'dashboard');
 <body>
 
 <header>
+    <div class="bg-gris text-dark py-2 px-3">
+        <div class="container d-flex justify-content-between align-items-center">
+            <div>
+                <?php if ($userData) { ?>
+                    <span>Bienvenido, <?= ucfirst($userData['nombre']) ?? 'Usuario' ?> </span>
+                <?php } else { ?>
+                    <span>Bienvenido a Mundo Urbano</span>
+                <?php } ?>
+            </div>
+            <div>
+                <?php if ($userData) { ?>
+                
+                    <?php if ($userData['rol'] == 'admin' || $userData['rol'] == 'superadmin') { ?>
+                        <a href="admin/index.php?link=dashboard" class="btn btn-outline-dark btn-sm me-2">
+                            <i class="bi bi-tools"></i> Admin
+                        </a>
+                    <?php } ?>
+                    <a href="admin/actions/auth_logout.php" class="btn btn-danger btn-sm">
+                        <i class="bi bi-door-open"></i> Cerrar Sesión
+                    </a>
+                <?php } else { ?>
+                    <a href="index.php?link=login" class="btn btn-outline-dark btn-sm">
+                        <i class="bi bi-box-arrow-in-right"></i> Iniciar Sesión
+                    </a>
+                <?php } ?>
+            </div>
+        </div>
+    </div>
+
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark px-3 sticky-top">
         <div class="container-fluid">
             <a class="navbar-brand" href="index.php?link=dashboard">

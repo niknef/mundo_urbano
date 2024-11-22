@@ -429,8 +429,6 @@ class Producto
                 return $this->precio_formateado();
         }
 
-
-
         /**
          * Devuelve el precio de la unidad, formateado correctamente
          */

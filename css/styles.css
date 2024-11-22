@@ -222,6 +222,10 @@ footer .nav-link:hover {
     color: #6c757d;
 }
 
+.bg-gris{
+    background-color: #dadbdb;
+}
+
 .fit-cover{
     object-fit: cover;
 }

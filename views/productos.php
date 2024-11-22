@@ -47,6 +47,7 @@ if ($categoriaSeleccionada) {
         <div class="container">
             <div class="row">       
                 <?php if (!empty($catalogo)): ?>
+                    
                     <?php foreach ($catalogo as $producto): ?>
                         <div class="col-12 col-md-6 col-lg-3 d-flex align-items-stretch">
                             <a href="index.php?link=detalle_producto&id=<?= $producto->getId() ?>" class="card mb-3 text-decoration-none text-dark w-100">
