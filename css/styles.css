@@ -200,7 +200,53 @@ footer .nav-link:hover {
     justify-content: center;
 }
 
+.btn-rojo{
+    background-color: #ff0000ad;
+    color: #fff;
+    border: none;
+    padding: 5px 10px;
+    font-size: 12px;
+    border-radius: 12px;
+    transition: background-color 0.3s ease;
+}
 
+.btn-iniciar{
+    background-color: #00E3CC;
+    color: #fff;
+    border: none;
+    padding: 5px 10px;
+    font-size: 12px;
+    border-radius: 12px;
+    transition: background-color 0.3s ease;
+}
+
+.btn-rojo:hover{
+    background-color: #ff0000; 
+    color: #fff;
+    box-shadow: 0 4px 8px rgba(255, 0, 0, 0.3);
+}
+
+.btn-iniciar:hover{
+    background-color: #009688; 
+    color: #fff;
+    box-shadow: 0 4px 8px rgba(0, 227, 204, 0.3);
+}
+
+.btn-admin{
+    background-color: #04292bad;
+    color: #fff;
+    border: none;
+    padding: 5px 10px;
+    font-size: 12px;
+    border-radius: 12px;
+    transition: background-color 0.3s ease;
+}
+
+.btn-admin:hover{
+    background-color: #04292b; 
+    color: #fff;
+    box-shadow: 0 4px 8px rgba(4, 41, 43, 0.3);
+}   
 .boton-comprar:hover {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); 
 }

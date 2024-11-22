@@ -2,6 +2,8 @@
 require_once "../functions/autoload.php";
 
 $vista = Vista::validar_vista($_GET['link'] ?? 'dashboard');
+Autenticacion::verify($vista->getRestringida());
+$userData = $_SESSION['loggedIn'] ?? FALSE;
 
 ?>
 
@@ -33,16 +35,11 @@ $vista = Vista::validar_vista($_GET['link'] ?? 'dashboard');
             <div>
                 <?php if ($userData) { ?>
                 
-                    <?php if ($userData['rol'] == 'admin' || $userData['rol'] == 'superadmin') { ?>
-                        <a href="admin/index.php?link=dashboard" class="btn btn-outline-dark btn-sm me-2">
-                            <i class="bi bi-tools"></i> Admin
-                        </a>
-                    <?php } ?>
-                    <a href="admin/actions/auth_logout.php" class="btn btn-danger btn-sm">
+                    <a href="actions/auth_logout.php" class="btn btn-rojo btn-sm">
                         <i class="bi bi-door-open"></i> Cerrar Sesión
                     </a>
                 <?php } else { ?>
-                    <a href="index.php?link=login" class="btn btn-outline-dark btn-sm">
+                    <a href="index.php?link=login" class="btn btn-iniciar btn-sm">
                         <i class="bi bi-box-arrow-in-right"></i> Iniciar Sesión
                     </a>
                 <?php } ?>

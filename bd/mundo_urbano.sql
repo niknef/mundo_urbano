@@ -2,10 +2,10 @@
 -- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Servidor: 127.0.0.1
--- Tiempo de generación: 22-11-2024 a las 16:53:51
--- Versión del servidor: 10.4.32-MariaDB
--- Versión de PHP: 8.2.12
+-- Host: 127.0.0.1
+-- Generation Time: Nov 22, 2024 at 07:27 PM
+-- Server version: 10.4.32-MariaDB
+-- PHP Version: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,13 +18,13 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de datos: `mundo_urbano`
+-- Database: `mundo_urbano`
 --
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `categorias`
+-- Table structure for table `categorias`
 --
 
 CREATE TABLE `categorias` (
@@ -36,7 +36,7 @@ CREATE TABLE `categorias` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Volcado de datos para la tabla `categorias`
+-- Dumping data for table `categorias`
 --
 
 INSERT INTO `categorias` (`id`, `nombre`, `img`, `banner_img`, `descripcion`) VALUES
@@ -48,7 +48,7 @@ INSERT INTO `categorias` (`id`, `nombre`, `img`, `banner_img`, `descripcion`) VA
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `colores`
+-- Table structure for table `colores`
 --
 
 CREATE TABLE `colores` (
@@ -58,7 +58,7 @@ CREATE TABLE `colores` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Volcado de datos para la tabla `colores`
+-- Dumping data for table `colores`
 --
 
 INSERT INTO `colores` (`id`, `color`, `codigo`) VALUES
@@ -77,7 +77,7 @@ INSERT INTO `colores` (`id`, `color`, `codigo`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `marcas`
+-- Table structure for table `marcas`
 --
 
 CREATE TABLE `marcas` (
@@ -88,7 +88,7 @@ CREATE TABLE `marcas` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Volcado de datos para la tabla `marcas`
+-- Dumping data for table `marcas`
 --
 
 INSERT INTO `marcas` (`id`, `nombre`, `img`, `descripcion`) VALUES
@@ -100,7 +100,7 @@ INSERT INTO `marcas` (`id`, `nombre`, `img`, `descripcion`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `oferta`
+-- Table structure for table `oferta`
 --
 
 CREATE TABLE `oferta` (
@@ -111,7 +111,7 @@ CREATE TABLE `oferta` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Volcado de datos para la tabla `oferta`
+-- Dumping data for table `oferta`
 --
 
 INSERT INTO `oferta` (`id`, `temporada`, `anio`, `descuento`) VALUES
@@ -120,7 +120,7 @@ INSERT INTO `oferta` (`id`, `temporada`, `anio`, `descuento`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `productos`
+-- Table structure for table `productos`
 --
 
 CREATE TABLE `productos` (
@@ -138,7 +138,7 @@ CREATE TABLE `productos` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Volcado de datos para la tabla `productos`
+-- Dumping data for table `productos`
 --
 
 INSERT INTO `productos` (`id`, `categoria_id`, `marca_id`, `color_id`, `nombre`, `descripcion`, `tipo`, `precio`, `img`, `temporada`, `fecha_ingreso`) VALUES
@@ -165,7 +165,7 @@ INSERT INTO `productos` (`id`, `categoria_id`, `marca_id`, `color_id`, `nombre`,
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `talles`
+-- Table structure for table `talles`
 --
 
 CREATE TABLE `talles` (
@@ -175,7 +175,7 @@ CREATE TABLE `talles` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Volcado de datos para la tabla `talles`
+-- Dumping data for table `talles`
 --
 
 INSERT INTO `talles` (`id`, `categoria_talle`, `talle`) VALUES
@@ -220,7 +220,7 @@ INSERT INTO `talles` (`id`, `categoria_talle`, `talle`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `talle_x_producto`
+-- Table structure for table `talle_x_producto`
 --
 
 CREATE TABLE `talle_x_producto` (
@@ -231,7 +231,7 @@ CREATE TABLE `talle_x_producto` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Volcado de datos para la tabla `talle_x_producto`
+-- Dumping data for table `talle_x_producto`
 --
 
 INSERT INTO `talle_x_producto` (`id`, `producto_id`, `talle_id`, `cantidad`) VALUES
@@ -255,7 +255,7 @@ INSERT INTO `talle_x_producto` (`id`, `producto_id`, `talle_id`, `cantidad`) VAL
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `usuario`
+-- Table structure for table `usuario`
 --
 
 CREATE TABLE `usuario` (
@@ -269,16 +269,18 @@ CREATE TABLE `usuario` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Volcado de datos para la tabla `usuario`
+-- Dumping data for table `usuario`
 --
 
 INSERT INTO `usuario` (`id`, `email`, `alias_usuario`, `nombre`, `apellido`, `password`, `rol`) VALUES
-(1, 'nicolas.firpo@davinci.edu.ar', 'nicofirpo', 'nicolas', 'firpo', 'test1234', 'superadmin');
+(1, 'nicolas.firpo@davinci.edu.ar', 'nicofirpo', 'nicolas', 'firpo', '$2y$10$S1/hQOkgZtWg6ormdMP9geBFTQElIdrI30u01x4LZ1G7jLQ6EK0G6', 'superadmin'),
+(2, 'testusuario@gmail.com', 'testuser', 'user', 'test', '$2y$10$S1/hQOkgZtWg6ormdMP9geBFTQElIdrI30u01x4LZ1G7jLQ6EK0G6', 'usuario'),
+(3, 'testadmin@gmail.com', 'admintest', 'admin', 'test', '$2y$10$S1/hQOkgZtWg6ormdMP9geBFTQElIdrI30u01x4LZ1G7jLQ6EK0G6', 'admin');
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `vistas`
+-- Table structure for table `vistas`
 --
 
 CREATE TABLE `vistas` (
@@ -290,7 +292,7 @@ CREATE TABLE `vistas` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Volcado de datos para la tabla `vistas`
+-- Dumping data for table `vistas`
 --
 
 INSERT INTO `vistas` (`id`, `nombre`, `titulo`, `restringida`, `activa`) VALUES
@@ -333,35 +335,35 @@ INSERT INTO `vistas` (`id`, `nombre`, `titulo`, `restringida`, `activa`) VALUES
 (39, 'login', 'Iniciar Sesión ', 0, 1);
 
 --
--- Índices para tablas volcadas
+-- Indexes for dumped tables
 --
 
 --
--- Indices de la tabla `categorias`
+-- Indexes for table `categorias`
 --
 ALTER TABLE `categorias`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indices de la tabla `colores`
+-- Indexes for table `colores`
 --
 ALTER TABLE `colores`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indices de la tabla `marcas`
+-- Indexes for table `marcas`
 --
 ALTER TABLE `marcas`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indices de la tabla `oferta`
+-- Indexes for table `oferta`
 --
 ALTER TABLE `oferta`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indices de la tabla `productos`
+-- Indexes for table `productos`
 --
 ALTER TABLE `productos`
   ADD PRIMARY KEY (`id`),
@@ -371,13 +373,13 @@ ALTER TABLE `productos`
   ADD KEY `color_id` (`color_id`);
 
 --
--- Indices de la tabla `talles`
+-- Indexes for table `talles`
 --
 ALTER TABLE `talles`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indices de la tabla `talle_x_producto`
+-- Indexes for table `talle_x_producto`
 --
 ALTER TABLE `talle_x_producto`
   ADD PRIMARY KEY (`id`),
@@ -385,7 +387,7 @@ ALTER TABLE `talle_x_producto`
   ADD KEY `talle_id` (`talle_id`);
 
 --
--- Indices de la tabla `usuario`
+-- Indexes for table `usuario`
 --
 ALTER TABLE `usuario`
   ADD PRIMARY KEY (`id`),
@@ -393,75 +395,75 @@ ALTER TABLE `usuario`
   ADD UNIQUE KEY `alias_usuario` (`alias_usuario`);
 
 --
--- Indices de la tabla `vistas`
+-- Indexes for table `vistas`
 --
 ALTER TABLE `vistas`
   ADD PRIMARY KEY (`id`);
 
 --
--- AUTO_INCREMENT de las tablas volcadas
+-- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT de la tabla `categorias`
+-- AUTO_INCREMENT for table `categorias`
 --
 ALTER TABLE `categorias`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'identificador de la categoria', AUTO_INCREMENT=12;
 
 --
--- AUTO_INCREMENT de la tabla `colores`
+-- AUTO_INCREMENT for table `colores`
 --
 ALTER TABLE `colores`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
--- AUTO_INCREMENT de la tabla `marcas`
+-- AUTO_INCREMENT for table `marcas`
 --
 ALTER TABLE `marcas`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'identificador de la marca', AUTO_INCREMENT=11;
 
 --
--- AUTO_INCREMENT de la tabla `oferta`
+-- AUTO_INCREMENT for table `oferta`
 --
 ALTER TABLE `oferta`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
--- AUTO_INCREMENT de la tabla `productos`
+-- AUTO_INCREMENT for table `productos`
 --
 ALTER TABLE `productos`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'Campo identificador principal de la tabla', AUTO_INCREMENT=24;
 
 --
--- AUTO_INCREMENT de la tabla `talles`
+-- AUTO_INCREMENT for table `talles`
 --
 ALTER TABLE `talles`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'Identificador de la tabla talles', AUTO_INCREMENT=49;
 
 --
--- AUTO_INCREMENT de la tabla `talle_x_producto`
+-- AUTO_INCREMENT for table `talle_x_producto`
 --
 ALTER TABLE `talle_x_producto`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
--- AUTO_INCREMENT de la tabla `usuario`
+-- AUTO_INCREMENT for table `usuario`
 --
 ALTER TABLE `usuario`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
--- AUTO_INCREMENT de la tabla `vistas`
+-- AUTO_INCREMENT for table `vistas`
 --
 ALTER TABLE `vistas`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
 
 --
--- Restricciones para tablas volcadas
+-- Constraints for dumped tables
 --
 
 --
--- Filtros para la tabla `productos`
+-- Constraints for table `productos`
 --
 ALTER TABLE `productos`
   ADD CONSTRAINT `productos_ibfk_1` FOREIGN KEY (`marca_id`) REFERENCES `marcas` (`id`) ON UPDATE CASCADE,
@@ -469,7 +471,7 @@ ALTER TABLE `productos`
   ADD CONSTRAINT `productos_ibfk_3` FOREIGN KEY (`color_id`) REFERENCES `colores` (`id`) ON UPDATE CASCADE;
 
 --
--- Filtros para la tabla `talle_x_producto`
+-- Constraints for table `talle_x_producto`
 --
 ALTER TABLE `talle_x_producto`
   ADD CONSTRAINT `talle_x_producto_ibfk_1` FOREIGN KEY (`talle_id`) REFERENCES `talles` (`id`) ON UPDATE CASCADE,
