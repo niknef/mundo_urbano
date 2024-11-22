@@ -7,11 +7,13 @@ $talle = Talle::get_x_id($id);
 ?>
 
 <div class="row my-5">
-    <div class="col">
-        <h2 class="text-center mb-5 fw-bold">Editar Talle</h2>
 
+
+    <div class="col">
+        
+    <h2 class="text-center mb-5 fw-bold">Editar Talle</h2>
         <!-- Información del talle actual -->
-        <div class="mb-4 text-start bg-white p-3 rounded shadow-sm">
+        <div class="mb-4 text-start p-3">
             <h3 class="fs-6 text-secondary">Categoría</h3>
             <p class="fs-5 fw-bold text-dark"><?= $talle->getCategoria_talle(); ?></p>
         </div>
