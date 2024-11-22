@@ -13,8 +13,8 @@ try {
     
     if (!empty($fileData['tmp_name'])) {
         //Si el usuario decide remplazar la imagen
-        $img = Imagen::subirImagen("../../img/logos", $fileData);
-        Imagen::borrarImagen("../../img/logos/".$marca->getImg());
+        $img = Imagen::subirImagen("../../img/logos/", $fileData);
+        Imagen::borrarImagen("../../img/logos/". $marca->getImg());
     }else{
         $img = $postData['imagen_org'];
     }

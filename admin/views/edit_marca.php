@@ -13,7 +13,7 @@ $marca = Marca::get_x_id($id);
             <!-- Nombre de la marca -->
             <div class="col-md-6">
                 <label for="nombre" class="form-label fw-bold">Nombre de la marca</label>
-                <input type="text" class="form-control" id="nombre" name="nombre" value="<?= $marca->getNombre()?>" required>
+                <input type="text" class="form-control" id="nombre" name="nombre" value="<?= $marca->getNombre()?>" >
             </div>
 
             <div class="col-md-6">
@@ -25,13 +25,13 @@ $marca = Marca::get_x_id($id);
             <!-- Logo de la marca -->
             <div class="col-md-6">
                 <label for="img" class="form-label fw-bold">Reemplazar el logo</label>
-                <input type="file" class="form-control" id="img" name="img" required>
+                <input type="file" class="form-control" id="img" name="img" >
             </div>
 
             <!-- Descripción de la marca -->
             <div class="col-12">
                 <label for="descripcion" class="form-label fw-bold">Descripción de la marca</label>
-                <textarea class="form-control" id="descripcion" name="descripcion" rows="4" value="<?= $marca->getDescripcion() ?>" required></textarea>
+                <textarea class="form-control" id="descripcion" name="descripcion" rows="4" value="<?= $marca->getDescripcion() ?>" ><?= $marca->getDescripcion() ?></textarea>
             </div>
 
             <!-- Botón de Enviar -->
