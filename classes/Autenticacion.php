@@ -33,7 +33,7 @@ class Autenticacion
                 return false;
             }
         } else {
-           // Alerta::add_alerta('warning', "El usuario ingresado no se encontró en nuestra base de datos.");
+           Alerta::new_alert('warning', "El usuario ingresado no se encontró en nuestra base de datos.");
            echo "El usuario ingresado no se encontró en nuestra base de datos."; 
            return NULL;
             
@@ -70,7 +70,7 @@ class Autenticacion
                     //seguir
                     return TRUE;
                 } else {
-                    //Alerta::anadir_alerta('danger', "No tiene permisos para acceder a esta sección. Inicia como Administrador.");
+                    Alerta::new_alert('danger', "No tiene permisos para acceder a esta sección. Inicia como Administrador.");
                     header('location: index.php?link=login');
                 }
 
@@ -80,6 +80,7 @@ class Autenticacion
             }
 
         } else {
+            Alerta::new_alert('danger', "Necesita iniciar sesión.");
             header("location: index.php?link=login");
         }
     }
