@@ -17,8 +17,9 @@ try {
         $password,
         $datos['rol']
     );
+    Alerta::new_alert('success', "El usuario se creó correctamente");
 } catch (Exception $e) {
-    die("No se pudo cargar el usuario en la base de datos");
+    Alerta::new_alert('danger', "El usuario no se puede crear, disculpe las molestias.");
 }
 
 header('Location: ../../index.php?link=login');

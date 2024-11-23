@@ -13,8 +13,10 @@ try{
         $img,
         $postData['descripcion']
     );
+
+    Alerta::new_alert('success', "La marca se creó correctamente");
 } catch (Exception $e){
-    die("No se pudo cargar la marca en la base de datos");
+    Alerta::new_alert('danger', "La marca no se puede crear, disculpe las molestias.");
 }
 
 header('Location: ../index.php?link=admin_marcas');

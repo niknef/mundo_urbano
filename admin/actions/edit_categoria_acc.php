@@ -45,11 +45,12 @@ try {
         $banner_img,
         $postData['descripcion']);
 
-        //Alerta::add_alerta('warning', "El personaje se editó correctamente");
+ 
+        Alerta::new_alert('success', "La categoria se editó correctamente");
 
 } catch (Exception $e) {
-   
-    //Alerta::add_alerta('danger', "El personaje no se puede editar, disculpe las molestias ocasionadas");
+        
+        Alerta::new_alert('danger', "La categoria no se puede editar, disculpe las molestias.");
 }
 
 header('Location: ../index.php?link=admin_categorias');

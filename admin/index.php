@@ -90,6 +90,9 @@ $userData = $_SESSION['loggedIn'] ?? FALSE;
 
 <main class="container my-4">
     
+<div>
+    <?= Alerta::get_alert(); ?>
+</div>
         <?php
         // Incluimos la vista correspondiente
         require_once "views/{$vista->getNombre()}.php"

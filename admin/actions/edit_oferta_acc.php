@@ -21,11 +21,11 @@ try {
         $descuento
         );
 
-        //Alerta::add_alerta('warning', "El personaje se editó correctamente");
-
+        
+        Alerta::new_alert('success', "La oferta se editó correctamente");
 } catch (Exception $e) {
-   
-    //Alerta::add_alerta('danger', "El personaje no se puede editar, disculpe las molestias ocasionadas");
+        
+        Alerta::new_alert('danger', "La oferta no se puede editar, disculpe las molestias.");
 }
 
 header('Location: ../index.php?link=edit_oferta');

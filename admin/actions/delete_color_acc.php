@@ -7,8 +7,9 @@ $id = $_GET['id'] ?? FALSE;
 try{
     $color = Color::get_x_id($id);
     $color->delete();
+    Alerta::new_alert('warning', "El color se eliminó correctamente");
 } catch (Exception $e){
-    die("No se pudo eliminar el color de la base de datos");
+    Alerta::new_alert('danger', "El color no se puede eliminar, disculpe las molestias.");
 }
 
 header('Location: ../index.php?link=admin_colores');

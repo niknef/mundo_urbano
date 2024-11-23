@@ -8,8 +8,9 @@ try{
         $postData['color'],
         $postData['codigo']
     );
+    Alerta::new_alert('success', "El color se agregó correctamente");
 } catch (Exception $e){
-    die("No se pudo cargar el color en la base de datos");
+    Alerta::new_alert('danger', "El color no se puede agregar, disculpe las molestias.");
 }
 
 header('Location: ../index.php?link=admin_colores');

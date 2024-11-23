@@ -42,8 +42,10 @@ try {
         $postData['temporada'],
         $postData['fecha_ingreso']
     );
+
+    Alerta::new_alert('success', "El producto se editó correctamente");
 }catch (Exception $e) {
-    die("No se pudo cargar el producto");
+    Alerta::new_alert('danger', "El producto no se puede editar, disculpe las molestias.");
 }
 
 header('Location: ../index.php?link=admin_productos');

@@ -8,15 +8,15 @@ $nuevoNombre = $postData['nuevo_nombre'] ?? false;
 
 
 if (!Talle::existe_categoria($categoriaActual)) {
-    die("La categoría especificada no existe.");
+    Alerta::new_alert('danger', "La categoría no existe");
 }
 
 try {
     Talle::update_categoria_nombre($categoriaActual, $nuevoNombre);
 
-
+    Alerta::new_alert('success', "La categoría se editó correctamente");
 } catch (Exception $e) {
-    die("Error al actualizar la categoría");
+    Alerta::new_alert('danger', "La categoría no se puede editar, disculpe las molestias.");
 }
 
 header('Location: ../index.php?link=admin_talles');

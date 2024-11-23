@@ -8,9 +8,11 @@ try {
     $marca = Marca::get_x_id($id);
     $marca->delete();
     Imagen::borrarImagen( "../../img/logos/" . $marca->getImg());
+
+    Alerta::new_alert('warning', "La marca se eliminó correctamente");
     
 } catch (Exception $e) {
-    die("No se pudo eliminar la marca de la base de datos");
+    Alerta::new_alert('danger', "La marca no se puede eliminar, disculpe las molestias.");
     
 }
 header('Location: ../index.php?link=admin_marcas');

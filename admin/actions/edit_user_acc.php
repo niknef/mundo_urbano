@@ -14,11 +14,11 @@ try {
             
         );
     
-       // Alerta::add_alerta('warning', "El usuario se editó correctamente");
+        Alerta::new_alert('success', "El usuario se editó correctamente");
     
     } catch (Exception $e) {
         
-       // Alerta::add_alerta('danger', "El usuario no se puede editar, disculpe las molestias ocasionadas");
+       Alerta::new_alert('danger', "El usuario no se puede editar, disculpe las molestias.");
 }
 
 header('Location: ../../index.php?link=usuario');

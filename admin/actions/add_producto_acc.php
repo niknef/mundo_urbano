@@ -34,8 +34,9 @@ try {
         }
     }
 
+    Alerta::new_alert('success', "El producto se agregó correctamente");
 } catch (Exception $e) {
-    die("No se pudo cargar el producto: " . $e->getMessage());
+    Alerta::new_alert('danger', "El producto no se puede agregar, disculpe las molestias.");
 }
 
 // Redirigir a la página de administración de productos

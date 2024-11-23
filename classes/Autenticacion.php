@@ -53,35 +53,34 @@ class Autenticacion
     public static function verify($nivel = 0): bool
     {
 
-        if (!$nivel) { 
-            return TRUE; 
+        if (!$nivel) { //RESTRICCION NIVEL 0 - ACCESO PÚBLICO
+            return TRUE; //SIGA PARA ADELANTE!
         }
 
-        if (isset($_SESSION['loggedIn'])) { 
-           
-            if ($nivel > 1) {
-                
+        if (isset($_SESSION['loggedIn'])) { //RESTRICCION NIVEL 1 o + - ACCESO RESTRINGIDO
+
+            if ($nivel > 1) {//RESTRICCION NIVEL 2 - ACCESO ADMINISTRADOR
+
                 if (
+                    //si el rol es admin / superadmin
                     $_SESSION['loggedIn']['rol'] == "admin" 
                     or 
                     $_SESSION['loggedIn']['rol'] == "superadmin"
                     ) {
+                    //seguir
                     return TRUE;
                 } else {
-                    //Alerta::add_alerta('danger', "No tiene permisos para acceder a esta sección");
-                    header('location: /admin/index.php?link=login');
+                    //Alerta::anadir_alerta('danger', "No tiene permisos para acceder a esta sección. Inicia como Administrador.");
+                    header('location: index.php?link=login');
                 }
 
             } else {
-                return TRUE; //SIGA PARA ADELANTE!
+                //seguir
+                return TRUE;
             }
-           
 
         } else {
-          
-        $routeMod = $nivel > 1 ? "/admin/" : "";
-        header("location: {$routeMod}index.php?link=login");
-    
+            header("location: index.php?link=login");
         }
     }
 }

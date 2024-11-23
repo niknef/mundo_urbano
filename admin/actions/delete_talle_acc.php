@@ -8,9 +8,9 @@ try {
     $talle = Talle::get_x_id($id);
     $talle->delete();
     
-    
+    Alerta::new_alert('warning', "El talle se eliminó correctamente");
 } catch (Exception $e) {
-    die("No se pudo eliminar el talle de la base de datos");
+    Alerta::new_alert('danger', "El talle no se puede eliminar, disculpe las molestias.");
     
 }
 header('Location: ../index.php?link=admin_talles');

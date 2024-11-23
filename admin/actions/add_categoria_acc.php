@@ -18,8 +18,9 @@ try{
         $banner_img,
         $postData['descripcion']
     );
+    Alerta::new_alert('success', "La categoria se agregó correctamente");
 } catch (Exception $e){
-    die("No se pudo cargar la categoria en la base de datos");
+    Alerta::new_alert('danger', "La categoria no se puede agregar, disculpe las molestias.");
 }
 
 header('Location: ../index.php?link=admin_categorias');

@@ -9,8 +9,9 @@ try{
     $producto->vaciarTalles();
     $producto->delete();
 
+    Alerta::new_alert('warning', "El producto se eliminó correctamente");
 }catch (Exception $e){
-    die("No se pudo eliminar el Producto =(");
+    Alerta::new_alert('danger', "El producto no se puede eliminar, disculpe las molestias.");
 }
 
 

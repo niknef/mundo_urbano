@@ -15,11 +15,11 @@ try {
     
     $talle->edit($postData['talle']);
 
-        //Alerta::add_alerta('warning', "El personaje se editó correctamente");
+    Alerta::new_alert('success', "El talle se editó correctamente");
 
 } catch (Exception $e) {
    
-    //Alerta::add_alerta('danger', "El personaje no se puede editar, disculpe las molestias ocasionadas");
+    Alerta::new_alert('danger', "El talle no se puede editar, disculpe las molestias.");
 }
 
 header('Location: ../index.php?link=admin_talles');
