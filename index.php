@@ -105,6 +105,11 @@ $productosEnOferta = Producto::filtrarProductosTemporada($temporada, $anio);
                     <li class="nav-item">
                         <a class="nav-link" href="index.php?link=alumno">Alumno</a>
                     </li>
+                    <li class="nav-item d-flex align-items-center">
+                        <a href="index.php?link=carrito" class="btn btn-dark border-0 p-0">
+                            <i class="bi bi-cart-fill fs-4"></i>
+                        </a>
+                    </li>
                     <li class="nav-item">
                         <a type="button" class="boton-custom btn" href="index.php?link=contacto">Contacto</a>
                     </li>
@@ -117,6 +122,9 @@ $productosEnOferta = Producto::filtrarProductosTemporada($temporada, $anio);
 
 <main class="container my-4">
     
+    <div>
+        <?= Alerta::get_alert(); ?>
+    </div>
         <?php
         // Incluimos la vista correspondiente
         require_once "views/{$vista->getNombre()}.php"

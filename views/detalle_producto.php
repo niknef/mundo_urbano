@@ -7,22 +7,22 @@
     <div class="row">
         <?PHP if (!empty($producto)) { ?>
             <div class="col-md-6">
-            <img src="img/productos/<?= $producto->getImg() ?>" alt="<?= $producto->getNombre() ?>" class="img-fluid">
-        </div>
-        <div class="col-md-6">
-            <h2><?= $producto->getNombre() ?></h2>
-            <h2 class="fw-light mb-3"><?= $producto->getMarca() ?></h2>
-            <p><strong>Tipo: </strong><?= $producto->getTipo() ?></p>
-            <div class="d-flex align-items-center gap-3">
-                <p class="mb-0"><strong>Color: </strong></p>
-                <span class="badge-personalizado d-flex align-items-center">
-                    <span class="bola" style="background-color: <?= $producto->getCodigoColor() ?>;"></span>
-                    <?= $producto->getColor() ?>
-                </span>
+                <img src="img/productos/<?= $producto->getImg() ?>" alt="<?= $producto->getNombre() ?>" class="img-fluid">
             </div>
-            <p class="mt-2"><?= $producto->getDescripcion() ?></p>
-            
-            <p><strong>Talles disponibles:</strong></p>
+            <div class="col-md-6">
+                <h2><?= $producto->getNombre() ?></h2>
+                <h2 class="fw-light mb-3"><?= $producto->getMarca() ?></h2>
+                <p><strong>Tipo: </strong><?= $producto->getTipo() ?></p>
+                <div class="d-flex align-items-center gap-3">
+                    <p class="mb-0"><strong>Color: </strong></p>
+                    <span class="badge-personalizado d-flex align-items-center">
+                        <span class="bola" style="background-color: <?= $producto->getCodigoColor() ?>;"></span>
+                        <?= $producto->getColor() ?>
+                    </span>
+                </div>
+                <p class="mt-2"><?= $producto->getDescripcion() ?></p>
+                
+                <p><strong>Talles disponibles:</strong></p>
                 <?php
                 $tallesDisponibles = array_filter($producto->getTalles(), function ($detalleTalle) {
                     return $detalleTalle['cantidad'] > 0; // Filtrar talles con cantidad mayor a 0
@@ -32,35 +32,45 @@
                 ?>
 
                 <?php if (!empty($tallesDisponibles)) : ?>
-                    <select class="form-select mt-1 talle-ancho">
-                        <?php foreach ($tallesDisponibles as $detalleTalle) : ?>
-                            <option value="<?= $detalleTalle['talle']->getTalle(); ?>">
-                                <?= $detalleTalle['talle']->getTalle(); ?> (Stock: <?= $detalleTalle['cantidad']; ?>)
-                            </option>
-                        <?php endforeach; ?>
-                    </select>
+                    <form action="admin/actions/add_to_cart.php" method="POST">
+                        <input type="hidden" name="producto_id" value="<?= $producto->getId(); ?>">
+
+                        <!-- Selección de talles -->
+                        <label for="talle_id" class="form-label">Seleccione un talle:</label>
+                        <select class="form-select mt-1 talle-ancho" id="talle_id" name="talle_id" required>
+                            <?php foreach ($tallesDisponibles as $detalleTalle) : ?>
+                                <option value="<?= $detalleTalle['talle']->getId(); ?>">
+                                    <?= $detalleTalle['talle']->getTalle(); ?> (Stock: <?= $detalleTalle['cantidad']; ?>)
+                                </option>
+                            <?php endforeach; ?>
+                        </select>
+
+                        <!-- Cantidad -->
+                        <label for="cantidad" class="form-label mt-3">Cantidad:</label>
+                        <input type="number" class="form-control w-25" id="cantidad" name="cantidad" min="1" max="<?= $detalleTalle['cantidad']; ?>" value="1" required>
+
+                        <!-- Botón de agregar al carrito -->
+                        <button type="submit" class="btn boton-custom btn-lg mt-3 w-50 text-white fw-semibold boton-comprar">Agregar al Carrito</button>
+                    </form>
                 <?php else : ?>
                     <p class="text-muted">No hay talles disponibles.</p>
                 <?php endif; ?>
 
                 <p class="mt-2"><strong>Stock total:</strong> <?= $totalStock > 0 ? $totalStock : 'Sin stock'; ?></p>
-            
-            <h3>
-                <?= $producto->obtenerPrecioConDescuento($temporada, $anio, $descuento); ?>
-            </h3>
-            <button class="btn boton-custom btn-lg mt-2 w-50 text-white fw-semibold boton-comprar">Comprar</button>
-        </div>
+                
+                <h3>
+                    <?= $producto->obtenerPrecioConDescuento($temporada, $anio, $descuento); ?>
+                </h3>
+            </div>
 
-        <?PHP } else {?>
+        <?PHP } else { ?>
             <div class="alert alert-danger text-center">
                 <h2> No se encontró el producto solicitado. </h2>
                 <img src="img/sad-svg.svg" alt="No se encontró el producto" class="img-fluid" style="max-width: 400px;">
             </div>
         <?PHP }; ?>
-        
     </div>
 </div>
-
 </section>
 <section>
     <?PHP

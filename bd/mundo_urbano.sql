@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 22-11-2024 a las 00:13:49
+-- Tiempo de generación: 23-11-2024 a las 06:57:07
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -72,7 +72,51 @@ INSERT INTO `colores` (`id`, `color`, `codigo`) VALUES
 (8, 'Azul', '#0000ff'),
 (9, 'Purpura', '#7d2181'),
 (11, 'Rojo', '#ff0000'),
-(12, 'rosa', '#FFC0CB');
+(12, 'Rosa', '#FFC0CB');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `compras`
+--
+
+CREATE TABLE `compras` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `usuario_id` int(10) UNSIGNED NOT NULL,
+  `fecha` date NOT NULL,
+  `importe` decimal(12,2) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `compras`
+--
+
+INSERT INTO `compras` (`id`, `usuario_id`, `fecha`, `importe`) VALUES
+(8, 5, '2024-11-23', 527789.00);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `item_x_compra`
+--
+
+CREATE TABLE `item_x_compra` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `id_compra` int(10) UNSIGNED NOT NULL,
+  `id_producto` int(10) UNSIGNED NOT NULL,
+  `id_talle` int(11) UNSIGNED NOT NULL,
+  `cantidad` int(10) UNSIGNED NOT NULL,
+  `precio_unitario` decimal(12,2) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `item_x_compra`
+--
+
+INSERT INTO `item_x_compra` (`id`, `id_compra`, `id_producto`, `id_talle`, `cantidad`, `precio_unitario`) VALUES
+(6, 8, 1, 1, 1, 144990.00),
+(7, 8, 2, 6, 1, 92819.00),
+(8, 8, 4, 2, 2, 144990.00);
 
 -- --------------------------------------------------------
 
@@ -115,7 +159,7 @@ CREATE TABLE `oferta` (
 --
 
 INSERT INTO `oferta` (`id`, `temporada`, `anio`, `descuento`) VALUES
-(1, NULL, 2023, 50);
+(1, 'Verano', 2023, 25);
 
 -- --------------------------------------------------------
 
@@ -159,8 +203,7 @@ INSERT INTO `productos` (`id`, `categoria_id`, `marca_id`, `color_id`, `nombre`,
 (16, 4, 3, 1, 'Mochila Off Road* Black/Purple', 'Esta mochila de viaje y outdoor, con capacidad de 22 litros, está diseñada para la aventura y la comodidad. Sus dimensiones de 44 cm de alto, 31 cm de ancho y 16 cm de profundidad la hacen ideal para llevar lo esencial. Fabricada en poliéster resistente con detalles en red de poliéster.', 'Mochila', 74890.00, 'mochila-rusty-road.jpg', 'Invierno', '2023-05-10'),
 (17, 4, 3, 7, 'Medias All Day Invisible 5- Pack', 'El pack de 5 medias All Day Invisible está diseñado para brindar comodidad y discreción en cualquier calzado. Fabricadas con materiales suaves y elásticos, estas medias invisibles se ajustan perfectamente al pie, proporcionando una sensación de ligereza durante todo el día.', 'Medias Cortas', 27490.00, 'media-rusty-allday.jpg', 'Verano', '2021-11-10'),
 (18, 4, 3, 1, 'Gorra Chronic 4 Flexfit', 'Gorra de gabardina elastizada con visera semi curva y logo bordado en 3D El calce esta regulado por elástico con personalizado de marca.', 'Gorra', 34890.00, 'gorra-rusty-chronic-negra.jpg', 'Verano', '2024-11-10'),
-(19, 4, 3, 1, 'Morral Sicarius Negro', 'Este morral de cordura, con dimensiones de 18 cm de ancho, 24 cm de alto y 7 cm de profundidad, combina estilo y funcionalidad en un diseño compacto. Incluye un patch festoneado en el frente que le añade un toque distintivo.', 'Morral', 25990.00, 'morral-rusty-sicarius.jpg', 'Mixto', '2021-11-10'),
-(20, 1, 1, 1, 'DC Union La ', 'Capellada de descarne + Forrería liviana de lengüeta + Cuello y lengüeta con espuma acolchada para máximo confort y soporte + Perforaciones de ventilación para una mejor respirabilidad del pie + Suela Cupsole de caucho resistente a la abrasión con costura alrededor, proveyendo mayor durabilidad y resistencia + Diseño Pill Pattern de DC en pisada.', 'Zapatillas Urbanas', 153900.00, '1732228123.jpg', 'Verano', '2024-11-21');
+(19, 4, 3, 1, 'Morral Sicarius Negro', 'Este morral de cordura, con dimensiones de 18 cm de ancho, 24 cm de alto y 7 cm de profundidad, combina estilo y funcionalidad en un diseño compacto. Incluye un patch festoneado en el frente que le añade un toque distintivo.', 'Morral', 25990.00, 'morral-rusty-sicarius.jpg', 'Mixto', '2021-11-10');
 
 -- --------------------------------------------------------
 
@@ -245,7 +288,43 @@ INSERT INTO `talle_x_producto` (`id`, `producto_id`, `talle_id`, `cantidad`) VAL
 (8, 9, 18, 1),
 (9, 10, 19, 1),
 (10, 8, 20, 1),
-(11, 4, 2, 1);
+(11, 4, 2, 1),
+(18, 2, 6, 1),
+(19, 2, 8, 1),
+(20, 2, 10, 1),
+(21, 2, 12, 2),
+(22, 3, 6, 1),
+(23, 3, 7, 1),
+(24, 3, 8, 1),
+(25, 3, 9, 1),
+(26, 3, 10, 2),
+(27, 3, 11, 1),
+(28, 3, 12, 2),
+(29, 3, 13, 2),
+(30, 5, 1, 1),
+(31, 5, 2, 3),
+(32, 5, 3, 3),
+(33, 5, 4, 4),
+(34, 5, 5, 1),
+(35, 7, 17, 1),
+(36, 7, 18, 1),
+(37, 7, 19, 1),
+(38, 7, 20, 1),
+(39, 7, 21, 1),
+(40, 11, 30, 1),
+(41, 11, 31, 1),
+(42, 11, 32, 1),
+(43, 11, 33, 2),
+(44, 11, 34, 2),
+(45, 11, 35, 1),
+(46, 11, 36, 1),
+(47, 12, 17, 1),
+(48, 12, 18, 2),
+(49, 12, 19, 1),
+(50, 12, 20, 1),
+(51, 12, 21, 1),
+(52, 18, 37, 1),
+(53, 19, 37, 2);
 
 -- --------------------------------------------------------
 
@@ -268,7 +347,9 @@ CREATE TABLE `usuario` (
 --
 
 INSERT INTO `usuario` (`id`, `email`, `alias_usuario`, `nombre`, `apellido`, `password`, `rol`) VALUES
-(1, 'nicolas.firpo@davinci.edu.ar', 'nicofirpo', 'nicolas', 'firpo', 'test1234', 'superadmin');
+(1, 'nicolas.firpo@davinci.edu.ar', 'nicofirpo', 'nicolas', 'firpo', '$2y$10$7rr8PaPhgcq5F8CZCANBAOVnsvpePoZJkuaoJfjB7JcYlj4i4PTW6', 'superadmin'),
+(4, 'testusuario@gmail.com', 'testusuario', 'test', 'usuario', '$2y$10$BkbD0tJVTu0rQqKJhJxHB.6UnuG/rBqOYYc/JB4H2Tyxkfm2FUdty', 'usuario'),
+(5, 'testadmin@gmail.com', 'admintest', 'admin', 'test', '$2y$10$55930ZSDbI0a5FvTFz6WeuVCjy8D22MADUMG4HLUD4p.dUMtrzdiC', 'admin');
 
 -- --------------------------------------------------------
 
@@ -291,7 +372,7 @@ CREATE TABLE `vistas` (
 INSERT INTO `vistas` (`id`, `nombre`, `titulo`, `restringida`, `activa`) VALUES
 (1, 'inicio', 'Tienda Online de Indumentaria y Calzado', 0, 1),
 (2, 'todos_productos', 'Todos los Productos', 0, 1),
-(3, 'nosotros', 'Nosotros', 0, 0),
+(3, 'nosotros', 'Nosotros', 0, 1),
 (4, 'productos', 'Todos los productos', 0, 1),
 (5, 'detalle_producto', 'Detalle del Producto', 0, 1),
 (6, 'oferta', 'Ofertas', 0, 1),
@@ -299,32 +380,38 @@ INSERT INTO `vistas` (`id`, `nombre`, `titulo`, `restringida`, `activa`) VALUES
 (8, 'contacto', 'Contacto', 0, 1),
 (9, '404', 'Página no encontrada', 0, 1),
 (10, '403', 'Pagina no disponible', 0, 1),
-(11, 'dashboard', 'Panel de control', 0, 1),
-(12, 'admin_marcas', 'Administrador de marcas', 0, 1),
-(13, 'admin_colores', 'Administrador de colores', 0, 1),
-(14, 'admin_categorias', 'Administrador de categorias', 0, 1),
-(15, 'admin_productos', 'Administrador de productos', 0, 1),
-(17, 'add_color', 'Agregar un color', 0, 1),
-(18, 'add_marcas', 'Agregar una Marca', 0, 1),
-(19, 'add_categorias', 'Agregar una categoria', 0, 1),
-(20, 'edit_color', 'Edita un color', 0, 1),
-(21, 'delete_color', 'Eliminar un color', 0, 1),
-(22, 'edit_categoria', 'Editar categoria', 0, 1),
-(23, 'edit_marca', 'Editar Marca', 0, 1),
-(24, 'delete_marca', 'Eliminar Marca', 0, 1),
-(25, 'delete_categoria', 'Eliminar categoria', 0, 1),
-(26, 'admin_talles', 'Administrador de talles', 0, 1),
-(27, 'add_categoria_talle', 'Agregar categoría de talle', 0, 1),
-(28, 'delete_categoria_talle', 'Eliminar una categoría de talles completa', 0, 1),
-(29, 'edit_categoria_talle', 'Editar Nombre de la categoria', 0, 1),
-(30, 'add_talle_categoria', 'Agregar talles a la categoria', 0, 1),
-(31, 'edit_talle', 'Editar un talle', 0, 1),
-(32, 'delete_talle', 'Eliminar un talle', 0, 1),
+(11, 'dashboard', 'Panel de control', 2, 1),
+(12, 'admin_marcas', 'Administrador de marcas', 2, 1),
+(13, 'admin_colores', 'Administrador de colores', 2, 1),
+(14, 'admin_categorias', 'Administrador de categorias', 2, 1),
+(15, 'admin_productos', 'Administrador de productos', 2, 1),
+(17, 'add_color', 'Agregar un color', 2, 1),
+(18, 'add_marcas', 'Agregar una Marca', 2, 1),
+(19, 'add_categorias', 'Agregar una categoria', 2, 1),
+(20, 'edit_color', 'Edita un color', 2, 1),
+(21, 'delete_color', 'Eliminar un color', 2, 1),
+(22, 'edit_categoria', 'Editar categoria', 2, 1),
+(23, 'edit_marca', 'Editar Marca', 2, 1),
+(24, 'delete_marca', 'Eliminar Marca', 2, 1),
+(25, 'delete_categoria', 'Eliminar categoria', 2, 1),
+(26, 'admin_talles', 'Administrador de talles', 2, 1),
+(27, 'add_categoria_talle', 'Agregar categoría de talle', 2, 1),
+(28, 'delete_categoria_talle', 'Eliminar una categoría de talles completa', 2, 1),
+(29, 'edit_categoria_talle', 'Editar Nombre de la categoria', 2, 1),
+(30, 'add_talle_categoria', 'Agregar talles a la categoria', 2, 1),
+(31, 'edit_talle', 'Editar un talle', 2, 1),
+(32, 'delete_talle', 'Eliminar un talle', 2, 1),
 (33, 'marcas', 'Marcas', 0, 1),
-(34, 'edit_oferta', 'Edita la Oferta', 0, 1),
-(36, 'add_productos', 'Agrega un nuevo producto', 0, 1),
-(37, 'delete_producto', 'Eliminar un producto', 0, 1),
-(38, 'edit_producto', 'Edita un producto', 0, 1);
+(34, 'edit_oferta', 'Edita la Oferta', 2, 1),
+(36, 'add_productos', 'Agrega un nuevo producto', 2, 1),
+(37, 'delete_producto', 'Eliminar un producto', 2, 1),
+(38, 'edit_producto', 'Edita un producto', 2, 1),
+(39, 'login', 'Iniciar Sesión ', 0, 1),
+(40, 'usuario', 'Información del usuario', 1, 1),
+(41, 'register', 'Registrarse como usuario nuevo', 0, 1),
+(42, 'editar_usuario', 'Editar tu usuario', 1, 1),
+(44, 'carrito', 'Carrito', 1, 1),
+(45, 'checkout', 'Checkout', 1, 1);
 
 --
 -- Índices para tablas volcadas
@@ -341,6 +428,22 @@ ALTER TABLE `categorias`
 --
 ALTER TABLE `colores`
   ADD PRIMARY KEY (`id`);
+
+--
+-- Indices de la tabla `compras`
+--
+ALTER TABLE `compras`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `usuario_id` (`usuario_id`);
+
+--
+-- Indices de la tabla `item_x_compra`
+--
+ALTER TABLE `item_x_compra`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `id_compra` (`id_compra`),
+  ADD KEY `id_producto` (`id_producto`),
+  ADD KEY `id_talle` (`id_talle`);
 
 --
 -- Indices de la tabla `marcas`
@@ -400,13 +503,25 @@ ALTER TABLE `vistas`
 -- AUTO_INCREMENT de la tabla `categorias`
 --
 ALTER TABLE `categorias`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'identificador de la categoria', AUTO_INCREMENT=12;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'identificador de la categoria', AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT de la tabla `colores`
 --
 ALTER TABLE `colores`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+
+--
+-- AUTO_INCREMENT de la tabla `compras`
+--
+ALTER TABLE `compras`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
+--
+-- AUTO_INCREMENT de la tabla `item_x_compra`
+--
+ALTER TABLE `item_x_compra`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT de la tabla `marcas`
@@ -430,29 +545,43 @@ ALTER TABLE `productos`
 -- AUTO_INCREMENT de la tabla `talles`
 --
 ALTER TABLE `talles`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'Identificador de la tabla talles', AUTO_INCREMENT=49;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'Identificador de la tabla talles', AUTO_INCREMENT=53;
 
 --
 -- AUTO_INCREMENT de la tabla `talle_x_producto`
 --
 ALTER TABLE `talle_x_producto`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=54;
 
 --
 -- AUTO_INCREMENT de la tabla `usuario`
 --
 ALTER TABLE `usuario`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT de la tabla `vistas`
 --
 ALTER TABLE `vistas`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
 
 --
 -- Restricciones para tablas volcadas
 --
+
+--
+-- Filtros para la tabla `compras`
+--
+ALTER TABLE `compras`
+  ADD CONSTRAINT `compras_ibfk_1` FOREIGN KEY (`usuario_id`) REFERENCES `usuario` (`id`) ON UPDATE CASCADE;
+
+--
+-- Filtros para la tabla `item_x_compra`
+--
+ALTER TABLE `item_x_compra`
+  ADD CONSTRAINT `item_x_compra_ibfk_1` FOREIGN KEY (`id_compra`) REFERENCES `compras` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `item_x_compra_ibfk_2` FOREIGN KEY (`id_producto`) REFERENCES `productos` (`id`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `item_x_compra_ibfk_3` FOREIGN KEY (`id_talle`) REFERENCES `talles` (`id`) ON UPDATE CASCADE;
 
 --
 -- Filtros para la tabla `productos`
