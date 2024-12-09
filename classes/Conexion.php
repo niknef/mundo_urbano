@@ -26,7 +26,8 @@ class Conexion{
         try {
             self::$db = new PDO(self::DB_DSN, self::DB_USER, self::DB_PASS);
         } catch (Exception $e) {
-            die('Error al conectar con la base de datos');
+            header('Location: ./views/mantenimiento.php');
+            exit;
         }
     }
 

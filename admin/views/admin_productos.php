@@ -18,9 +18,9 @@ $inventario = Producto::inventario_completo();
                     <th scope="col" >Tipo</th>
                     <th scope="col" >Descripción</th>
                     <th scope="col">Temporada</th>
-                    <th scope="col">Fecha de ingreso</th>
-                    <th scope="col" >Talles y Cantidades</th>
-                    <th scope="col" >Stock Total</th>
+                    <th scope="col">Año</th>
+                    <th scope="col" >Precio</th>
+                    <th scope="col" >Talles/Stock</th>
                     <th scope="col" >Acciones</th>
                 </tr>
             </thead>
@@ -54,7 +54,8 @@ $inventario = Producto::inventario_completo();
                             </div>
                         </td>
                         <td><?= $P->getTemporada() ?></td>
-                        <td><?= date("d/m/Y", strtotime($P->getFecha_ingreso())) ?></td>
+                        <td><?= date("Y", strtotime($P->getFecha_ingreso())) ?></td>
+                        <td><?= $P->precio_formateado() ?></td> 
                         <td>
                             <?php if (!empty($tallesDisponibles)) : ?>
                                 <ul class="list-unstyled mb-0">
@@ -68,7 +69,7 @@ $inventario = Producto::inventario_completo();
                                 <span class="text-muted">Sin talles</span>
                             <?php endif; ?>
                         </td>
-                        <td><?= $stockTotal > 0 ? $stockTotal : 'Sin stock'; ?></td>
+                        
                         <td>
                             <div class="d-flex flex-column gap-1">
                                 <a href="index.php?link=edit_producto&id=<?= $P->getId() ?>" class="btn btn-sm btn-info">Editar</a>
